@@ -13,6 +13,17 @@ ADDED from AndroidManifest.xml:2:1
 	android:versionCode
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
+uses-sdk
+ADDED from AndroidManifest.xml:4:5
+MERGED from com.android.support:appcompat-v7:22.0.0:20:5
+MERGED from com.android.support:support-v4:22.0.0:20:5
+	android:targetSdkVersion
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:minSdkVersion
+		ADDED from AndroidManifest.xml:4:15
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
 application
 ADDED from AndroidManifest.xml:5:5
 MERGED from com.android.support:appcompat-v7:22.0.0:22:5
@@ -41,13 +52,17 @@ category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:16:17
 	android:name
 		ADDED from AndroidManifest.xml:16:27
-uses-sdk
-INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
-MERGED from com.android.support:appcompat-v7:22.0.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-	android:targetSdkVersion
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
-	android:minSdkVersion
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
+activity#fiuba.mensajero.ListViewFriendsActivity
+ADDED from AndroidManifest.xml:19:9
+	android:label
+		ADDED from AndroidManifest.xml:21:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:22:13
+	android:name
+		ADDED from AndroidManifest.xml:20:13
+meta-data#android.support.PARENT_ACTIVITY
+ADDED from AndroidManifest.xml:23:13
+	android:name
+		ADDED from AndroidManifest.xml:24:17
+	android:value
+		ADDED from AndroidManifest.xml:25:17

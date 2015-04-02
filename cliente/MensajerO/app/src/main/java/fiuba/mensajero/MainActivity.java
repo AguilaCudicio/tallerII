@@ -1,5 +1,6 @@
 package fiuba.mensajero;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,10 +9,22 @@ import android.view.MenuItem;
 
 public class MainActivity extends ActionBarActivity {
 
+    /* TODO: Mientras este conectado, esta variable va a estar en true.
+    Por ahora lo dejo en true to-do el tiempo.
+     */
+    boolean conectado= true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (conectado) {
+            Intent intent = new Intent(this, ListViewFriendsActivity.class);
+            startActivity(intent);
+        }
+        /*  else {
+           TODO: Ofrecer hacer login o registrarse
+        } */
     }
 
 
