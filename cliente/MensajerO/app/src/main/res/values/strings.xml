@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">MensajerO</string>
-
-    <string name="hello_world">Hello world!</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="send_message">Send</string>
+    <string name="button_send">Send</string>
+    <string name="activity_chat">My Message</string>
     <string name="action_settings">Settings</string>
 </resources>
