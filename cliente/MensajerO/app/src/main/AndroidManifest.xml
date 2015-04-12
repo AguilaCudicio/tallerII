@@ -24,6 +24,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fiuba.mensajero.MainActivity" />
         </activity>
+        <activity
+            android:name=".ChatActivity"
+            android:label="@string/activity_chat"
+            android:parentActivityName=".ListViewFriendsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fiuba.mensajero.ListViewFriendsActivity" />
+        </activity>
+
     </application>
 
 </manifest>
