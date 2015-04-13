@@ -29,17 +29,18 @@ public class ChatActivity extends ActionBarActivity {
 
         MyFragment fragment = new MyFragment();
         //TODO: Mensajes de prueba, cambiarlos.
+
         fragment.addMessage(nombre,"hola");
-        fragment.addMessage(nombre,"chau");
+        int f;
+        for(f=1;f<=10;f++) {
+            fragment.addMessage(nombre, "chau");
+        }
         getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
 
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
@@ -57,10 +58,14 @@ class MyFragment extends ListFragment {
     }
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // initialize the items list
         Resources resources = getResources();
         setListAdapter(new ListViewDemoAdapter(getActivity(), mItems));
     }
+
+    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.footer_chat, container, false); }
 
     public void addMessage(String friend,String mess) {
         mItems.add(new ListViewItem(friend,mess));
@@ -71,8 +76,8 @@ class MyFragment extends ListFragment {
     //}
 }
 class ListViewItem {
-    public final String title; // the text for the ListView item title
-    public final String description; // the text for the ListView item description
+    public final String title;
+    public final String description;
     public ListViewItem(String title, String description) {
         this.title = title;
         this.description = description;
@@ -108,11 +113,7 @@ class ListViewDemoAdapter extends ArrayAdapter<ListViewItem> {
         viewHolder.tvDescription.setText(item.description);
         return convertView;
     }
-    /**
-     * The view holder design pattern prevents using findViewById()
-     * repeatedly in the getView() method of the adapter.
-     *
-     */
+
     private static class ViewHolder {
         TextView tvTitle;
         TextView tvDescription;
