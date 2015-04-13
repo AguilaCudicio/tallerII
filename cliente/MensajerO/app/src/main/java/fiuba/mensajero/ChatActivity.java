@@ -25,10 +25,12 @@ public class ChatActivity extends ActionBarActivity {
 
         // Get the message from the intent
         Intent intent = getIntent();
-        String message = intent.getStringExtra(ListViewFriendsActivity.EXTRA_MESSAGE);
-        String[] lista = new String[] {message};
+        String nombre = intent.getStringExtra(ListViewFriendsActivity.EXTRA_MESSAGE);
 
         MyFragment fragment = new MyFragment();
+        //TODO: Mensajes de prueba, cambiarlos.
+        fragment.addMessage(nombre,"hola");
+        fragment.addMessage(nombre,"chau");
         getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
 
     }
@@ -47,22 +49,21 @@ public class ChatActivity extends ActionBarActivity {
 
 }
 
-
 class MyFragment extends ListFragment {
-    private List<ListViewItem> mItems;
+    private List<ListViewItem> mItems ;
 
+    public MyFragment() {
+        mItems= new ArrayList<ListViewItem>();
+    }
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // initialize the items list
-       mItems = new ArrayList<ListViewItem>();
         Resources resources = getResources();
-
-        //TODO: Mensajes de prueba, cambiarlos.
-
-
-        mItems.add(new ListViewItem("Juanito","hola"));
-        mItems.add(new ListViewItem("Juanito","chau"));
         setListAdapter(new ListViewDemoAdapter(getActivity(), mItems));
+    }
+
+    public void addMessage(String friend,String mess) {
+        mItems.add(new ListViewItem(friend,mess));
     }
 
    //public void onListItemClick(ListView listView, View view, int position, long id) {

@@ -30,7 +30,7 @@ public class ListViewFriendsActivity extends ListActivity {
         AlertDialog alertDialog = new Builder(this).create();
 
         Intent intent = new Intent(this, ChatActivity.class);
-        intent.putExtra(EXTRA_MESSAGE, "Conversacion con "+contactos[position]);
+        intent.putExtra(EXTRA_MESSAGE, contactos[position]);
         startActivity(intent);
 
         super.onListItemClick(l, v, position, id);
