@@ -14,7 +14,9 @@
         android:text="Log in"
         android:id="@+id/buttonLogin"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="47dp" />
+        android:layout_marginTop="47dp"
+        android:onClick="changeActivityLogin"
+        />
 
     <Button
         android:layout_width="wrap_content"
@@ -24,7 +26,9 @@
         android:layout_marginTop="33dp"
         android:layout_below="@+id/buttonLogin"
         android:layout_alignLeft="@+id/buttonLogin"
-        android:layout_alignStart="@+id/buttonLogin" />
+        android:layout_alignStart="@+id/buttonLogin"
+        android:onClick="changeActivitySign"
+        />
 
     <TextView
         android:layout_width="wrap_content"

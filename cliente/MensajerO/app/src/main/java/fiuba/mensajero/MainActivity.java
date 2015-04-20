@@ -12,7 +12,7 @@ public class MainActivity extends ActionBarActivity {
     /* TODO: Mientras este conectado, esta variable va a estar en true.
     Por ahora lo dejo en true to-do el tiempo.
      */
-    boolean conectado= true;
+    boolean conectado= false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class MainActivity extends ActionBarActivity {
             startActivity(flist);
         }
         else {
-            Intent intent = new Intent(this, ListViewFriendsActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
     }
