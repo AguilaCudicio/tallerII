@@ -1,19 +1,44 @@
 package fiuba.mensajero;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.app.AlertDialog;
+import android.view.View;
 
 public class LoginRegActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_reg);
+
     }
 
+    //* handler para el boton de Terminar
+    public void handTerminar(View view) {
+        boolean passCorrecto= false;
+
+        if(passCorrecto) {
+            //Entrar, mostrar lista de amigos..
+        }
+        else {
+            AlertDialog alerta = new AlertDialog.Builder(this).create();
+            alerta.setTitle("Datos incorrectos");
+            alerta.setMessage("El password o nombre ingresados son incorrrectos");
+            alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // aquí puedes añadir funciones
+                }
+            });
+            alerta.setIcon(R.drawable.noo);
+            alerta.show();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
