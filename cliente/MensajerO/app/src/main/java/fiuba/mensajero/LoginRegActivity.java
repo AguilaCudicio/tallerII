@@ -1,37 +1,24 @@
 package fiuba.mensajero;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 
-public class LoginActivity extends ActionBarActivity {
+public class LoginRegActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
+        setContentView(R.layout.activity_login_reg);
     }
 
-    //* handler para el boton de Log In
-    public void changeActivityLogin(View view) {
-        startActivity(new Intent(this, LoginRegActivity.class));
-    }
-
-    //* handler para el boton de Sign In
-    public void changeActivitySign(View view) {
-        startActivity(new Intent(this, SignInActivity.class));
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
+        getMenuInflater().inflate(R.menu.menu_login_reg, menu);
         return true;
     }
 
