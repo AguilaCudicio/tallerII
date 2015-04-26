@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
+import java.util.ArrayList;
+
+
 
 public class MyService extends IntentService {
 
@@ -19,6 +22,7 @@ public class MyService extends IntentService {
 
     protected void onHandleIntent(Intent intent) {
 
+
         ResultReceiver receiver = intent.getParcelableExtra("receiver");
         String command = intent .getStringExtra("command");
         Bundle b = new Bundle();
@@ -28,8 +32,9 @@ public class MyService extends IntentService {
             receiver.send(RUNNING, Bundle.EMPTY);
             try {
                 String token = intent.getStringExtra("token");
-                String res = serverRequest.getUsersOnline(token);
-                b.putString("result", res);
+                String user = intent.getStringExtra("user");
+                ArrayList<String> res = serverRequest.getUsersOnline(user, token);
+                b.putStringArrayList("result", res);
                 receiver.send(OK, b);
             } catch(Exception e) {
                 b.putString(Intent.EXTRA_TEXT, e.toString());

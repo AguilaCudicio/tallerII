@@ -10,6 +10,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends Activity implements OnClickListener, MyResultReceiver.Receiver {
 
@@ -102,9 +104,19 @@ public class MainActivity extends Activity implements OnClickListener, MyResultR
                 et.setText("Solicitando info al servidor");
                 break;
             case MyService.OK:
-                String str = resultData.getString("result");
+                ArrayList<String> list = resultData.getStringArrayList("result");
                 et = (EditText)findViewById(R.id.my_edit);
-                et.setText(str);
+                et.setText("");
+                if (list != null)
+                    for (String s : list) {
+                        et.append(s);
+                        et.append(" ");
+                        if (s.equals("conectado") || s.equals("desconectado")) {
+                            et.append("/n");
+                        }
+                    }
+                else
+                    et.append("fallo algo");
 
                 Button b = (Button)findViewById(R.id.my_button);
 

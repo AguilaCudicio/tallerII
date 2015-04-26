@@ -1,37 +1,44 @@
 package com.rest.nico.myapp;
 
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServerRequest {
 
-    public String getUsersOnline (String token) {
-        HttpClient httpClient = new DefaultHttpClient();
-        HttpContext localContext = new BasicHttpContext();
-        //todo construir la URL con el usuario y token en vez de hardcodear
-        HttpGet httpGet = new HttpGet("http://www.cheesejedi.com/rest_services/get_big_cheese?level=1");
-        String text;
-        try {
-            HttpResponse response = httpClient.execute(httpGet, localContext);
-            HttpEntity entity = response.getEntity();
-            text = inputStreamToString(entity.getContent());
-        } catch (Exception e) {
-            return e.getLocalizedMessage();
+    private String url;
+
+    public ServerRequest() {
+        //url = "http://echo.jsontest.com";
+        //url = "http://200.127.232.72:5000";
+        url= "http://200.127.232.72:5000/Usuario";
+    }
+
+
+    public ArrayList<String> getUsersOnline (String user, String token) {
+        //todo construir la url como corresponde con el token
+        StringBuilder stringBuilder = new StringBuilder(url);
+        //stringBuilder.append("/nombre/pedro/estado/conectado");
+        //stringBuilder.append("/Usuario");
+
+        String finalURL = stringBuilder.toString();
+
+        RestMethod rest = new RestMethod();
+        String resp = rest.GET(finalURL);
+        int respCode = rest.getStatusCode();
+        ArrayList<String> list;
+
+        if (respCode == 200 && resp != null) {
+            JSONParser jp = new JSONParser();
+            list = jp.parseUsersOnline(resp);
+        }
+        else {
+            list = null;
         }
 
-        return text;
+       return list;
     }
+
 
     public String getMessages (String token, String secondUser) {
         //todo completar
@@ -40,18 +47,5 @@ public class ServerRequest {
 
     //todo completar el resto de los metodos
 
-
-
-    private  String inputStreamToString(InputStream inputStream) throws IOException{
-        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
-        String line = "";
-        String result = "";
-        while((line = bufferedReader.readLine()) != null)
-            result += line;
-
-        inputStream.close();
-        return result;
-
-    }
 
 }

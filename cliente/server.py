@@ -1,25 +1,37 @@
-# Instalar lo que hace falta
-# 1. sudo apt-get install python-pip
-# 2. sudo pip install flask-restful
-# Ponemos el script en un archivo server.py
-# Para ejecutarlo 'python server.py'
-# En la consola vemos la direccion y puerto para testear
-
-from flask import Flask
+from flask import Flask,request,jsonify
 from flask_restful import Resource, Api
+import random
 
 app = Flask(__name__)
 api = Api(app)
 
-# Handler para cada URI
-class Default(Resource):
-	# Se puede definir para GET, POST, etc
-	# Ver mas ejemplos aca http://f...content-available-to-author-only...s.org/en/latest/quickstart.html#resourceful-routing
-    def get(self, path):
-        return {'path': str(path), 'hello': 'world', 'array': ['one', 'two', 'three']}
+magic = "FHJWIJWFIWEFKDFMDK"
+
+class Login(Resource):
+        def post(self):
+                root = request.get_json(force=True)
+                if root.get('user', '') == 'pepe':
+                        return { "token": magic }, 201
+                else:
+                        return '', 401
+                end
+
+class Usuarios(Resource):
+        def get(self):
+		return  [ {"nombre": "pedro", "estado" : "online"}, {"nombre": "juan", "estado" : "online"}, {"nombre": "carlos", "estado" : "offline"} ] , 200
+               
+
+class Usuario(Resource):
+        def get(self, user_id):
+                if request.args.get('token', '') == magic and user_id == "adriano":
+                        return { "username": "Adriano Du Pastel", "ubicacion": "Brazillllllll" }
+                else:
+                        return '', 401
 
 # Agregamos los URIs para cada recurso
-api.add_resource(Default, '/<string:path>')
+api.add_resource(Login, '/Login')
+api.add_resource(Usuarios, '/Usuario')
+api.add_resource(Usuario, '/Usuario/<user_id>')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
