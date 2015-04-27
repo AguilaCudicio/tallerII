@@ -18,7 +18,7 @@ class Login(Resource):
 
 class Usuarios(Resource):
         def get(self):
-		return  [ {"nombre": "pedro", "estado" : "online"}, {"nombre": "juan", "estado" : "online"}, {"nombre": "carlos", "estado" : "offline"} ] , 200
+		return  [ {"nombre": "pedro", "estado" : "conectado"}, {"nombre": "juan", "estado" : "conectado"}, {"nombre": "carlos", "estado" : "desconectado"} ] , 200
                
 
 class Usuario(Resource):
