@@ -10,7 +10,6 @@ import android.view.MenuItem;
 public class MainActivity extends ActionBarActivity {
 
     /* TODO: Mientras este conectado, esta variable va a estar en true.
-    Por ahora lo dejo en true to-do el tiempo.
      */
     boolean conectado= false;
 
@@ -19,7 +18,10 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (conectado) {
+            /* TODO: deberia leer el nombre del archivo */
+            String nombre = "Nombre";
             Intent flist = new Intent(this, ListViewFriendsActivity.class);
+            flist.putExtra("nombre", nombre);
             startActivity(flist);
         }
         else {

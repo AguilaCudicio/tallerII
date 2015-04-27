@@ -21,6 +21,8 @@ public class ListViewFriendsActivity extends ListActivity {
                 "conectadoAna", "Irene", "Matilda", "Alma",
                 "Francisco", "Adrian", "Elena", "Jesica", "Roberto",
                 "Matias", "Soledad", "Victoria", "Nadia", "Elsa" };
+        Intent intent = getIntent();
+        // String nombre = intent.getExtras().getString("nombre");
         AdaptFriends adapt = new AdaptFriends (this, contactos);
         setListAdapter(adapt);
     }

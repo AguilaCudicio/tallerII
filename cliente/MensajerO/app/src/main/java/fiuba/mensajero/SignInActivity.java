@@ -1,9 +1,14 @@
 package fiuba.mensajero;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 
 public class SignInActivity extends ActionBarActivity {
@@ -20,6 +25,33 @@ public class SignInActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_sign_in, menu);
         return true;
+    }
+
+    //* handler para el boton de Terminar
+    public void handTerminar(View view) {
+
+        final EditText usr = (EditText) findViewById(R.id.editTextNombreUsuario);
+        String usuario = usr.getText().toString();
+
+        final EditText nom = (EditText) findViewById(R.id.editTextNombreMostrar);
+        String nombre = nom.getText().toString();
+
+        final EditText pass = (EditText) findViewById(R.id.editTextPassw);
+        String password = pass.getText().toString();
+
+        /* TODO: Deberia enviar password, usuario y nombre al servidor */
+
+        AlertDialog alerta = new AlertDialog.Builder(this).create();
+        alerta.setTitle("Registro completo");
+        alerta.setMessage("Volviendo a la pantalla principal, oprima log in para ingresar");
+        alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        alerta.setIcon(R.drawable.okk);
+        alerta.show();
+
     }
 
     @Override

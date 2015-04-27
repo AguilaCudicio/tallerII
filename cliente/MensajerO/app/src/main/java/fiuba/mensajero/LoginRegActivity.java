@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.app.AlertDialog;
 import android.view.View;
+import android.widget.EditText;
 
 public class LoginRegActivity extends ActionBarActivity {
 
@@ -21,10 +22,19 @@ public class LoginRegActivity extends ActionBarActivity {
 
     //* handler para el boton de Terminar
     public void handTerminar(View view) {
-        boolean passCorrecto= false;
+        boolean passCorrecto= true;
+
+        final EditText nom = (EditText) findViewById(R.id.editTextNombre);
+        String nombre = nom.getText().toString();
+
+        //TODO enviar el pass al servidor y verificar si es correcto
+        final EditText pass = (EditText) findViewById(R.id.editTextPass);
+        String password = pass.getText().toString();
 
         if(passCorrecto) {
-            //Entrar, mostrar lista de amigos..
+            Intent flist = new Intent(this, ListViewFriendsActivity.class);
+            flist.putExtra("nombre", nombre);
+            startActivity(flist);
         }
         else {
             AlertDialog alerta = new AlertDialog.Builder(this).create();
@@ -32,7 +42,7 @@ public class LoginRegActivity extends ActionBarActivity {
             alerta.setMessage("El password o nombre ingresados son incorrrectos");
             alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    // aquí puedes añadir funciones
+                    // TODO Hacer algo aca?
                 }
             });
             alerta.setIcon(R.drawable.noo);
