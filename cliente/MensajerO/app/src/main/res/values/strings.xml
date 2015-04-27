@@ -5,4 +5,9 @@
     <string name="button_send">Send</string>
     <string name="activity_chat">My Message</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_sign_in">SignIn</string>
+    <string name="title_activity_login_reg">Login</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>
