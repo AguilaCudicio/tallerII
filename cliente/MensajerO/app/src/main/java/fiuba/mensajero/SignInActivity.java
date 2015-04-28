@@ -47,19 +47,8 @@ public class SignInActivity extends ActionBarActivity implements MyResultReceive
         final EditText pass = (EditText) findViewById(R.id.editTextPassw);
         String password = pass.getText().toString();
 
-        /* TODO: Deberia enviar password, usuario y nombre al servidor */
         register(usuario, password, nombre);
 
-      /*  AlertDialog alerta = new AlertDialog.Builder(this).create();
-        alerta.setTitle("Registro completo");
-        alerta.setMessage("Volviendo a la pantalla principal, oprima log in para ingresar");
-        alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
-        alerta.setIcon(R.drawable.okk);
-        alerta.show();  */
 
     }
 
@@ -99,14 +88,35 @@ public class SignInActivity extends ActionBarActivity implements MyResultReceive
                 String mensaje = resultData.getString("result");
                 if (mensaje == null)
                      Log.e("RESULTADO DE REGISTRO", "parece que no hay internet");
-                else
+                else {
                     //nota si el mensaje es "ok" entonces tuvo exito, si no el mensaje es el problema
                     Log.i("RESULTADO DE REGISTRO", mensaje);
+                    AlertDialog alerta = new AlertDialog.Builder(this).create();
+                    alerta.setTitle("Registro completo");
+                    alerta.setMessage("Volviendo a la pantalla principal, oprima log in para ingresar");
+                    alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+                    alerta.setIcon(R.drawable.okk);
+                    alerta.show();
+                }
 
                 break;
             case NetworkService.ERROR:
                 // handle the error;
                 Log.e("onreceiveresult", "salto un error en registro");
+                AlertDialog alerta = new AlertDialog.Builder(this).create();
+                alerta.setTitle("Error en el registro");
+                //TODO: aca aclarar cual fue el problema, por ej nombre de usuario repetido
+                alerta.setMessage("Hubo un error en el registro");
+                alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                alerta.setIcon(R.drawable.okk);
+                alerta.show();
                 break;
         }
     }

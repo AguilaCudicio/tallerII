@@ -13,7 +13,7 @@ public class ServerRequest {
     private String url;     //url base
 
     public ServerRequest() {
-        url= "http://200.127.232.72:5000";
+        url= "http://190.173.13.167:5000";
     }
 
     //devuelve un array con todos los usuarios

@@ -28,7 +28,6 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
 
     //* handler para el boton de Terminar
     public void handTerminar(View view) {
-        boolean passCorrecto= true;
 
         final EditText nom = (EditText) findViewById(R.id.editTextNombre);
         String user = nom.getText().toString();
@@ -37,24 +36,6 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
         String password = pass.getText().toString();
 
         logIn(user, password);
-
-       /* if(passCorrecto) {
-            Intent flist = new Intent(this, ListViewFriendsActivity.class);
-            flist.putExtra("nombre", nombre);
-            startActivity(flist);
-        }
-        else {
-            AlertDialog alerta = new AlertDialog.Builder(this).create();
-            alerta.setTitle("Datos incorrectos");
-            alerta.setMessage("El password o nombre ingresados son incorrrectos");
-            alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    // TODO Hacer algo aca?
-                }
-            });
-            alerta.setIcon(R.drawable.noo);
-            alerta.show();
-        } */
     }
 
     @Override
@@ -102,10 +83,23 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
                 else
                     //nota si el mensaje es "ok" entonces tuvo exito, si no el mensaje es el problema
                     Log.i("RESULTADO DE REGISTRO", mensaje);
-
+                    Intent flist = new Intent(this, ListViewFriendsActivity.class);
+                    // TODO: Aca deberia recibir el nombre de usuario.
+                    flist.putExtra("nombre", "nombre-cualquiera");
+                    startActivity(flist);
                 break;
             case NetworkService.ERROR:
                 // handle the error;
+                AlertDialog alerta = new AlertDialog.Builder(this).create();
+                alerta.setTitle("Datos incorrectos");
+                alerta.setMessage("El password o nombre ingresados son incorrrectos");
+                alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Hacer algo aca?
+                    }
+                });
+                alerta.setIcon(R.drawable.noo);
+                alerta.show();
                 Log.e("onreceiveresult", "salto un error en login");
                 break;
         }
