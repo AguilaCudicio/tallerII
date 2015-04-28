@@ -74,6 +74,15 @@
         </activity>
 
 
+        <activity
+            android:name=".ConfigActivity"
+            android:label="@string/title_activity_login_reg"
+            android:parentActivityName=".LoginActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fiuba.mensajero.LoginActivity" />
+        </activity>
+
         <service android:enabled="true" android:name=".NetworkService" />
 
 

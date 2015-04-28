@@ -28,6 +28,11 @@ public class LoginActivity extends ActionBarActivity {
         startActivity(new Intent(this, SignInActivity.class));
     }
 
+    //* handler para el boton de Config
+    public void changeActivityConfig(View view) {
+        startActivity(new Intent(this, ConfigActivity.class));
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

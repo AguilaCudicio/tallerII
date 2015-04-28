@@ -2,6 +2,7 @@ package fiuba.mensajero;
 
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
@@ -26,7 +27,8 @@ public class NetworkService extends IntentService {
         ResultReceiver receiver = intent.getParcelableExtra("receiver");
         String command = intent .getStringExtra("command");
         Bundle b = new Bundle();
-        ServerRequest serverRequest = new ServerRequest();
+        Context context= getApplicationContext();
+        ServerRequest serverRequest = new ServerRequest(context);
 
         if(command.equals("getListaConectados")) {
             receiver.send(RUNNING, Bundle.EMPTY);

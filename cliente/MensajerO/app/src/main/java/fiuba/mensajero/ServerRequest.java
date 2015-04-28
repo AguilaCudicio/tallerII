@@ -1,19 +1,39 @@
 package fiuba.mensajero;
 
 
+import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class ServerRequest {
 
     private String url;     //url base
 
-    public ServerRequest() {
-        url= "http://190.173.13.167:5000";
+    public ServerRequest(Context c) {
+        Context context;
+        try {
+            FileInputStream fin = c.openFileInput("ipserver.txt");
+            int car;
+            String temp="";
+            while( (car = fin.read()) != -1){
+                temp = temp + Character.toString((char)car);
+            }
+            url=temp;
+            fin.close();
+        }
+        catch (Exception ex) {
+            Log.e("Ficheros", "Error al leer fichero desde memoria interna");
+            url= "http://190.173.8.186:5000";
+        }
     }
 
     //devuelve un array con todos los usuarios
