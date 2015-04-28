@@ -100,6 +100,7 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
                 if (mensaje == null)
                     Log.e("RESULTADO DE REGISTRO", "parece que no anda internet");
                 else
+                    //nota si el mensaje es "ok" entonces tuvo exito, si no el mensaje es el problema
                     Log.i("RESULTADO DE REGISTRO", mensaje);
 
                 break;

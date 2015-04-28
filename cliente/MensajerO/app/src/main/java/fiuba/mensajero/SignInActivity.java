@@ -100,6 +100,7 @@ public class SignInActivity extends ActionBarActivity implements MyResultReceive
                 if (mensaje == null)
                      Log.e("RESULTADO DE REGISTRO", "parece que no hay internet");
                 else
+                    //nota si el mensaje es "ok" entonces tuvo exito, si no el mensaje es el problema
                     Log.i("RESULTADO DE REGISTRO", mensaje);
 
                 break;
