@@ -77,8 +77,12 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
 
 
                 ArrayList<String> list = resultData.getStringArrayList("result");
-                contactos = new String[list.size()];
-                contactos = list.toArray(contactos);
+                if (list == null)
+                  contactos = new String[] { "conectadoValores", "conectadoDefault", "para testeo" };
+                else {
+                    contactos = new String[list.size()];
+                    contactos = list.toArray(contactos);
+                }
                 AdaptFriends adapt = new AdaptFriends (this, contactos);
                 setListAdapter(adapt);
                 break;

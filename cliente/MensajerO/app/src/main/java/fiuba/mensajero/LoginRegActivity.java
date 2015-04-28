@@ -2,21 +2,27 @@ package fiuba.mensajero;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.app.AlertDialog;
 import android.view.View;
 import android.widget.EditText;
 
-public class LoginRegActivity extends ActionBarActivity {
+public class LoginRegActivity extends ActionBarActivity implements MyResultReceiver.Receiver {
+
+    public MyResultReceiver mReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_reg);
+        mReceiver = new MyResultReceiver(new Handler());
+        mReceiver.setReceiver(this);
 
     }
 
@@ -25,13 +31,14 @@ public class LoginRegActivity extends ActionBarActivity {
         boolean passCorrecto= true;
 
         final EditText nom = (EditText) findViewById(R.id.editTextNombre);
-        String nombre = nom.getText().toString();
+        String user = nom.getText().toString();
 
-        //TODO enviar el pass al servidor y verificar si es correcto
         final EditText pass = (EditText) findViewById(R.id.editTextPass);
         String password = pass.getText().toString();
 
-        if(passCorrecto) {
+        logIn(user, password);
+
+       /* if(passCorrecto) {
             Intent flist = new Intent(this, ListViewFriendsActivity.class);
             flist.putExtra("nombre", nombre);
             startActivity(flist);
@@ -47,7 +54,7 @@ public class LoginRegActivity extends ActionBarActivity {
             });
             alerta.setIcon(R.drawable.noo);
             alerta.show();
-        }
+        } */
     }
 
     @Override
@@ -71,4 +78,36 @@ public class LoginRegActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void logIn(String user, String password) {
+        Intent intent = new Intent(this, NetworkService.class);
+        intent.putExtra("receiver", mReceiver);
+        intent.putExtra("command", "logIn");
+        intent.putExtra("user", user);
+        intent.putExtra("password", password);
+        startService(intent);
+    }
+
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        switch (resultCode) {
+            case NetworkService.RUNNING:
+                Log.i("onreceiveresult", "esta corriendo el servicio de login");
+                //aca se podria mostrar algo mientras el servicio esta corriendo
+                break;
+            case NetworkService.OK:
+                Log.d("onreceiveresult", "se completo la operacion de login ");
+                String mensaje = resultData.getString("result");
+                if (mensaje == null)
+                    Log.e("RESULTADO DE REGISTRO", "parece que no anda internet");
+                else
+                    Log.i("RESULTADO DE REGISTRO", mensaje);
+
+                break;
+            case NetworkService.ERROR:
+                // handle the error;
+                Log.e("onreceiveresult", "salto un error en login");
+                break;
+        }
+    }
+
 }

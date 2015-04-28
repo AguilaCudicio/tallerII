@@ -3,20 +3,28 @@ package fiuba.mensajero;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.ArrayList;
 
-public class SignInActivity extends ActionBarActivity {
+
+public class SignInActivity extends ActionBarActivity implements MyResultReceiver.Receiver {
+
+    public MyResultReceiver mReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+        mReceiver = new MyResultReceiver(new Handler());
+        mReceiver.setReceiver(this);
     }
 
 
@@ -40,8 +48,9 @@ public class SignInActivity extends ActionBarActivity {
         String password = pass.getText().toString();
 
         /* TODO: Deberia enviar password, usuario y nombre al servidor */
+        register(usuario, password, nombre);
 
-        AlertDialog alerta = new AlertDialog.Builder(this).create();
+      /*  AlertDialog alerta = new AlertDialog.Builder(this).create();
         alerta.setTitle("Registro completo");
         alerta.setMessage("Volviendo a la pantalla principal, oprima log in para ingresar");
         alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
@@ -50,7 +59,7 @@ public class SignInActivity extends ActionBarActivity {
             }
         });
         alerta.setIcon(R.drawable.okk);
-        alerta.show();
+        alerta.show();  */
 
     }
 
@@ -67,5 +76,37 @@ public class SignInActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void register(String user, String password, String name) {
+        Intent intent = new Intent(this, NetworkService.class);
+        intent.putExtra("receiver", mReceiver);
+        intent.putExtra("command", "register");
+        intent.putExtra("user", user);
+        intent.putExtra("password", password);
+        intent.putExtra("name", name);
+        startService(intent);
+    }
+
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        switch (resultCode) {
+            case NetworkService.RUNNING:
+                Log.i("onreceiveresult", "esta corriendo el servicio de registro");
+                //aca se podria mostrar algo mientras el servicio esta corriendo
+                break;
+            case NetworkService.OK:
+                Log.d("onreceiveresult", "se completo la operacion de registro ");
+                String mensaje = resultData.getString("result");
+                if (mensaje == null)
+                     Log.e("RESULTADO DE REGISTRO", "parece que no hay internet");
+                else
+                    Log.i("RESULTADO DE REGISTRO", mensaje);
+
+                break;
+            case NetworkService.ERROR:
+                // handle the error;
+                Log.e("onreceiveresult", "salto un error en registro");
+                break;
+        }
     }
 }

@@ -34,8 +34,6 @@ public class NetworkService extends IntentService {
                 String token = intent.getStringExtra("token");
                 String user = intent.getStringExtra("user");
                 ArrayList<String> res = serverRequest.getUsersOnline(user, token);
-
-
                 b.putStringArrayList("result", res);
                 receiver.send(OK, b);
             } catch(Exception e) {
@@ -44,18 +42,34 @@ public class NetworkService extends IntentService {
             }
         }
 
-     /*   if (command.equals("getMensajes")) {
+        if (command.equals("register")) {
             receiver.send(RUNNING, Bundle.EMPTY);
             try {
-                //llamar al metodo que hace get
-                String res = getMensajes();
+                String user = intent.getStringExtra("user");
+                String password = intent.getStringExtra("password");
+                String name = intent.getStringExtra("name");
+                String res = serverRequest.register(user, password, name);
                 b.putString("result", res);
                 receiver.send(OK, b);
             } catch(Exception e) {
                 b.putString(Intent.EXTRA_TEXT, e.toString());
                 receiver.send(ERROR, b);
             }
-        } */
+        }
+
+        if (command.equals("logIn")) {
+            receiver.send(RUNNING, Bundle.EMPTY);
+            try {
+                String user = intent.getStringExtra("user");
+                String password = intent.getStringExtra("password");
+                String res = serverRequest.logIn(user, password);
+                b.putString("result", res);
+                receiver.send(OK, b);
+            } catch(Exception e) {
+                b.putString(Intent.EXTRA_TEXT, e.toString());
+                receiver.send(ERROR, b);
+            }
+        }
 
     }
 

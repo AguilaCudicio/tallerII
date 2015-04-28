@@ -1,25 +1,25 @@
 package fiuba.mensajero;
 
 
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class ServerRequest {
 
-    private String url;
+    private String url;     //url base
 
     public ServerRequest() {
-        //url = "http://echo.jsontest.com";
-        //url = "http://200.127.232.72:5000";
-        url= "http://200.127.232.72:5000/Usuario";
+        url= "http://200.127.232.72:5000";
     }
 
-
+    //devuelve un array con todos los usuarios
     public ArrayList<String> getUsersOnline (String user, String token) {
-        //todo construir la url como corresponde con el token
         StringBuilder stringBuilder = new StringBuilder(url);
-        //stringBuilder.append("/nombre/pedro/estado/conectado");
-        //stringBuilder.append("/Usuario");
-
+        stringBuilder.append("/usuarios");
         String finalURL = stringBuilder.toString();
 
         RestMethod rest = new RestMethod();
@@ -38,13 +38,75 @@ public class ServerRequest {
        return list;
     }
 
+    //devuelve un string "ok" o el motivo de error si fallo
+    public String register(String user, String password, String name) {
+        StringBuilder stringBuilder = new StringBuilder(url);
+        stringBuilder.append("/usuario/");
+        stringBuilder.append(user);
+        String finalURL = stringBuilder.toString();
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.accumulate("password", password);
+            jsonObject.accumulate("nombre", name);
+            jsonObject.accumulate("foto", "vacio");
+            jsonObject.accumulate("ubicacion", "vacio");
+        }
+        catch (JSONException e) {
+            Log.e("register", "json fallo crear register body");
+        }
+        RestMethod rest = new RestMethod();
+        String resp = rest.POST(finalURL, jsonObject);
+        int respCode = rest.getStatusCode();
+
+        String ret;
+        if (respCode == 201 && resp != null) {
+            ret = "ok";
+        }
+        else {
+            JSONParser jp = new JSONParser();
+            ret = jp.getError(resp);
+        }
+
+        return ret;
+    }
+
+    public String logIn(String user, String password) {
+        StringBuilder stringBuilder = new StringBuilder(url);
+        stringBuilder.append("/login");
+        String finalURL = stringBuilder.toString();
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.accumulate("password", password);
+            jsonObject.accumulate("id", user);
+        }
+        catch (JSONException e) {
+            Log.e("register", "json fallo crear login body");
+        }
+        RestMethod rest = new RestMethod();
+        String resp = rest.POST(finalURL, jsonObject);
+        int respCode = rest.getStatusCode();
+
+        String ret, token;
+        JSONParser jp = new JSONParser();
+        if (respCode == 201 && resp != null) {
+            ret = "ok";
+            token = jp.getToken(resp);
+            //todo almacenar el token en un archivo ?
+        }
+        else {
+            ret = "usuario o clave invalida";
+        }
+
+        return ret;
+    }
+
 
     public String getMessages (String token, String secondUser) {
-        //todo completar
         return null;
     }
 
-    //todo completar el resto de los metodos
 
 
 }
