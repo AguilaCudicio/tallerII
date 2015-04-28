@@ -2,11 +2,13 @@ package fiuba.mensajero;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,18 +25,11 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        /* TODO: Aca deberian ir las personas conectadas*/
-        /*contactos = new String[] { "conectadoJuan", "conectadoFernando", "conectadoMaria", "conectadoRoberto",
-                "conectadoAna", "Irene", "Matilda", "Alma",
-                "Francisco", "Adrian", "Elena", "Jesica", "Roberto",
-                "Matias", "Soledad", "Victoria", "Nadia", "Elsa" };
-        Intent intent = getIntent();
-        // String nombre = intent.getExtras().getString("nombre");
-        AdaptFriends adapt = new AdaptFriends (this, contactos);
-        setListAdapter(adapt);*/
+        setContentView(R.layout.activity_listviewfriendsactivity);
         mReceiver = new MyResultReceiver(new Handler());
         mReceiver.setReceiver(this);
         getUsersOnline(null, null);
+
     }
 
     @Override

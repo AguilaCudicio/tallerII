@@ -59,7 +59,6 @@ class MyFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // initialize the items list
         Resources resources = getResources();
         setListAdapter(new ListViewDemoAdapter(getActivity(), mItems));
     }
