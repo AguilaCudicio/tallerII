@@ -99,7 +99,6 @@ public class SignInActivity extends ActionBarActivity implements MyResultReceive
                             finish();
                         }
                     });
-                    alerta.setIcon(R.drawable.okk);
                     alerta.show();
                 }
 
@@ -115,7 +114,6 @@ public class SignInActivity extends ActionBarActivity implements MyResultReceive
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
-                alerta.setIcon(R.drawable.okk);
                 alerta.show();
                 break;
         }
