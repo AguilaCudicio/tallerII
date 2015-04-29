@@ -25,9 +25,9 @@ public class ServerRequest {
             int car;
             String temp="";
             while( (car = fin.read()) != -1){
-                temp = temp + Character.toString((char)car);
+                temp = temp + Character.toString((char)car );
             }
-            url=temp;
+            url=temp + ":5000";
             fin.close();
         }
         catch (Exception ex) {
