@@ -27,7 +27,7 @@ public class ServerRequest {
             while( (car = fin.read()) != -1){
                 temp = temp + Character.toString((char)car );
             }
-            url=temp + ":5000";
+            url="http://" + temp + ":5000";
             fin.close();
         }
         catch (Exception ex) {
