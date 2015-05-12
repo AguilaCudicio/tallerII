@@ -63,14 +63,6 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
             case NetworkService.OK:
                 Log.d("onreceiveresult", "se completo la operacion ");
 
-              /*  contactos = new String[] { "conectadoJuan", "conectadoFernando", "conectadoMaria", "conectadoRoberto",
-                        "conectadoAna", "Irene", "Matilda", "Alma",
-                        "Francisco", "Adrian", "Elena", "Jesica", "Roberto",
-                        "Matias", "Soledad", "Victoria", "Nadia", "Elsa" };
-                AdaptFriends adapt = new AdaptFriends (this, contactos);
-                setListAdapter(adapt);*/
-
-
                 ArrayList<String> list = resultData.getStringArrayList("result");
                 if (list == null)
                   contactos = new String[] { "conectadoValores", "conectadoDefault", "para testeo" };
@@ -87,6 +79,12 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
 
                 break;
         }
+    }
+
+
+    //* handler para el boton de Perfil
+    public void changeActivityProfile(View view) {
+        startActivity(new Intent(this, ProfileActivity.class));
     }
 
 }

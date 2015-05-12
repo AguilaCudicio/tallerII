@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fiuba.mensajero" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-
     <uses-sdk android:minSdkVersion="12" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <android:uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -24,7 +24,6 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
 
     <application
         android:allowBackup="true"
@@ -72,8 +71,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fiuba.mensajero.LoginActivity" />
         </activity>
-
-
         <activity
             android:name=".ConfigActivity"
             android:label="@string/title_activity_login_reg"
@@ -83,8 +80,9 @@
                 android:value="fiuba.mensajero.LoginActivity" />
         </activity>
 
-        <service android:enabled="true" android:name=".NetworkService" />
-
+        <service
+            android:name=".NetworkService"
+            android:enabled="true" />
 
         <activity
             android:name=".LoginRegActivity"
@@ -94,7 +92,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fiuba.mensajero.LoginActivity" />
         </activity>
-
+        <activity
+            android:name=".ProfileActivity"
+            android:label="Perfil"
+            android:parentActivityName=".ListViewFriendsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fiuba.mensajero.ListViewFriendsActivity" />
+        </activity>
     </application>
 
 </manifest>
