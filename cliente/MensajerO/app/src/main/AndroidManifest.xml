@@ -100,6 +100,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fiuba.mensajero.ListViewFriendsActivity" />
         </activity>
+        <activity
+            android:name=".EditProfileActivity"
+            android:label="Edicion del perfil"
+            android:parentActivityName=".ProfileActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fiuba.mensajero.ProfileActivity" />
+        </activity>
     </application>
 
 </manifest>

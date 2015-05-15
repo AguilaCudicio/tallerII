@@ -21,7 +21,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/noimage"
-        android:layout_marginTop="38dp"
         android:layout_below="@+id/textView10"
         android:layout_centerHorizontal="true" />
 
@@ -31,8 +30,18 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Nombre"
         android:id="@+id/textView11"
+        android:layout_below="@+id/imageButtonProfile"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Editar Perfil"
+        android:onClick="changeActivityEditProfile"
+        android:id="@+id/buttonChangeProfile"
+        android:layout_below="@+id/textView11"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp" />
+        android:layout_marginTop="41dp" />
 
 
 </RelativeLayout>
