@@ -56,7 +56,7 @@ public class ProfileActivity extends ActionBarActivity {
 
     }
 
-   public void changeActivityEditProfile() {
+   public void changeActivityEditProfile(View view) {
        Intent flist = new Intent(this, EditProfileActivity.class);
        startActivity(flist);
    }
