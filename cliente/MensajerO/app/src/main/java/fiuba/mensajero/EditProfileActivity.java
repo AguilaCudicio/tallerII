@@ -1,45 +1,24 @@
 package fiuba.mensajero;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class MainActivity extends ActionBarActivity {
-
-    /* TODO: Mientras este conectado, esta variable va a estar en true.
-     */
-    boolean conectado= false;
+public class EditProfileActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        if (conectado) {
-            /* TODO: deberia leer el nombre del archivo */
-            String nombre = "Nombre";
-            Intent flist = new Intent(this, ListViewFriendsActivity.class);
-            flist.putExtra("nombre", nombre);
-            startActivity(flist);
-            finish();
-        }
-        else {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
-
-
+        setContentView(R.layout.activity_edit_profile);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_edit_profile, menu);
         return true;
     }
 

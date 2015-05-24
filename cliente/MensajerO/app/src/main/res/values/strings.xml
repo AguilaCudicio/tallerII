@@ -10,4 +10,6 @@
     <string name="title_activity_login_reg">Login</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_edit_profile">EditProfileActivity</string>
 </resources>

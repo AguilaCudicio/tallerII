@@ -61,6 +61,7 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
                 Log.d("onreceiveresult", "se completo la operacion ");
 
                 ArrayList<UserData> list = resultData.getParcelableArrayList("result");
+
                 if (list == null)
                   Log.e("onreceiveresult lista", "error inesperado");
                 else {
@@ -82,6 +83,12 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
                 Log.e("onreceiveresult", err);
                 break;
         }
+    }
+
+
+    //* handler para el boton de Perfil
+    public void changeActivityProfile(View view) {
+        startActivity(new Intent(this, ProfileActivity.class));
     }
 
 }

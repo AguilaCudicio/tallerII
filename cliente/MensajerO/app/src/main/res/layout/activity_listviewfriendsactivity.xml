@@ -8,17 +8,19 @@
         android:layout_width="fill_parent" android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
         <Button
-            android:id="@+id/allow"
+            android:id="@+id/logoutb"
             android:layout_width="0.0dip" android:layout_height="fill_parent"
             android:text="Desconectar"
             android:layout_weight="1.0" />
 
         <Button
-            android:id="@+id/deny"
+            android:id="@+id/profileb"
             android:layout_width="0.0dip" android:layout_height="fill_parent"
             android:text="Perfil"
+            android:onClick="changeActivityProfile"
             android:layout_weight="1.0" />
     </LinearLayout>
+
     <ListView android:id="@android:id/list" android:layout_width="fill_parent"
         android:layout_height="0dip" android:choiceMode="multipleChoice"
         android:layout_below="@id/top_control_bar" android:layout_above="@id/bottom_control_bar"></ListView>
