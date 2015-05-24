@@ -16,7 +16,7 @@ class login(Resource):
 		if root.get('id', '') == nombre and root.get('password', '') == password:
 			return { "token": token }, 201
 		else:
-			return '', 401
+			return { "error": "clave o usuario incorrecto" } , 401
 
 class usuarios(Resource):
 	def get(self):
@@ -26,9 +26,9 @@ class usuarios(Resource):
 class usuario(Resource):
 	def get(self, user_id):
 		if request.args.get('token', '') == token and user_id == "adriano":
-			return { "username": "Adriano Du Pastel", "ubicacion": "Brazil" }
+			return { "username": "Adriano Du Pastel", "ubicacion": "Brazil" }, 200
 		else:
-			return '', 401
+			return { "error": "Token invalido" }, 401
 	def post(self, user_id):
 		root = request.get_json(force=True)
 		global nombre

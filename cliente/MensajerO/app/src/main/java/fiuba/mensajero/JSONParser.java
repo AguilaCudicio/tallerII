@@ -11,22 +11,22 @@ import java.util.ArrayList;
 
 public class JSONParser {
 
-    public ArrayList<String> parseUsersOnline(String jsonstr) {
-        ArrayList<String> list = new ArrayList<>();
-        String nombre, estado;
-
+    public ArrayList<UserData> parseUsersOnline(String jsonstr) {
+        ArrayList<UserData> list = new ArrayList<>();
+        String nombre, estado, id;
         try {
             JSONArray users = new JSONArray(jsonstr);
             for (int i = 0; i < users.length(); i++) {
+                boolean conectado = false;
                 JSONObject user = users.getJSONObject(i);
                 nombre = user.getString("nombre");
                 estado = user.getString("estado");
+                id = user.getString("id");
                 if (estado.equals("conectado")) {
-                    estado = estado.concat(nombre);
-                    list.add(estado);
+                    conectado = true;
                 }
-                else
-                    list.add(nombre);
+                UserData userData = new UserData(id, nombre, conectado);
+                list.add(userData);
             }
         }
         catch (JSONException e) {

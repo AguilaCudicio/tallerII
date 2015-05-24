@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 
 public class LoginActivity extends ActionBarActivity {
@@ -25,7 +24,7 @@ public class LoginActivity extends ActionBarActivity {
 
     //* handler para el boton de Sign In
     public void changeActivitySign(View view) {
-        startActivity(new Intent(this, SignInActivity.class));
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 
     //* handler para el boton de Config
