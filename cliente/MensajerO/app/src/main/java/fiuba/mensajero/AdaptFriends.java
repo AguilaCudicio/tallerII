@@ -9,28 +9,30 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 
-public class AdaptFriends extends ArrayAdapter<String> {
+
+public class AdaptFriends extends ArrayAdapter<UserData> {
     private final Context context;
-    private final String[] values;
 
-    public AdaptFriends(Context context, String[] contactos) {
+    public AdaptFriends(Context context, ArrayList<UserData> contactos) {
         super(context, R.layout.rowlayout, contactos);
         this.context = context;
-        this.values = contactos;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        UserData contacto = getItem(position);
+
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.rowlayout, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.label);
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-        textView.setText(values[position]);
+        textView.setText(contacto.getNombre());
 
-        String s = values[position];
-        if (s.startsWith("conectado")) {
+        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+        boolean conectado = contacto.isConectado();
+        if (conectado) {
             imageView.setImageResource(R.drawable.okk);
         } else {
             imageView.setImageResource(R.drawable.noo);

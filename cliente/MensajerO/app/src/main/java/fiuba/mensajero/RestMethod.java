@@ -1,15 +1,21 @@
 package fiuba.mensajero;
 
+import android.util.Log;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -23,34 +29,44 @@ public class RestMethod {
     private int statusCode;
     private String response;
 
+    public class Respuesta {
+        public String body;
+        public int code;
+    }
+
     public RestMethod() {
-        statusCode = -1;       //codigo sin valor
+        statusCode = 0;       //codigo sin valor
     }
 
     public int getStatusCode() {
         return statusCode;
     }
 
-    public String getResponse() {
-        return response;
-    }
-
-
     public String GET(String URL) {
         HttpClient httpClient = new DefaultHttpClient();
-        HttpContext localContext = new BasicHttpContext();
         HttpGet httpGet = new HttpGet(URL);
         String text = null;
         try {
-            HttpResponse response = httpClient.execute(httpGet, localContext);
-            StatusLine statusLine = response.getStatusLine();
-            statusCode = statusLine.getStatusCode();
-            if (statusCode == 200) {
-                HttpEntity entity = response.getEntity();
-                text = inputStreamToString(entity.getContent());
-            }
+
+            ResponseHandler<Respuesta> responseHandler = new ResponseHandler<Respuesta>() {
+                public Respuesta handleResponse(final HttpResponse response) throws  IOException {
+                    Respuesta r = new Respuesta();
+                    r.code =  response.getStatusLine().getStatusCode();
+                    r.body = null;
+                    HttpEntity entity = response.getEntity();
+                    r.body = EntityUtils.toString(entity);
+                    return r;
+                }
+            };
+
+            Respuesta rp= httpClient.execute(httpGet, responseHandler);
+            statusCode = rp.code;
+            text = rp.body;
+            Log.i("RESTMETHOD GET", text);
+
         } catch (Exception e) {
-            return e.getLocalizedMessage();
+            Log.e("GET", "error en el htttget");
+            statusCode = -1;
         }
 
         return text;
@@ -63,21 +79,67 @@ public class RestMethod {
         try {
             StringEntity se = new StringEntity(jsonobj.toString());
             httpPost.setEntity(se);
-            HttpResponse response = httpClient.execute(httpPost);
-            StatusLine statusLine = response.getStatusLine();
-            statusCode = statusLine.getStatusCode();
-            if (statusCode == 201) {
-                HttpEntity entity = response.getEntity();
-                text = inputStreamToString(entity.getContent());
-            }
+
+            ResponseHandler<Respuesta> responseHandler = new ResponseHandler<Respuesta>() {
+                public Respuesta handleResponse(final HttpResponse response) throws  IOException {
+                    Respuesta r = new Respuesta();
+                    r.code =  response.getStatusLine().getStatusCode();
+                    r.body = null;
+                    HttpEntity entity = response.getEntity();
+                    r.body = EntityUtils.toString(entity);
+                    return r;
+                }
+            };
+
+            Respuesta rp= httpClient.execute(httpPost, responseHandler);
+
+            statusCode = rp.code;
+            text = rp.body;
+            Log.i("RESTMETHOD POST", text);
         }
-        catch (Exception e) {
-            return e.getLocalizedMessage();
+        catch (ClientProtocolException e) {
+            Log.e("POST", "error en el htttpost");
+            statusCode = -1;
+        }
+        catch (IOException e) {
+            Log.e("POST", "error de IO");
+            statusCode = -1;
         }
 
         return text;
     }
 
+    public String PUT(String URL, JSONObject jsonobj) {
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPut httpPut = new HttpPut(URL);
+        String text = null;
+        try {
+            StringEntity se = new StringEntity(jsonobj.toString());
+            httpPut.setEntity(se);
+
+            ResponseHandler<Respuesta> responseHandler = new ResponseHandler<Respuesta>() {
+                public Respuesta handleResponse(final HttpResponse response) throws  IOException {
+                    Respuesta r = new Respuesta();
+                    r.code =  response.getStatusLine().getStatusCode();
+                    r.body = null;
+                    HttpEntity entity = response.getEntity();
+                    r.body = EntityUtils.toString(entity);
+                    return r;
+                }
+            };
+            Respuesta rp= httpClient.execute(httpPut, responseHandler);
+
+            statusCode = rp.code;
+            text = rp.body;
+            Log.i("RESTMETHOD PUT", text);
+        }
+        catch (Exception e) {
+            Log.e("PUT", "error en el htttput");
+            statusCode = -1;
+        }
+
+        return text;
+    }
 
 
     private  String inputStreamToString(InputStream inputStream) throws IOException {
@@ -89,6 +151,7 @@ public class RestMethod {
 
         inputStream.close();
         return result;
-
     }
+
+
 }

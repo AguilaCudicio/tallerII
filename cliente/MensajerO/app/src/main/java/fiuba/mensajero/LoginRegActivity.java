@@ -2,6 +2,7 @@ package fiuba.mensajero;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -77,28 +78,30 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
                 break;
             case NetworkService.OK:
                 Log.d("onreceiveresult", "se completo la operacion de login ");
-                String mensaje = resultData.getString("result");
-                if (mensaje == null)
-                    Log.e("RESULTADO DE REGISTRO", "parece que no anda internet");
-                else
-                    //nota si el mensaje es "ok" entonces tuvo exito, si no el mensaje es el problema
-                    Log.i("RESULTADO DE REGISTRO", mensaje);
+                String token = resultData.getString("result");
+                if (token == null)
+                    Log.e("ONRECEIVERESULT REG", "error inesperado");
+                else {
+                    //guardo el token en sharedpreferences
+                    SharedPreferences sharedPref = getSharedPreferences("appdata", 0);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("token", token);
+                    editor.commit();
+                    Log.i("RESULTADO DE REGISTRO", token);
                     Intent flist = new Intent(this, ListViewFriendsActivity.class);
-                    // TODO: Aca deberia recibir el nombre de usuario.
-                    flist.putExtra("nombre", "nombre-cualquiera");
                     startActivity(flist);
+                }
                 break;
             case NetworkService.ERROR:
-                // handle the error;
                 AlertDialog alerta = new AlertDialog.Builder(this).create();
-                alerta.setTitle("Datos incorrectos");
-                alerta.setMessage("El password o nombre ingresados son incorrrectos");
+                alerta.setTitle("Error");
+                String err = resultData.getString("error");
+                alerta.setMessage(err);
                 alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO Hacer algo aca?
                     }
                 });
-                alerta.setIcon(R.drawable.noo);
+                //alerta.setIcon(R.drawable.noo);
                 alerta.show();
                 Log.e("onreceiveresult", "salto un error en login");
                 break;
