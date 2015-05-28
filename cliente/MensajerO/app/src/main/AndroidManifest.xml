@@ -108,6 +108,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fiuba.mensajero.ProfileActivity" />
         </activity>
+        <activity
+            android:name=".ImageUploadActivity"
+            android:label="@string/title_activity_image_upload" >
+        </activity>
     </application>
 
 </manifest>
