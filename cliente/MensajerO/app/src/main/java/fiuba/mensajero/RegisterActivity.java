@@ -15,7 +15,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 
-public class SignInActivity extends ActionBarActivity implements MyResultReceiver.Receiver {
+public class RegisterActivity extends ActionBarActivity implements MyResultReceiver.Receiver {
 
     public MyResultReceiver mReceiver;
 

@@ -23,10 +23,12 @@ public class MainActivity extends ActionBarActivity {
             Intent flist = new Intent(this, ListViewFriendsActivity.class);
             flist.putExtra("nombre", nombre);
             startActivity(flist);
+            finish();
         }
         else {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            finish();
         }
 
 

@@ -25,14 +25,13 @@ public class ChatActivity extends ActionBarActivity {
 
         // Get the message from the intent
         Intent intent = getIntent();
-        String nombre = intent.getStringExtra(ListViewFriendsActivity.EXTRA_MESSAGE);
+        String nombre = intent.getStringExtra("id");
 
         MyFragment fragment = new MyFragment();
         //TODO: Mensajes de prueba, cambiarlos.
 
         fragment.addMessage(nombre,"hola");
-        int f;
-        for(f=1;f<=10;f++) {
+        for(int f=1;f<=10;f++) {
             fragment.addMessage(nombre, "chau");
         }
         getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();

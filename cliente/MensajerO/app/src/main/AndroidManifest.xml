@@ -2,9 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fiuba.mensajero" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <uses-sdk android:minSdkVersion="12" />
 
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <android:uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -14,8 +16,6 @@
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
-    <!-- To access Google+ APIs: -->
-    <uses-permission android:name="android.permission.INTERNET" />
     <!--
  To retrieve OAuth 2.0 tokens or invalidate tokens to disconnect a user. This disconnect
      option is required to comply with the Google+ Sign-In developer policies
@@ -64,7 +64,7 @@
                 android:value="fiuba.mensajero.MainActivity" />
         </activity>
         <activity
-            android:name=".SignInActivity"
+            android:name=".RegisterActivity"
             android:label="@string/title_activity_sign_in"
             android:parentActivityName=".LoginActivity" >
             <meta-data
