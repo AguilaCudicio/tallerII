@@ -46,8 +46,8 @@ public class ServerRequest {
     }
 
     //devuelve un array con todos los usuarios o null si fallo el get
-    public ArrayList<UserData> getUsersOnline (String user, String token) {
-        String finalURL = url + "/usuarios";
+    public ArrayList<UserData> getUsersOnline () {
+        String finalURL = url + "/usuarios" + "?r_user=" + this.user + "&token=" + this.token;
         RestMethod rest = new RestMethod();
         String resp = rest.GET(finalURL);
         int respCode = rest.getStatusCode();
@@ -86,7 +86,7 @@ public class ServerRequest {
 
         String ret = null;
         switch (respCode) {
-            case 201:   ret = "Registro exitoso";
+            case 201:   ret = "ok";
                         break;
             case 401:   JSONParser jp = new JSONParser();
                         errormsg = jp.getError(resp);
@@ -103,6 +103,7 @@ public class ServerRequest {
     //si tuvo exito devuelve el token valido, si fallo devuleve null
     public String logIn(String user, String password) {
         String finalURL = url + "/login";
+
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.accumulate("password", password);
@@ -131,7 +132,7 @@ public class ServerRequest {
 
 
     //devuelve un array con todos los mensajes o null si fallo el get
-    public ArrayList<String> getMessages(String user, String user2, String token) {
+    public ArrayList<String> getMessages(String user2, String token) {
         String finalURL = url + "/usuario/" + user + "." + user2;
         RestMethod rest = new RestMethod();
         String resp = rest.GET(finalURL);
@@ -150,6 +151,40 @@ public class ServerRequest {
         }
         return list;
     }
+
+    //si no se especifica user2 (destinatario) se envia el mensaje a todos los usuarios
+    public String sendMessage(String user2, String message) {
+        String finalURL;
+        if (user2 == null)
+            finalURL = url + "/broadcast/" + "?r_user=" + user + "&token=" + token;
+        else
+            finalURL = url + "/conversacion/" + user2 + "?r_user=" + user + "&token=" + token;
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.accumulate("message", message);
+        }
+        catch (JSONException e) {
+            Log.e("register", "json fallo crear register body");
+        }
+        RestMethod rest = new RestMethod();
+        String resp = rest.POST(finalURL, jsonObject);
+        int respCode = rest.getStatusCode();
+
+        String ret = null;
+        switch (respCode) {
+            case 201:   ret = "ok";
+                        break;
+            case 401:   JSONParser jp = new JSONParser();
+                        errormsg = jp.getError(resp);
+                        break;
+            case -1:    errormsg = "No se pudo conectar con el servidor";
+                        break;
+            default:    errormsg = "Http protocol error: " + String.valueOf(respCode);
+                        break;
+        }
+        return ret;
+    }
+
 
 
 }

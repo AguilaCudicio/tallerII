@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -27,7 +28,7 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
         setContentView(R.layout.activity_listviewfriendsactivity);
         mReceiver = new MyResultReceiver(new Handler());
         mReceiver.setReceiver(this);
-        getUsersOnline(null, null);
+        getUsersOnline();
 
     }
 
@@ -42,12 +43,10 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
         super.onListItemClick(l, v, position, id);
     }
 
-    public void getUsersOnline(String user, String token) {
+    public void getUsersOnline() {
         Intent intent = new Intent(this, NetworkService.class);
         intent.putExtra("receiver", mReceiver);
         intent.putExtra("command", "getListaConectados");
-        intent.putExtra("token", token);
-        intent.putExtra("user", user);
         startService(intent);
     }
 
@@ -89,6 +88,19 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
     //* handler para el boton de Perfil
     public void changeActivityProfile(View view) {
         startActivity(new Intent(this, ProfileActivity.class));
+    }
+
+    // boton desconectar
+    public void logout(View view) {
+        LoginActivity.logout(this);
+       /* Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        SharedPreferences sharedPref = getSharedPreferences("appdata", 0);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.remove("user");
+        editor.remove("token");
+        editor.commit();
+        startActivity(intent); */
     }
 
 }

@@ -39,6 +39,7 @@ public class ConfigActivity extends ActionBarActivity {
             alerta.setMessage("Configuracion guardada exitosamente");
             alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
+                    finish();
                 }
             });
             alerta.show();

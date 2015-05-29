@@ -40,9 +40,7 @@ public class NetworkService extends IntentService {
         if(command.equals("getListaConectados")) {
             receiver.send(RUNNING, Bundle.EMPTY);
             try {
-                String token = intent.getStringExtra("token");
-                String user = intent.getStringExtra("user");
-                ArrayList<UserData> res = serverRequest.getUsersOnline(user, token);
+                ArrayList<UserData> res = serverRequest.getUsersOnline();
                 if (res != null) {
                     b.putParcelableArrayList("result", res);
                     receiver.send(OK, b);
@@ -98,13 +96,13 @@ public class NetworkService extends IntentService {
             }
         }
 
-        if(command.equals("getMessages")) {
+       /* if(command.equals("getMessages")) {
             receiver.send(RUNNING, Bundle.EMPTY);
             try {
                 String token = intent.getStringExtra("token");
                 String user = intent.getStringExtra("user");
                 String user2 = intent.getStringExtra("user2");
-                ArrayList<String> res = serverRequest.getMessages(user, user2, token);
+                ArrayList<String> res = serverRequest.getMessages(user2);
                 if (res != null) {
                     b.putStringArrayList("result", res);
                     receiver.send(OK, b);
@@ -119,14 +117,12 @@ public class NetworkService extends IntentService {
             }
         }
 
-        /*  if (command.equals("sendMessage")) {
+          if (command.equals("sendMessage")) {
             receiver.send(RUNNING, Bundle.EMPTY);
             try {
-                String user = intent.getStringExtra("user");
                 String user2 = intent.getStringExtra("user2");
-                String token = intent.getStringExtra("token");
                 String message = intent.getStringExtra("message");
-                String res = serverRequest.sendMessage(user, user2, token, message);
+                String res = serverRequest.sendMessage(user2, message);
                 b.putString("result", res);
                 receiver.send(OK, b);
             } catch(Exception e) {
@@ -135,13 +131,11 @@ public class NetworkService extends IntentService {
             }
         }
 
-        if (command.equals("sendBroadcast")) {
+        if (command.equals("broadcast")) {
             receiver.send(RUNNING, Bundle.EMPTY);
             try {
-                String user = intent.getStringExtra("user");
-                String token = intent.getStringExtra("token");
                 String message = intent.getStringExtra("message");
-                String res = serverRequest.sendBroadcast(user, token, message);
+                String res = serverRequest.sendMessage(null, message);
                 b.putString("result", res);
                 receiver.send(OK, b);
             } catch(Exception e) {
@@ -153,9 +147,8 @@ public class NetworkService extends IntentService {
         if(command.equals("getProfile")) {
             receiver.send(RUNNING, Bundle.EMPTY);
             try {
-                String token = intent.getStringExtra("token");
-                String user = intent.getStringExtra("user");
-                ArrayList<String> res = serverRequest.getProfile(user, token);
+                String user2 = intent.getStringExtra("user2");
+                ArrayList<String> res = serverRequest.getProfile(user2);
                 b.putStringArrayList("result", res);
                 receiver.send(OK, b);
             } catch(Exception e) {
@@ -167,19 +160,16 @@ public class NetworkService extends IntentService {
         if(command.equals("editProfile")) {
             receiver.send(RUNNING, Bundle.EMPTY);
             try {
-                String token = intent.getStringExtra("token");
-                String user = intent.getStringExtra("user");
                 String nombre = intent.getStringExtra("nombre");
                 String foto = intent.getStringExtra("foto");
-                String res = serverRequest.editProfile(user, token);
+                String res = serverRequest.editProfile(nombre, foto);
                 b.putString("result", res);
                 receiver.send(OK, b);
             } catch(Exception e) {
                 b.putString(Intent.EXTRA_TEXT, e.toString());
                 receiver.send(ERROR, b);
             }
-        }
-        */
+        }*/
     }
 
 

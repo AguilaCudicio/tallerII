@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +33,10 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
 
         final EditText nom = (EditText) findViewById(R.id.editTextNombre);
         String user = nom.getText().toString();
+        SharedPreferences sharedPref = getSharedPreferences("appdata", 0);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("user", user);
+        editor.commit();
 
         final EditText pass = (EditText) findViewById(R.id.editTextPass);
         String password = pass.getText().toString();
@@ -87,12 +92,16 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("token", token);
                     editor.commit();
-                    Log.i("RESULTADO DE REGISTRO", token);
+                    Log.i("TOKEN OBTENIDO: ", token);
                     Intent flist = new Intent(this, ListViewFriendsActivity.class);
                     startActivity(flist);
                 }
                 break;
             case NetworkService.ERROR:
+                SharedPreferences sharedPref = getSharedPreferences("appdata", 0);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.remove("user");
+                editor.commit();
                 AlertDialog alerta = new AlertDialog.Builder(this).create();
                 alerta.setTitle("Error");
                 String err = resultData.getString("error");

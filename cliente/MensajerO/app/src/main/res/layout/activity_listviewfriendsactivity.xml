@@ -11,6 +11,7 @@
             android:id="@+id/logoutb"
             android:layout_width="0.0dip" android:layout_height="fill_parent"
             android:text="Desconectar"
+            android:onClick="logout"
             android:layout_weight="1.0" />
 
         <Button

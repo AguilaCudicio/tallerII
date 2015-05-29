@@ -87,13 +87,13 @@ public class RegisterActivity extends ActionBarActivity implements MyResultRecei
                 Log.d("onreceiveresult", "se completo la operacion de registro ");
                 String mensaje = resultData.getString("result");
                 if (mensaje == null)
-                     Log.e("RESULTADO DE REGISTRO", "parece que no hay internet");
-                else {
+                     Log.e("RESULTADO DE REGISTRO", "error inesperado");
+                else if (mensaje.equals("ok")) {
                     //nota si el mensaje es "ok" entonces tuvo exito, si no el mensaje es el problema
                     Log.i("RESULTADO DE REGISTRO", mensaje);
                     AlertDialog alerta = new AlertDialog.Builder(this).create();
                     alerta.setTitle("Registro completo");
-                    alerta.setMessage("Volviendo a la pantalla principal, oprima log in para ingresar");
+                    alerta.setMessage("Volviendo a la pantalla principal, oprima login para ingresar");
                     alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             finish();
@@ -107,9 +107,9 @@ public class RegisterActivity extends ActionBarActivity implements MyResultRecei
                 // handle the error;
                 Log.e("onreceiveresult", "salto un error en registro");
                 AlertDialog alerta = new AlertDialog.Builder(this).create();
-                alerta.setTitle("Error en el registro");
-                //TODO: aca aclarar cual fue el problema, por ej nombre de usuario repetido
-                alerta.setMessage("Hubo un error en el registro");
+                alerta.setTitle("Error");
+                String err = resultData.getString("error");
+                alerta.setMessage(err);
                 alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                     }

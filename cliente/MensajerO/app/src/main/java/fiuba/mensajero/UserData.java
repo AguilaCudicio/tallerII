@@ -9,11 +9,13 @@ public class UserData implements Parcelable {
     private  String id;
     private  String nombre;
     private  boolean conectado;
+    private  boolean nuevomsg;
 
-    public UserData(String id, String nombre, boolean conectado) {
+    public UserData(String id, String nombre, boolean conectado, boolean nuevomsg) {
         this.id = id;
         this.nombre = nombre;
         this.conectado = conectado;
+        this.nuevomsg = nuevomsg;
     }
 
     public String getId() {
@@ -28,6 +30,8 @@ public class UserData implements Parcelable {
         return conectado;
     }
 
+    public boolean hasNewMessages() { return nuevomsg; }
+
     public UserData(Parcel in) {
         readFromParcel(in);
     }
@@ -36,6 +40,7 @@ public class UserData implements Parcelable {
         this.id = in.readString();
         this.nombre = in.readString();
         this.conectado = (in.readInt() != 0);
+        this.nuevomsg = (in.readInt() != 0);
     }
 
     public int describeContents() {
@@ -57,5 +62,6 @@ public class UserData implements Parcelable {
         dest.writeString(id);
         dest.writeString(nombre);
         dest.writeInt( conectado ? 1 : 0 );
+        dest.writeInt( nuevomsg ? 1 : 0 );
     }
 }

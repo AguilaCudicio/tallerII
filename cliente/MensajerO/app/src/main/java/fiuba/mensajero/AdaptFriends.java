@@ -31,11 +31,14 @@ public class AdaptFriends extends ArrayAdapter<UserData> {
         textView.setText(contacto.getNombre());
 
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-        boolean conectado = contacto.isConectado();
-        if (conectado) {
+        if (contacto.isConectado()) {
             imageView.setImageResource(R.drawable.okk);
         } else {
             imageView.setImageResource(R.drawable.noo);
+        }
+
+        if (contacto.hasNewMessages()) {
+            //TODO mostrar icono de nuevos mensajes!
         }
 
         return rowView;
