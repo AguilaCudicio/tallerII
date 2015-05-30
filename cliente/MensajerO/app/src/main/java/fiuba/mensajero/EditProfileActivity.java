@@ -3,6 +3,7 @@ package fiuba.mensajero;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -11,18 +12,27 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 
 public class EditProfileActivity extends ActionBarActivity {
     private static int RESULT_LOAD_IMG = 1;
-    String imgDecodableString;
+    String imgString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        imgString = null;
+        //mostrar en los edittext la info actual (excepto password)
+        SharedPreferences sharedPref= getSharedPreferences("appdata", 0);
+        String nombre = sharedPref.getString("nombre", null);
+        if (nombre != null) {
+            EditText nom = (EditText) findViewById(R.id.editText);
+            nom.setText(nombre);
+        }
     }
 
 
@@ -38,6 +48,7 @@ public class EditProfileActivity extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        String imgDecodableString = null;
         try {
             if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK
                     && null != data) {
@@ -54,8 +65,9 @@ public class EditProfileActivity extends ActionBarActivity {
                 cursor.close();
                 ImageView imgView = (ImageView) findViewById(R.id.uploadimageview);
                 // Poner en ImageView
-                imgView.setImageBitmap(BitmapFactory
-                        .decodeFile(imgDecodableString));
+                Bitmap bm = BitmapFactory.decodeFile(imgDecodableString);
+                imgView.setImageBitmap(bm);
+                imgString = ProfileActivity.bitmapToString(bm);
 
             } else {
                 Toast.makeText(this, "Tiene que seleccionar una imagen",
@@ -68,7 +80,28 @@ public class EditProfileActivity extends ActionBarActivity {
     }
 
     public void saveChanges(View view) {
-        // TODO Aca deberia llamar a ProfileData y guardar el nuevo avatar, si fue cargado...
+        //obtengo los valores a guardar
+        EditText pass = (EditText) findViewById(R.id.editTextPassword);
+        String password = pass.getText().toString();
+        EditText nom = (EditText) findViewById(R.id.editText);
+        String nombre = nom.getText().toString();
+
+        //debo mandar esta info al servidor antes de guardarla localmente, pero para probar ahora guardo directamente
+
+
+        //guardar la info necesaria localmente
+        SharedPreferences sharedPref= getSharedPreferences("appdata", 0);
+        SharedPreferences.Editor editor= sharedPref.edit();
+        editor.putString("nombre", nombre);
+        editor.putString("password", password);     //deberia hacer algun chequeo de validez
+        if (imgString != null)
+            editor.putString("foto", imgString);
+        editor.commit();
+
+        //para recuperar despues la info seria asi por ej
+        //        SharedPreferences sharedPref= getSharedPreferences("appdata", 0);
+        //        String nombre = sharedPref.getString("nombre", null);
+
         finish();
     }
 

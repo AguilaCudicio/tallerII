@@ -64,6 +64,9 @@ public class LoginActivity extends ActionBarActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.remove("user");
         editor.remove("token");
+        editor.remove("password");
+        editor.remove("foto");
+        editor.remove("nombre");
         editor.commit();
         context.startActivity(intent);
     }
