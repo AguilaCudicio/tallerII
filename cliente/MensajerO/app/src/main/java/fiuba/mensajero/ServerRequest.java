@@ -1,21 +1,13 @@
 package fiuba.mensajero;
 
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import org.apache.http.entity.SerializableEntity;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+
 import java.util.ArrayList;
 
 public class ServerRequest {
@@ -56,7 +48,7 @@ public class ServerRequest {
         switch (respCode) {
             case 200:   list = jp.parseUsersOnline(resp);
                         break;
-            case 401:   errormsg = jp.getError(resp);
+            case 401:   errormsg = jp.parseError(resp);
                         break;
             case -1:    errormsg = "No se pudo conectar con el servidor";
                         break;
@@ -89,7 +81,7 @@ public class ServerRequest {
             case 201:   ret = "ok";
                         break;
             case 401:   JSONParser jp = new JSONParser();
-                        errormsg = jp.getError(resp);
+                        errormsg = jp.parseError(resp);
                         break;
             case -1:    errormsg = "No se pudo conectar con el servidor";
                         break;
@@ -118,9 +110,9 @@ public class ServerRequest {
         String token = null;
         JSONParser jp = new JSONParser();
         switch (respCode) {
-            case 201:   token = jp.getToken(resp);
+            case 201:   token = jp.parseToken(resp);
                         break;
-            case 401:   errormsg = jp.getError(resp);
+            case 401:   errormsg = jp.parseError(resp);
                         break;
             case -1:    errormsg = "No se pudo conectar con el servidor";
                         break;
@@ -132,17 +124,17 @@ public class ServerRequest {
 
 
     //devuelve un array con todos los mensajes o null si fallo el get
-    public ArrayList<String> getMessages(String user2, String token) {
-        String finalURL = url + "/usuario/" + user + "." + user2;
+    public ArrayList<MessageData> getMessages(String user2) {
+        String finalURL = url + "/conversacion/" + user2 + "?r_user=" + user + "&token=" + token;
         RestMethod rest = new RestMethod();
         String resp = rest.GET(finalURL);
         int respCode = rest.getStatusCode();
-        ArrayList<String> list = null;
+        ArrayList<MessageData> list = null;
         JSONParser jp = new JSONParser();
         switch (respCode) {
-            case 200:   //list = jp.parseMessages(resp);
+            case 200:   list = jp.parseMessages(resp);
                         break;
-            case 401:   errormsg = jp.getError(resp);
+            case 401:   errormsg = jp.parseError(resp);
                         break;
             case -1:    errormsg = "No se pudo conectar con el servidor";
                         break;
@@ -175,7 +167,7 @@ public class ServerRequest {
             case 201:   ret = "ok";
                         break;
             case 401:   JSONParser jp = new JSONParser();
-                        errormsg = jp.getError(resp);
+                        errormsg = jp.parseError(resp);
                         break;
             case -1:    errormsg = "No se pudo conectar con el servidor";
                         break;
@@ -185,6 +177,55 @@ public class ServerRequest {
         return ret;
     }
 
+    public ProfileData getProfile(String user2) {
+        String finalURL = url + "/usuario/" + user2 + "?r_user=" + user + "&token=" + token;
+        RestMethod rest = new RestMethod();
+        String resp = rest.GET(finalURL);
+        int respCode = rest.getStatusCode();
+        ProfileData ret = null;
+        JSONParser jp = new JSONParser();
+        switch (respCode) {
+            case 200:   ret = jp.parseProfile(resp);
+                break;
+            case 401:   errormsg = jp.parseError(resp);
+                break;
+            case -1:    errormsg = "No se pudo conectar con el servidor";
+                break;
+            default:    errormsg = "Http protocol error: " + String.valueOf(respCode);
+                break;
+        }
+        return ret;
+    }
 
 
+    public String editProfile(String nombre, String password, String foto) {
+        String finalURL = url + "/usuario/" + user + "?r_user=" + user + "&token=" + token;
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.accumulate("password", password);
+            jsonObject.accumulate("nombre", nombre);
+            jsonObject.accumulate("foto", foto);
+        }
+        catch (JSONException e) {
+            Log.e("register", "json fallo crear register body");
+        }
+        RestMethod rest = new RestMethod();
+        String resp = rest.PUT(finalURL, jsonObject);
+        int respCode = rest.getStatusCode();
+
+        String ret = null;
+        switch (respCode) {
+            case 201:   ret = "ok";
+                        break;
+            case 401:   JSONParser jp = new JSONParser();
+                        errormsg = jp.parseError(resp);
+                        break;
+            case -1:    errormsg = "No se pudo conectar con el servidor";
+                        break;
+            default:    errormsg = "Http protocol error: " + String.valueOf(respCode);
+                        break;
+        }
+
+        return ret;
+    }
 }

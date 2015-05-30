@@ -26,13 +26,13 @@ class usuarios(Resource):
 		if request.args.get('r_user', '') ==  ide and request.args.get('token', '') == token:
 			return  [ {"id": "pedro", "nombre": "Pedro Gomez", "estado" : "conectado", "nuevomsg": "true" }, {"id": "juan", "nombre": "Juan Perez", "estado" : "conectado", "nuevomsg": "false"}, {"id": "carlos", "nombre": "Carlos Johnson", "estado" : "desconectado", "nuevomsg": "false"} ] , 200
 		else:
-			return { "error": "Token invalido" }, 401
+			return { "error": "token invalido" }, 401
 
 
 class usuario(Resource):
 	def get(self, user):
 		if request.args.get('token', '') != token:
-			return { "error": "Token invalido" }, 401
+			return { "error": "token invalido" }, 401
 		else:
 			if request.args.get('r_user', '') ==  usertest:
 				return { "nombre": "Usuario de prueba", "ubicacion": "Brazil", "foto": "una foto" }, 200
@@ -46,10 +46,11 @@ class usuario(Resource):
 		nombre = root['nombre']
 		global password
 		password = root['password']
+		print "registrado usuario nuevo: " + ide
 		return '', 201
 	def put(self, user):
 		root = request.get_json(force=True)
-		if request.args.get('token', '') == token and request.args.get('r_user', '') ==  usertest:
+		if request.args.get('token', '') == token and request.args.get('r_user', '') ==  ide:
 			global nombre
 			nombre = root['nombre']
 			print "nuevo nombre: " + nombre
@@ -58,13 +59,29 @@ class usuario(Resource):
 			print "nuevo password: " + password
 			return '', 201
 		else:
-			return {"error": "Token invalido no existe el usuario"}, 401
+			return {"error": "token invalido no existe el usuario"}, 401
+
+class conversacion(Resource):
+	def get(self, user):
+		if request.args.get('token', '') == token and request.args.get('r_user', '') ==  ide:
+			return [ { "id" : "test", "time" : 1432945648, "message" : "hola" }, { "id" : "pepe", "time" : 1432945700, "message" : "como va?" }, { "id" : "test", "time" : 1432945800, "message" : "todo bien" } ], 200
+		else:
+			return { "error" : "token invalido" }, 401
+	def post(self, user):
+		root = request.get_json(force=True)
+		if request.args.get('token', '') != token or request.args.get('r_user', '') !=  ide:
+			return { "error": "token invalido" }, 401
+		else:
+			mensaje = root['message']
+			print "llego mensaje" + mensaje
+			return '', 201
 			
 
 # Agregamos los URIs para cada recurso
 api.add_resource(login, '/login')
 api.add_resource(usuarios, '/usuarios')
 api.add_resource(usuario, '/usuario/<user>')
+api.add_resource(conversacion, '/conversacion/<user>')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

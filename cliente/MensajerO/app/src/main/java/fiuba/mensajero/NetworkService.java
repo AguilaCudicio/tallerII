@@ -96,22 +96,19 @@ public class NetworkService extends IntentService {
             }
         }
 
-       /* if(command.equals("getMessages")) {
+        if(command.equals("getMessages")) {
             receiver.send(RUNNING, Bundle.EMPTY);
             try {
-                String token = intent.getStringExtra("token");
-                String user = intent.getStringExtra("user");
                 String user2 = intent.getStringExtra("user2");
-                ArrayList<String> res = serverRequest.getMessages(user2);
+                ArrayList<MessageData> res = serverRequest.getMessages(user2);
                 if (res != null) {
-                    b.putStringArrayList("result", res);
+                    b.putParcelableArrayList("result", res);
                     receiver.send(OK, b);
-                }
-                else {
+                } else {
                     b.putString("error", serverRequest.getErrormsg());
                     receiver.send(ERROR, b);
                 }
-            } catch(Exception e) {
+            } catch (Exception e) {
                 b.putString("error", e.toString());
                 receiver.send(ERROR, b);
             }
@@ -123,8 +120,14 @@ public class NetworkService extends IntentService {
                 String user2 = intent.getStringExtra("user2");
                 String message = intent.getStringExtra("message");
                 String res = serverRequest.sendMessage(user2, message);
-                b.putString("result", res);
-                receiver.send(OK, b);
+                if (res != null) {
+                    b.putString("result", res);
+                    receiver.send(OK, b);
+                }
+                else {
+                    b.putString("error", serverRequest.getErrormsg());
+                    receiver.send(ERROR, b);
+                }
             } catch(Exception e) {
                 b.putString(Intent.EXTRA_TEXT, e.toString());
                 receiver.send(ERROR, b);
@@ -136,8 +139,14 @@ public class NetworkService extends IntentService {
             try {
                 String message = intent.getStringExtra("message");
                 String res = serverRequest.sendMessage(null, message);
-                b.putString("result", res);
-                receiver.send(OK, b);
+                if (res != null) {
+                    b.putString("result", res);
+                    receiver.send(OK, b);
+                }
+                else {
+                    b.putString("error", serverRequest.getErrormsg());
+                    receiver.send(ERROR, b);
+                }
             } catch(Exception e) {
                 b.putString(Intent.EXTRA_TEXT, e.toString());
                 receiver.send(ERROR, b);
@@ -148,8 +157,8 @@ public class NetworkService extends IntentService {
             receiver.send(RUNNING, Bundle.EMPTY);
             try {
                 String user2 = intent.getStringExtra("user2");
-                ArrayList<String> res = serverRequest.getProfile(user2);
-                b.putStringArrayList("result", res);
+                ProfileData res = serverRequest.getProfile(user2);
+                b.putParcelable("result", res);
                 receiver.send(OK, b);
             } catch(Exception e) {
                 b.putString(Intent.EXTRA_TEXT, e.toString());
@@ -162,14 +171,15 @@ public class NetworkService extends IntentService {
             try {
                 String nombre = intent.getStringExtra("nombre");
                 String foto = intent.getStringExtra("foto");
-                String res = serverRequest.editProfile(nombre, foto);
+                String password = intent.getStringExtra("password");
+                String res = serverRequest.editProfile(nombre, password, foto);
                 b.putString("result", res);
                 receiver.send(OK, b);
             } catch(Exception e) {
                 b.putString(Intent.EXTRA_TEXT, e.toString());
                 receiver.send(ERROR, b);
             }
-        }*/
+        }
     }
 
 
