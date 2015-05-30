@@ -13,6 +13,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
@@ -43,7 +46,12 @@ public class RestMethod {
     }
 
     public String GET(String URL) {
-        HttpClient httpClient = new DefaultHttpClient();
+        HttpParams httpParameters = new BasicHttpParams();
+        int timeoutConnection = 3000;
+        HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+        int timeoutSocket = 5000;
+        HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+        DefaultHttpClient httpClient = new DefaultHttpClient(httpParameters);
         HttpGet httpGet = new HttpGet(URL);
         String text = null;
         try {
@@ -73,7 +81,12 @@ public class RestMethod {
     }
 
     public String POST(String URL, JSONObject jsonobj) {
-        HttpClient httpClient = new DefaultHttpClient();
+        HttpParams httpParameters = new BasicHttpParams();
+        int timeoutConnection = 3000;
+        HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+        int timeoutSocket = 5000;
+        HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+        DefaultHttpClient httpClient = new DefaultHttpClient(httpParameters);
         HttpPost httpPost = new HttpPost(URL);
         String text = null;
         try {
@@ -110,7 +123,12 @@ public class RestMethod {
     }
 
     public String PUT(String URL, JSONObject jsonobj) {
-        HttpClient httpClient = new DefaultHttpClient();
+        HttpParams httpParameters = new BasicHttpParams();
+        int timeoutConnection = 3000;
+        HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+        int timeoutSocket = 5000;
+        HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+        DefaultHttpClient httpClient = new DefaultHttpClient(httpParameters);
         HttpPut httpPut = new HttpPut(URL);
         String text = null;
         try {

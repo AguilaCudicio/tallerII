@@ -1,6 +1,8 @@
 package fiuba.mensajero;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -52,5 +54,17 @@ public class LoginActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //hacer logout
+    public static void logout(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        SharedPreferences sharedPref = context.getSharedPreferences("appdata", 0);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.remove("user");
+        editor.remove("token");
+        editor.commit();
+        context.startActivity(intent);
     }
 }
