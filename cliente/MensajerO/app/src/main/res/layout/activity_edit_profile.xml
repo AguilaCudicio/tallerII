@@ -75,4 +75,35 @@
         android:layout_below="@+id/editTextPassword"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/buttonUpl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="uploadImage"
+        android:text="Cargar avatar"
+        android:layout_below="@+id/textViewAvatar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/buttonSaveProfileChanges"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar Cambios"
+        android:onClick="saveChanges"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/uploadimageview"
+        android:scaleType="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/buttonUpl"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/buttonSaveProfileChanges" />
+
 </RelativeLayout>

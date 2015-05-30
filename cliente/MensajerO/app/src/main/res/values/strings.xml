@@ -12,4 +12,5 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_edit_profile">EditProfileActivity</string>
+    <string name="title_activity_image_upload">ImageUploadActivity</string>
 </resources>
