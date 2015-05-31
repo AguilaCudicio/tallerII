@@ -2,6 +2,7 @@ package fiuba.mensajero;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,9 @@ public class AdaptFriends extends ArrayAdapter<UserData> {
         }
 
         if (contacto.hasNewMessages()) {
-            //TODO mostrar icono de nuevos mensajes!
+           ImageView imageViewAlert = (ImageView) rowView.findViewById(R.id.iconNewMsg);
+           imageViewAlert.setImageResource(R.drawable.warning);
+           rowView.setBackgroundColor(Color.argb(50,0,0,20));
         }
 
         return rowView;
