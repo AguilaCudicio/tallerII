@@ -36,11 +36,12 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
         SharedPreferences sharedPref = getSharedPreferences("appdata", 0);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("user", user);
-        editor.commit();
 
         final EditText pass = (EditText) findViewById(R.id.editTextPass);
         String password = pass.getText().toString();
+        editor.putString("password", password);
 
+        editor.commit();
         logIn(user, password);
     }
 
@@ -95,13 +96,14 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
                     Log.i("TOKEN OBTENIDO: ", token);
                     Intent flist = new Intent(this, ListViewFriendsActivity.class);
                     startActivity(flist);
-                    finish();
+
                 }
                 break;
             case NetworkService.ERROR:
                 SharedPreferences sharedPref = getSharedPreferences("appdata", 0);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.remove("user");
+                editor.remove("password");
                 editor.commit();
                 AlertDialog alerta = new AlertDialog.Builder(this).create();
                 alerta.setTitle("Error");

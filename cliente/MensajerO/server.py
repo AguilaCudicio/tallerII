@@ -64,7 +64,7 @@ class usuario(Resource):
 class conversacion(Resource):
 	def get(self, user):
 		if request.args.get('token', '') == token and request.args.get('r_user', '') ==  ide:
-			return [ { "id" : "test", "time" : 1432945648, "message" : "hola" }, { "id" : "pepe", "time" : 1432945700, "message" : "como va?" }, { "id" : "test", "time" : 1432945800, "message" : "todo bien" } ], 200
+			return [ { "id" : "test", "time" : 1432945648, "msg" : "hola" }, { "id" : "pepe", "time" : 1432945700, "msg" : "como va?" }, { "id" : "test", "time" : 1432945800, "msg" : "todo bien" } ], 200
 		else:
 			return { "error" : "token invalido" }, 401
 	def post(self, user):

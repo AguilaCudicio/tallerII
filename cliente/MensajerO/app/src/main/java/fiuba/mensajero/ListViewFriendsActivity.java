@@ -54,12 +54,17 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
         handler.removeCallbacks(listUpdater);
     }
 
+    public void onStop() {
+        super.onStop();
+        handler.removeCallbacks(listUpdater);
+    }
+
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         AlertDialog alertDialog = new Builder(this).create();
 
         Intent intent = new Intent(this, ChatActivity.class);
-        intent.putExtra("id", contactos.get(position).getId());
+        intent.putExtra("contacto", contactos.get(position));
         startActivity(intent);
 
         super.onListItemClick(l, v, position, id);
@@ -87,8 +92,10 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
                   Log.e("onreceiveresult lista", "error inesperado");
                 else {
                     contactos = list;
-                    AdaptFriends adapt = new AdaptFriends(this, list);
-                    setListAdapter(adapt);
+                    if(!this.isFinishing()) {
+                        AdaptFriends adapt = new AdaptFriends(this, list);
+                        setListAdapter(adapt);
+                    }
                 }
                 break;
             case NetworkService.ERROR:
