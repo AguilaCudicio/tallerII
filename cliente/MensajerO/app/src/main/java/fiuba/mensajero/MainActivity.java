@@ -1,6 +1,7 @@
 package fiuba.mensajero;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,16 +10,18 @@ import android.view.MenuItem;
 
 public class MainActivity extends ActionBarActivity {
 
-    /* TODO: Mientras este conectado, esta variable va a estar en true.
-     */
     boolean conectado= false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (conectado) {
-            /* TODO: deberia leer el nombre del archivo */
+
+        SharedPreferences sharedPref = getSharedPreferences("appdata", 0);
+        String user = sharedPref.getString("user", null);
+        String password = sharedPref.getString("password", null);
+
+        if (user != null && password != null) {
             String nombre = "Nombre";
             Intent flist = new Intent(this, ListViewFriendsActivity.class);
             flist.putExtra("nombre", nombre);

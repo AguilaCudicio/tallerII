@@ -95,6 +95,7 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
                     Log.i("TOKEN OBTENIDO: ", token);
                     Intent flist = new Intent(this, ListViewFriendsActivity.class);
                     startActivity(flist);
+                    finish();
                 }
                 break;
             case NetworkService.ERROR:

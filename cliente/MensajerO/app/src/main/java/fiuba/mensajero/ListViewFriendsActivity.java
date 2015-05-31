@@ -22,14 +22,36 @@ import static android.app.AlertDialog.*;
 public class ListViewFriendsActivity extends ListActivity implements MyResultReceiver.Receiver {
     public MyResultReceiver mReceiver;
     private ArrayList<UserData> contactos;
+    private Handler handler;
+    private int interval = 15000;   //intervalo entre updates
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.activity_listviewfriendsactivity);
         mReceiver = new MyResultReceiver(new Handler());
         mReceiver.setReceiver(this);
-        getUsersOnline();
+        handler = new Handler();
 
+    }
+
+    Runnable listUpdater = new Runnable() {
+        @Override
+        public void run() {
+            getUsersOnline();
+            handler.postDelayed(listUpdater, interval);
+        }
+    };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        listUpdater.run();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        handler.removeCallbacks(listUpdater);
     }
 
     @Override
