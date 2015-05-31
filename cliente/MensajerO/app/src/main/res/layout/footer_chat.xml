@@ -1,10 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_height="match_parent"
     tools:context="fiuba.mensajero.ChatActivity">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:background="#A5FFE8"
+        android:id="@+id/headerchat"
+        android:weightSum="1">
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/noimage"
+            android:scaleType="fitXY" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:background="#A5FFE8"
+        android:id="@+id/Friendinfo"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="37dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAlignment="center"
+            android:text="Conversacion con -Nombre-"
+            android:id="@+id/textView13" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="37dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Ultima conexion: Fecha,hora"
+            android:id="@+id/textViessw13" />
+
+    </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -36,8 +77,9 @@
         android:onClick="handEnviar"
         />
     </LinearLayout>
-    <ListView android:layout_height="fill_parent" android:layout_width="match_parent"
+    <ListView android:layout_height="match_parent" android:layout_width="match_parent"
     android:background="#A5FFE8"
-    android:id="@android:id/list" android:layout_above="@id/footer"/>
+    android:id="@android:id/list" android:layout_above="@id/footer"
+        android:layout_below="@+id/headerchat" />
 
 </RelativeLayout>
