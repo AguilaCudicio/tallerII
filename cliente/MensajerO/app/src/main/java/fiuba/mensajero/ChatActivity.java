@@ -25,6 +25,7 @@ import java.util.List;
 
 public class ChatActivity extends ActionBarActivity implements MyResultReceiver.Receiver {
 
+    MyFragment fragment;
     public MyResultReceiver mReceiver;
     private UserData contacto;
     private Handler handler;
@@ -36,6 +37,8 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        fragment = new MyFragment();
+        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
         mReceiver = new MyResultReceiver(new Handler());
         mReceiver.setReceiver(this);
         handler = new Handler();
@@ -99,12 +102,12 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
                     if (list == null)
                         Log.e("onreceiveresult lista", "error inesperado");
                     else {
-                        MyFragment fragment = new MyFragment();
                         for (int i = 0; i < list.size(); i++) {
                             //TODO agregar el tiempo list.get(i).getTime()
                             fragment.addMessage(list.get(i).getId(), list.get(i).getMessage());
-                            getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
                         }
+                        //Actualizar la vista del Fragment para que se vean los nuevos mensajes.
+                        fragment.getView().requestLayout();
                     }
                 }
                 break;
@@ -164,6 +167,7 @@ class MyFragment extends ListFragment {
     //    ...
     //}
 }
+
 class ListViewItem {
     public final String title;
     public final String description;
