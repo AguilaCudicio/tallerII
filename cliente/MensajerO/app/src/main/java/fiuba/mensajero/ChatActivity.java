@@ -30,7 +30,6 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
     private UserData contacto;
     private Handler handler;
     private int interval;
-    private boolean pauseUpdate;
 
 
     @Override
@@ -85,30 +84,27 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode) {
             case NetworkService.RUNNING:
-                Log.i("onreceiveresult", "esta corriendo el servicio chat msg");
+                Log.i("ChatActivity", "esta corriendo el servicio chat msg");
                 //aca se podria mostrar algo mientras el servicio esta corriendo
                 break;
-            case NetworkService.OK:
-                Log.d("onreceiveresult", "se completo la operacion de chat msg ");
-                if (pauseUpdate) {
-                    String res = resultData.getString("result");
-                    if (res.equals("ok")) {
-                        pauseUpdate = false;
-                        msgUpdater.run();
-                    }
+            case NetworkService.OK_MSG:
+                String res = resultData.getString("result");
+                if (res.equals("ok")) {
+                    Log.i("ChatActivity", "mensaje enviado");
                 }
+                break;
+            case NetworkService.OK:
+                Log.d("ChatActivity", "se completo la operacion de chat msg ");
+                ArrayList<MessageData> list = resultData.getParcelableArrayList("result");
+                if (list == null)
+                    Log.e("ChatActivity ", "error inesperado");
                 else {
-                    ArrayList<MessageData> list = resultData.getParcelableArrayList("result");
-                    if (list == null)
-                        Log.e("onreceiveresult lista", "error inesperado");
-                    else {
-                        for (int i = 0; i < list.size(); i++) {
-                            //TODO agregar el tiempo list.get(i).getTime()
-                            fragment.addMessage(list.get(i).getId(), list.get(i).getMessage());
-                        }
-                        //Actualizar la vista del Fragment para que se vean los nuevos mensajes.
-                        fragment.getView().requestLayout();
+                    for (int i = 0; i < list.size(); i++) {
+                        //TODO agregar el tiempo list.get(i).getTime()
+                        fragment.addMessage(list.get(i).getId(), list.get(i).getMessage());
                     }
+                    //Actualizar la vista del Fragment para que se vean los nuevos mensajes.
+                    fragment.getView().requestLayout();
                 }
                 break;
             case NetworkService.ERROR:
@@ -128,8 +124,23 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
 
 
     public void handEnviar(View view) {
-        //no hace nada por ahora
+        final EditText msg = (EditText) findViewById(R.id.edit_message);
+        String message = msg.getText().toString();
+        if (!message.isEmpty()) {
+            Intent intent = new Intent(this, NetworkService.class);
+            intent.putExtra("receiver", mReceiver);
+            intent.putExtra("command", "sendMessage");
+            intent.putExtra("user2", contacto.getId());
+            intent.putExtra("message", message);
+            msg.setText("");
+            startService(intent);
+            getMessages();
+        }
+        else {
+            Log.i("ENVIAR", "mensaje vacio");
+        }
     }
+
 
 
     @Override

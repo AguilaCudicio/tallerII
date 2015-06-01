@@ -20,6 +20,7 @@ public class NetworkService extends IntentService {
     public static final int RUNNING = 0;
     public static final int OK = 1;
     public static final int ERROR = 2;
+    public static final int OK_MSG = 3;
 
 
     protected void onHandleIntent(Intent intent) {
@@ -122,7 +123,7 @@ public class NetworkService extends IntentService {
                 String res = serverRequest.sendMessage(user2, message);
                 if (res != null) {
                     b.putString("result", res);
-                    receiver.send(OK, b);
+                    receiver.send(OK_MSG, b);
                 }
                 else {
                     b.putString("error", serverRequest.getErrormsg());
@@ -141,7 +142,7 @@ public class NetworkService extends IntentService {
                 String res = serverRequest.sendMessage(null, message);
                 if (res != null) {
                     b.putString("result", res);
-                    receiver.send(OK, b);
+                    receiver.send(OK_MSG, b);
                 }
                 else {
                     b.putString("error", serverRequest.getErrormsg());
