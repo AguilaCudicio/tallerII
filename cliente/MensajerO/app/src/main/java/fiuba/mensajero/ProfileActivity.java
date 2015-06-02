@@ -27,10 +27,12 @@ public class ProfileActivity extends ActionBarActivity {
     ImageButton avatar;
     ProfileData profile;
     boolean owner;
+    BitmapUtilities bitmapUtilities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bitmapUtilities=new BitmapUtilities();
         setContentView(R.layout.activity_profile);
         addListenerProfile();
         Intent intent = getIntent();
@@ -48,18 +50,6 @@ public class ProfileActivity extends ActionBarActivity {
             showProfile();
         }
 */
-    }
-
-    public static String bitmapToString(Bitmap image) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] b = baos.toByteArray();
-        return Base64.encodeToString(b, Base64.DEFAULT);
-    }
-
-    public static Bitmap stringToBitmap(String input) {
-        byte[] decodedByte = Base64.decode(input, 0);
-        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
     public void getProfile() {
@@ -83,7 +73,7 @@ public class ProfileActivity extends ActionBarActivity {
         String nombre = profile.getNombre();
         avatar = (ImageButton) findViewById(R.id.imageButtonProfile);
         if (foto != null) {
-            Bitmap bm = stringToBitmap(foto);
+            Bitmap bm = bitmapUtilities.stringToBitmap(foto);
             avatar.setImageBitmap(bm);
         }
         else {
@@ -121,7 +111,7 @@ public class ProfileActivity extends ActionBarActivity {
 
                 ImageView image = (ImageView) profileDialog.findViewById(R.id.ImageLargeView);
                 if (foto != null && image !=null) {
-                    Bitmap bm = stringToBitmap(foto);
+                    Bitmap bm = bitmapUtilities.stringToBitmap(foto);
                     image.setImageBitmap(bm);
                 }
 

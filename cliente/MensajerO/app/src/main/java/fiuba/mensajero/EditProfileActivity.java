@@ -64,10 +64,11 @@ public class EditProfileActivity extends ActionBarActivity {
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
                 ImageView imgView = (ImageView) findViewById(R.id.uploadimageview);
-                // Poner en ImageView
-                Bitmap bm = BitmapFactory.decodeFile(imgDecodableString);
+
+                //Cambiar el segundo argumento para redimensionar a un tamaño mas grande o mas chico
+                Bitmap bm = BitmapUtilities.getResizedBitmap(imgDecodableString,1000);
                 imgView.setImageBitmap(bm);
-                imgString = ProfileActivity.bitmapToString(bm);
+                imgString = BitmapUtilities.bitmapToString(bm);
 
             } else {
                 Toast.makeText(this, "Tiene que seleccionar una imagen",
