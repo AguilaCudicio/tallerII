@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.io.ByteArrayOutputStream;
 
@@ -115,8 +116,14 @@ public class ProfileActivity extends ActionBarActivity {
 
                 final Dialog profileDialog = new Dialog(ProfileActivity.this);
                 profileDialog.setTitle("Foto de perfil");
-
+                String foto = profile.getFoto();
                 profileDialog.setContentView(getLayoutInflater().inflate(R.layout.profilepicture_layout, null));
+
+                ImageView image = (ImageView) profileDialog.findViewById(R.id.ImageLargeView);
+                if (foto != null && image !=null) {
+                    Bitmap bm = stringToBitmap(foto);
+                    image.setImageBitmap(bm);
+                }
 
                 Button button = (Button) profileDialog.findViewById(R.id.ButtonProfile);
                 button.setOnClickListener(new OnClickListener() {

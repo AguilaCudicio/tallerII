@@ -18,8 +18,9 @@
 
     <ImageButton
         android:id="@+id/imageButtonProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
         android:src="@drawable/noimage"
         android:layout_below="@+id/textView10"
         android:layout_centerHorizontal="true" />
@@ -28,9 +29,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Fecha de ultimo acceso"
+        android:id="@+id/textViewDate"
+        android:layout_below="@+id/textViewNameProfile"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Nombre"
-        android:id="@+id/textView11"
+        android:id="@+id/textViewNameProfile"
         android:layout_below="@+id/imageButtonProfile"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="E-mail:"
+        android:id="@+id/textViewMailProfile"
+        android:layout_below="@+id/textViewDate"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Telefono:"
+        android:id="@+id/textViewTelProfile"
+        android:layout_below="@+id/textViewMailProfile"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Fecha de nacimiento:"
+        android:id="@+id/textViewBirthProfile"
+        android:layout_below="@+id/textViewTelProfile"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -39,9 +76,9 @@
         android:text="Editar Perfil"
         android:onClick="changeActivityEditProfile"
         android:id="@+id/buttonChangeProfile"
-        android:layout_below="@+id/textView11"
+        android:layout_below="@+id/textViewBirthProfile"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp" />
+        android:layout_marginTop="40dp" />
 
 
 </RelativeLayout>
