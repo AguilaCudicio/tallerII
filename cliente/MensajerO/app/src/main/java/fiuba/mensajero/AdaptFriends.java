@@ -32,12 +32,16 @@ public class AdaptFriends extends ArrayAdapter<UserData> {
         textView.setText(contacto.getNombre());
 
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-        if (contacto.isConectado()) {
-            imageView.setImageResource(R.drawable.okk);
-        } else {
-            imageView.setImageResource(R.drawable.noo);
+        if (contacto.getId().equals("broadcast")) {
+            rowView.setBackgroundColor(Color.argb(228,135,159,255));
         }
-
+        else {
+            if (contacto.isConectado()) {
+                imageView.setImageResource(R.drawable.okk);
+            } else {
+                imageView.setImageResource(R.drawable.noo);
+            }
+        }
         if (contacto.hasNewMessages()) {
            ImageView imageViewAlert = (ImageView) rowView.findViewById(R.id.iconNewMsg);
            imageViewAlert.setImageResource(R.drawable.warning);
