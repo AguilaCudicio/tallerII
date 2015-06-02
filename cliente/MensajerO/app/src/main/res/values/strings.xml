@@ -3,7 +3,7 @@
     <string name="edit_message">Enter a message</string>
     <string name="send_message">Escriba su mensaje</string>
     <string name="button_send">Enviar</string>
-    <string name="activity_chat">My Message</string>
+    <string name="activity_chat">Conversacion</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_sign_in">SignIn</string>
@@ -13,4 +13,5 @@
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_edit_profile">EditProfileActivity</string>
     <string name="title_activity_image_upload">ImageUploadActivity</string>
+    <string name="title_activity_friend_profile">Perfil del contacto</string>
 </resources>

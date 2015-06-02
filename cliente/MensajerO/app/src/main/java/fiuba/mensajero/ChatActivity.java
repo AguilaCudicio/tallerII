@@ -142,6 +142,10 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
     }
 
 
+    public void showFriendInfo(View view) {
+        startActivity(new Intent(this, FriendProfileActivity.class));
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

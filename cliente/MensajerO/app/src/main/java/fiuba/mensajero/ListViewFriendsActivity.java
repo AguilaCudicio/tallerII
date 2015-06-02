@@ -116,7 +116,7 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
 
 
     void addBroadcast(ArrayList<UserData> list) {
-        UserData userBroadcast= new UserData("broadcast","Enviar mensaje a todos",true,false);
+        UserData userBroadcast= new UserData("broadcast","Conversacion grupal",true,false);
         list.add(0,userBroadcast);
     }
 
