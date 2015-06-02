@@ -9,7 +9,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal"
-        android:background="#A5FFE8"
+        android:background="#97D5DA"
         android:id="@+id/headerchat"
         android:weightSum="1">
 
@@ -26,7 +26,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:orientation="vertical"
-        android:background="#A5FFE8"
+        android:background="#97D5DA"
         android:id="@+id/Friendinfo"
         android:weightSum="1">
 
@@ -54,7 +54,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal"
-        android:background="#A5FFE8"
+        android:background="#97D5DA"
         android:id="@+id/footer">
 
     <EditText android:id="@+id/edit_message"
@@ -74,12 +74,12 @@
         android:layout_marginTop="1dp"
         android:layout_weight="1"
         android:text="@string/button_send"
-        android:background="#54DAB7"
+        android:background="#7DA2BA"
         android:onClick="handEnviar"
         />
     </LinearLayout>
     <ListView android:layout_height="match_parent" android:layout_width="match_parent"
-    android:background="#A5FFE8"
+    android:background="#BDEFF3"
     android:id="@android:id/list" android:layout_above="@id/footer"
         android:layout_below="@+id/headerchat" />
 
