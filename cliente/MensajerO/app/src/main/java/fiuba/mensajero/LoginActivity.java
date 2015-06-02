@@ -67,6 +67,8 @@ public class LoginActivity extends ActionBarActivity {
         editor.remove("password");
         editor.remove("foto");
         editor.remove("nombre");
+        editor.remove("telefono");
+        editor.remove("email");
         editor.commit();
         context.startActivity(intent);
     }

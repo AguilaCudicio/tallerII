@@ -37,7 +37,7 @@ public class JSONParser {
             }
         }
         catch (JSONException e) {
-            Log.e("JSON PARSER", "I got an error", e);
+            Log.e("JSON PARSER", "error al parsear lista de usaurios", e);
         }
 
         return list;
@@ -63,7 +63,7 @@ public class JSONParser {
             }
         }
         catch (JSONException e) {
-            Log.e("JSON PARSER", "I got an error", e);
+            Log.e("JSON PARSER", "error al parsear mensajes", e);
         }
 
         return list;
@@ -97,15 +97,18 @@ public class JSONParser {
 
     public ProfileData parseProfile(String jsonstr) {
         ProfileData profile = null;
-        String nombre, foto;
+        String nombre, foto, ultimoacceso, telefono, email;
         try {
             JSONObject jsonObject = new JSONObject(jsonstr);
             nombre = jsonObject.getString("nombre");
             foto = jsonObject.getString("foto");
-            profile = new ProfileData(nombre, foto);
+            ultimoacceso = jsonObject.getString("ultimoacceso");
+            telefono = jsonObject.getString("telefono");
+            email = jsonObject.getString("email");
+            profile = new ProfileData(nombre, foto, ultimoacceso, telefono, email);
         }
         catch (JSONException e) {
-            Log.e("JSON PARSER", "error al obtener el token");
+            Log.e("JSON PARSER", "error al parsear un profile");
         }
         return profile;
     }

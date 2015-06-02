@@ -102,7 +102,7 @@ public class ServerRequest {
             jsonObject.accumulate("id", user);
         }
         catch (JSONException e) {
-            Log.e("register", "json fallo crear login body");
+            Log.e("login", "json fallo crear login body");
         }
         RestMethod rest = new RestMethod();
         String resp = rest.POST(finalURL, jsonObject);
@@ -156,7 +156,7 @@ public class ServerRequest {
             jsonObject.accumulate("message", message);
         }
         catch (JSONException e) {
-            Log.e("register", "json fallo crear register body");
+            Log.e("sendmessage", "json fallo crear register body");
         }
         RestMethod rest = new RestMethod();
         String resp = rest.POST(finalURL, jsonObject);
@@ -198,16 +198,19 @@ public class ServerRequest {
     }
 
 
-    public String editProfile(String nombre, String password, String foto) {
+    public String editProfile(String nombre, String password, String foto, String telefono, String email) {
         String finalURL = url + "/usuario/" + user + "?r_user=" + user + "&token=" + token;
+        Log.d("DAME LA URL", finalURL);
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.accumulate("password", password);
             jsonObject.accumulate("nombre", nombre);
             jsonObject.accumulate("foto", foto);
+            jsonObject.accumulate("telefono", telefono);
+            jsonObject.accumulate("email", email);
         }
         catch (JSONException e) {
-            Log.e("register", "json fallo crear register body");
+            Log.e("editprofile", "json fallo crear register body");
         }
         RestMethod rest = new RestMethod();
         String resp = rest.PUT(finalURL, jsonObject);

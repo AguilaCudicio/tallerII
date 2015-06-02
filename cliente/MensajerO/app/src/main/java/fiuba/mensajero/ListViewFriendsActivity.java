@@ -128,14 +128,6 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
     // boton desconectar
     public void logout(View view) {
         LoginActivity.logout(this);
-       /* Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        SharedPreferences sharedPref = getSharedPreferences("appdata", 0);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.remove("user");
-        editor.remove("token");
-        editor.commit();
-        startActivity(intent); */
     }
 
 }

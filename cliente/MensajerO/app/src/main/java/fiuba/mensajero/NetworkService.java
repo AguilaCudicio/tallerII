@@ -173,7 +173,9 @@ public class NetworkService extends IntentService {
                 String nombre = intent.getStringExtra("nombre");
                 String foto = intent.getStringExtra("foto");
                 String password = intent.getStringExtra("password");
-                String res = serverRequest.editProfile(nombre, password, foto);
+                String telefono = intent.getStringExtra("telefono");
+                String email = intent.getStringExtra("email");
+                String res = serverRequest.editProfile(nombre, password, foto, telefono, email);
                 b.putString("result", res);
                 receiver.send(OK, b);
             } catch(Exception e) {

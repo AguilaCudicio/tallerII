@@ -36,14 +36,12 @@
             android:layout_height="37dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textAlignment="center"
-            android:text="Conversacion con -Nombre-"
             android:id="@+id/textView13" />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="37dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Ultima conexion: Fecha,hora"
             android:id="@+id/textViessw13" />
 
         </LinearLayout>

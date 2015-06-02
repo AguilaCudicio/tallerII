@@ -51,12 +51,12 @@ class usuario(Resource):
 	def put(self, user):
 		root = request.get_json(force=True)
 		if request.args.get('token', '') == token and request.args.get('r_user', '') ==  ide:
-			global nombre
-			nombre = root['nombre']
-			print "nuevo nombre: " + nombre
 			global password
 			password = root['password']
-			print "nuevo password: " + password
+			print "nuevo password: " + password	
+			global nombre
+			nombre = root['nombre']
+			print "nuevo nombre: " + nombre	
 			return '', 201
 		else:
 			return {"error": "token invalido no existe el usuario"}, 401

@@ -45,6 +45,9 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
         Intent intent = getIntent();
         contacto = intent.getParcelableExtra("contacto");
 
+
+        Log.d("CHATACTIVITY", contacto.getNombre());
+
     }
 
     Runnable msgUpdater = new Runnable() {
@@ -77,6 +80,9 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
         intent.putExtra("receiver", mReceiver);
         intent.putExtra("command", "getMessages");
         intent.putExtra("user2", contacto.getId());
+
+        TextView tv = (TextView) findViewById(R.id.textView13);
+        tv.setText(contacto.getId());
         startService(intent);
     }
 
@@ -100,8 +106,9 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
                     Log.e("ChatActivity ", "error inesperado");
                 else {
                     for (int i = 0; i < list.size(); i++) {
-                        //TODO agregar el tiempo list.get(i).getTime()
                         fragment.addMessage(list.get(i).getId(), list.get(i).getMessage());
+                        TextView tv = (TextView) findViewById(R.id.textViessw13);
+                        tv.setText(list.get(i).getTime());
                     }
                     //Actualizar la vista del Fragment para que se vean los nuevos mensajes.
                     fragment.getView().requestLayout();
@@ -137,7 +144,7 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
             getMessages();
         }
         else {
-            Log.i("ENVIAR", "mensaje vacio");
+            Log.d("ChatActivity", "no se puede enviar un mensaje vacio");
         }
     }
 
