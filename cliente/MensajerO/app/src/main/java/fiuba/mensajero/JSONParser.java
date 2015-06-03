@@ -21,9 +21,11 @@ public class JSONParser {
     public ArrayList<UserData> parseUsersOnline(String jsonstr) {
         ArrayList<UserData> list = new ArrayList<>();
         String nombre, estado, id;
-        boolean nuevomsg;
+        boolean nuevomsg, nuevobroadcast;
         try {
-            JSONArray users = new JSONArray(jsonstr);
+            JSONObject result = new JSONObject(jsonstr);
+            nuevobroadcast = result.getBoolean("nuevobroadcast");
+            JSONArray users = result.getJSONArray("usuarios");
             for (int i = 0; i < users.length(); i++) {
                 boolean conectado = false;
                 JSONObject user = users.getJSONObject(i);
@@ -110,14 +112,19 @@ public class JSONParser {
             JSONObject jsonObject = new JSONObject(jsonstr);
             nombre = jsonObject.getString("nombre");
             if (isEmpty(nombre)) nombre = null;
+
             foto = jsonObject.getString("foto");
             if (isEmpty(foto)) foto = null;
+
             ubicacion = jsonObject.getString("ubicacion");
             if (isEmpty(ubicacion)) ubicacion = null;
+
             telefono = jsonObject.getString("telefono");
             if (isEmpty(telefono)) telefono = null;
+
             email = jsonObject.getString("email");
             if (isEmpty(email)) email = null;
+
             t = jsonObject.getInt("ultimoacceso");
             long dv = (long)t* 1000L;
             Date date = new Date(dv);

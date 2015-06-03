@@ -105,10 +105,11 @@ public class ProfileActivity extends ActionBarActivity implements MyResultReceiv
             tv.setText(text);
         }
         String foto = profile.getFoto();
+        Log.d("STRINGFOTO", foto);
         avatar = (ImageButton) findViewById(R.id.imageButtonProfile);
         if (foto != null) {
-            Bitmap bm = BitmapUtilities.stringToBitmap(foto);
-            avatar.setImageBitmap(bm);
+          //  Bitmap bm = BitmapUtilities.stringToBitmap(foto);
+          //  avatar.setImageBitmap(bm);
         }
         else {
             Resources resources = this.getResources();

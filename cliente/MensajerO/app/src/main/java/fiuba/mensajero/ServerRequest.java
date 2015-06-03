@@ -16,6 +16,7 @@ public class ServerRequest {
     private String user;
     private String token;
     private String errormsg;
+    private String pass;
 
 
     public ServerRequest(Context c) throws ServerAddressNotFoundException {
@@ -25,6 +26,7 @@ public class ServerRequest {
         String ip = sharedPref.getString("ip", null);
         token = sharedPref.getString("token", null);
         user = sharedPref.getString("user", null);
+        pass = sharedPref.getString("password", null);
 
         if (ip == null) {
             throw new ServerAddressNotFoundException("La IP del servidor no fue especificada");
@@ -66,8 +68,6 @@ public class ServerRequest {
         try {
             jsonObject.accumulate("password", password);
             jsonObject.accumulate("nombre", name);
-            jsonObject.accumulate("foto", "vacio");
-            jsonObject.accumulate("ubicacion", "vacio");
         }
         catch (JSONException e) {
             Log.e("register", "json fallo crear register body");
@@ -153,7 +153,7 @@ public class ServerRequest {
             finalURL = url + "/conversacion/" + user2 + "?r_user=" + user + "&token=" + token;
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.accumulate("message", message);
+            jsonObject.accumulate("mensaje", message);
         }
         catch (JSONException e) {
             Log.e("sendmessage", "json fallo crear register body");
@@ -199,17 +199,27 @@ public class ServerRequest {
         return ret;
     }
 
+    boolean isEmpty(String s) {
+        return  s.trim().length() == 0;
+    }
+
 
     public String editProfile(String nombre, String password, String foto, String telefono, String email) {
-        String finalURL = url + "/usuario/" + user + "?r_user=" + user + "&token=" + token;
+        String finalURL = url + "/usuario/" + user + "?r_user=" + user + "&token=" + token + "&password=" + pass;
         Log.d("DAME LA URL", finalURL);
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.accumulate("password", password);
-            jsonObject.accumulate("nombre", nombre);
-            jsonObject.accumulate("foto", foto);
-            jsonObject.accumulate("telefono", telefono);
-            jsonObject.accumulate("email", email);
+            if (password != null && !isEmpty(password) )
+                jsonObject.accumulate("password", password);
+            if (nombre != null && !isEmpty(nombre) )
+                jsonObject.accumulate("nombre", nombre);
+            if (foto != null && !isEmpty(foto) )
+                jsonObject.accumulate("foto", foto);
+            if (telefono != null && !isEmpty(telefono) )
+                jsonObject.accumulate("telefono", telefono);
+            if (email != null && !isEmpty(email) )
+                jsonObject.accumulate("email", email);
+            Log.d("JSONENVIADO", jsonObject.toString());
         }
         catch (JSONException e) {
             Log.e("editprofile", "json fallo crear register body");

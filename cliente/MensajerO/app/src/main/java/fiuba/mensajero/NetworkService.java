@@ -169,8 +169,21 @@ public class NetworkService extends IntentService {
 
         if(command.equals("editProfile")) {
             receiver.send(RUNNING, Bundle.EMPTY);
-            try {
-                String nombre = intent.getStringExtra("nombre");
+            String nombre = intent.getStringExtra("nombre");
+            String foto = intent.getStringExtra("foto");
+            String password = intent.getStringExtra("password");
+            String telefono = intent.getStringExtra("telefono");
+            String email = intent.getStringExtra("email");
+            String res = serverRequest.editProfile(nombre, password, foto, telefono, email);
+            if (res != null) {
+                b.putString("result", res);
+                receiver.send(OK_MSG, b);
+            }
+            else {
+                b.putString("error", serverRequest.getErrormsg());
+                receiver.send(ERROR, b);
+            }
+           /* try {
                 String foto = intent.getStringExtra("foto");
                 String password = intent.getStringExtra("password");
                 String telefono = intent.getStringExtra("telefono");
@@ -179,9 +192,9 @@ public class NetworkService extends IntentService {
                 b.putString("result", res);
                 receiver.send(OK, b);
             } catch(Exception e) {
-                b.putString(Intent.EXTRA_TEXT, e.toString());
+                b.putString("error", "fallo el servicio editprofile");
                 receiver.send(ERROR, b);
-            }
+            }*/
         }
     }
 

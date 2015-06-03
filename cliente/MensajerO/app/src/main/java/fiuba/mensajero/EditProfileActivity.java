@@ -116,7 +116,7 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
         startService(intent);
     }
 
-    public void saveLocalChanges() {
+        public void saveLocalChanges() {
         //guardar la info necesaria localmente
         SharedPreferences sharedPref= getSharedPreferences("appdata", 0);
         SharedPreferences.Editor editor= sharedPref.edit();
@@ -134,6 +134,7 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
 
         finish();
     }
+
 
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode) {
