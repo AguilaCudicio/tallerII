@@ -13,13 +13,15 @@ public class ProfileData implements Parcelable {
     private String ultimoacceso;
     private String telefono;
     private String email;
+    private String ubicacion;
 
-    public ProfileData(String nombre, String foto, String ultimoacceso, String telefono, String email) {
+    public ProfileData(String nombre, String foto, String ultimoacceso, String telefono, String email, String ubicacion) {
         this.nombre = nombre;
         this.foto = foto;
         this.ultimoacceso = ultimoacceso;
         this.telefono = telefono;
         this.email = email;
+        this.ubicacion = ubicacion;
     }
 
 
@@ -37,6 +39,8 @@ public class ProfileData implements Parcelable {
 
     public String getEmail() { return email; }
 
+    public String getUbicacion() {  return ubicacion; }
+
     public ProfileData(Parcel in) {
         readFromParcel(in);
     }
@@ -47,6 +51,7 @@ public class ProfileData implements Parcelable {
         this.ultimoacceso = in.readString();
         this.telefono = in.readString();
         this.email = in.readString();
+        this.ubicacion = in.readString();
     }
 
     public int describeContents() {
@@ -70,5 +75,6 @@ public class ProfileData implements Parcelable {
         dest.writeString(ultimoacceso);
         dest.writeString(telefono);
         dest.writeString(email);
+        dest.writeString(ubicacion);
     }
 }

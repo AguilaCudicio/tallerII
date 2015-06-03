@@ -1,11 +1,14 @@
 package fiuba.mensajero;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -21,13 +24,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 
-public class ProfileActivity extends ActionBarActivity {
+public class ProfileActivity extends ActionBarActivity implements MyResultReceiver.Receiver {
 
     ImageButton avatar;
     ProfileData profile;
-    boolean owner;
+    public MyResultReceiver mReceiver;
+    String user2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +41,29 @@ public class ProfileActivity extends ActionBarActivity {
         setContentView(R.layout.activity_profile);
         addListenerProfile();
         Intent intent = getIntent();
-        owner = !intent.hasExtra("nombre");
+        if (intent.hasExtra("user2")) {
+            user2 = intent.getStringExtra("user2");
+            View b = findViewById(R.id.buttonChangeProfile);
+            b.setVisibility(View.GONE);
+        } else {
+            user2 = null;
+        }
+        mReceiver = new MyResultReceiver(new Handler());
+        mReceiver.setReceiver(this);
+    }
+
+    public void onResume() {
+        super.onResume();
+        getProfile();
     }
 
     public void getProfile() {
-        if(!owner) {
+        Intent intent = new Intent(this, NetworkService.class);
+        intent.putExtra("receiver", mReceiver);
+        intent.putExtra("command", "getProfile");
+        intent.putExtra("user2", user2);
+        startService(intent);
+       /* if(!owner) {
             //si es el perfil de otra persona hago request al server
         }
         else {
@@ -54,8 +78,10 @@ public class ProfileActivity extends ActionBarActivity {
             showProfile();
         }
 
-
+        */
     }
+
+
     public void showProfile() {
         TextView tv = (TextView) findViewById(R.id.textViewNameProfile);
         String text;
@@ -90,11 +116,38 @@ public class ProfileActivity extends ActionBarActivity {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        getProfile();
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        switch (resultCode) {
+            case NetworkService.RUNNING:
+                Log.i("PROFILEACT", "esta corriendo el servicio de getprofile");
+                //aca se podria mostrar algo mientras el servicio esta corriendo
+                break;
+            case NetworkService.OK:
+                Log.d("PROFILEACT", "se completo la operacion ");
+                profile = resultData.getParcelable("result");
+                if (profile == null) {
+                    Log.e("PROFILEACT", "error inesperado");
+                }
+                else {
+                    showProfile();
+                }
+                break;
+            case NetworkService.ERROR:
+                AlertDialog alerta = new AlertDialog.Builder(this).create();
+                alerta.setTitle("Error");
+                String err = resultData.getString("error");
+                alerta.setMessage(err);
+                alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                alerta.show();
+                Log.e("PROFILEACT", err);
+                break;
+        }
     }
+
+
 
 
     @Override

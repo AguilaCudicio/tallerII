@@ -128,6 +128,7 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
     // boton desconectar
     public void logout(View view) {
         LoginActivity.logout(this);
+        finish();
     }
 
 }

@@ -12,7 +12,6 @@ nombre = ''
 token = 'magic'
 usertest = 'test'
 
-
 class login(Resource):
 	def post(self):
 		root = request.get_json(force=True)
@@ -34,10 +33,8 @@ class usuario(Resource):
 		if request.args.get('token', '') != token:
 			return { "error": "token invalido" }, 401
 		else:
-			if request.args.get('r_user', '') ==  usertest:
-				return { "nombre": "Usuario de prueba", "ubicacion": "Brazil", "foto": "una foto" }, 200
-			else:
-				return { "error": "No existe el usuario" }, 401
+			return { "nombre": "Usuarioprueba", "foto" : " ", "ubicacion": "Brazil", "telefono" : "46345455", "email" : "pepefake", "ultimoacceso" : 1433342925 }, 200
+			
 	def post(self, user):
 		root = request.get_json(force=True)
 		global ide

@@ -28,21 +28,41 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
 
     }
 
+    public boolean isEmpty(String s) {
+        return s.trim().length() == 0;
+    }
+
     //* handler para el boton de Terminar
     public void handTerminar(View view) {
 
-        final EditText nom = (EditText) findViewById(R.id.editTextNombre);
+        EditText nom = (EditText) findViewById(R.id.editTextNombre);
         String user = nom.getText().toString();
-        SharedPreferences sharedPref = getSharedPreferences("appdata", 0);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("user", user);
-
-        final EditText pass = (EditText) findViewById(R.id.editTextPass);
+        EditText pass = (EditText) findViewById(R.id.editTextPass);
         String password = pass.getText().toString();
-        editor.putString("password", password);
+        if (isEmpty(password) || isEmpty(user)) {
+            AlertDialog alerta = new AlertDialog.Builder(this).create();
+            alerta.setTitle("Error");
+            alerta.setMessage("Ingrese los datos requeridos");
+            alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    EditText user = (EditText) findViewById(R.id.editTextNombre);
+                    user.setText("");
+                    EditText pass = (EditText) findViewById(R.id.editTextPass);
+                    pass.setText("");
+                }
+            });
+            //alerta.setIcon(R.drawable.noo);
+            alerta.show();
+        }
+        else {
+            SharedPreferences sharedPref = getSharedPreferences("appdata", 0);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("user", user);
+            editor.putString("password", password);
 
-        editor.commit();
-        logIn(user, password);
+            editor.commit();
+            logIn(user, password);
+        }
     }
 
     @Override
@@ -95,7 +115,9 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
                     editor.commit();
                     Log.i("TOKEN OBTENIDO: ", token);
                     Intent flist = new Intent(this, ListViewFriendsActivity.class);
+                    flist.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(flist);
+                    finish();
 
                 }
                 break;

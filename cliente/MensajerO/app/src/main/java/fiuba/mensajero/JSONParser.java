@@ -12,6 +12,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 
 public class JSONParser {
@@ -53,9 +55,10 @@ public class JSONParser {
                 JSONObject us = msgs.getJSONObject(i);
                 id = us.getString("id");
                 t = us.getInt("time");
-                long dv = t*1000;
+                long dv = (long)t* 1000L;
                 Date date = new Date(dv);
                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
+                df.setTimeZone(TimeZone.getTimeZone("GMT-3"));
                 time = df.format(date);
                 message = us.getString("msg");
                 MessageData msgdata = new MessageData(id, time, message);
@@ -95,17 +98,34 @@ public class JSONParser {
         return token;
     }
 
+    boolean isEmpty(String s) {
+        return  s.trim().length() == 0;
+    }
+
     public ProfileData parseProfile(String jsonstr) {
         ProfileData profile = null;
-        String nombre, foto, ultimoacceso, telefono, email;
+        String nombre, foto, ultimoacceso, telefono, email, ubicacion;
+        int t;
         try {
             JSONObject jsonObject = new JSONObject(jsonstr);
             nombre = jsonObject.getString("nombre");
+            if (isEmpty(nombre)) nombre = null;
             foto = jsonObject.getString("foto");
-            ultimoacceso = jsonObject.getString("ultimoacceso");
+            if (isEmpty(foto)) foto = null;
+            ubicacion = jsonObject.getString("ubicacion");
+            if (isEmpty(ubicacion)) ubicacion = null;
             telefono = jsonObject.getString("telefono");
+            if (isEmpty(telefono)) telefono = null;
             email = jsonObject.getString("email");
-            profile = new ProfileData(nombre, foto, ultimoacceso, telefono, email);
+            if (isEmpty(email)) email = null;
+            t = jsonObject.getInt("ultimoacceso");
+            long dv = (long)t* 1000L;
+            Date date = new Date(dv);
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy, HH:mm", Locale.US);
+            df.setTimeZone(TimeZone.getTimeZone("GMT-3"));
+            ultimoacceso = df.format(date);
+            profile = new ProfileData(nombre, foto, ultimoacceso, telefono, email, ubicacion);
+
         }
         catch (JSONException e) {
             Log.e("JSON PARSER", "error al parsear un profile");

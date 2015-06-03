@@ -178,6 +178,8 @@ public class ServerRequest {
     }
 
     public ProfileData getProfile(String user2) {
+        if (user2 == null)
+            user2 = user;
         String finalURL = url + "/usuario/" + user2 + "?r_user=" + user + "&token=" + token;
         RestMethod rest = new RestMethod();
         String resp = rest.GET(finalURL);

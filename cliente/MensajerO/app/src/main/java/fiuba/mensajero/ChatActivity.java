@@ -44,10 +44,6 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
         interval = 10000; //10 seg
         Intent intent = getIntent();
         contacto = intent.getParcelableExtra("contacto");
-
-
-        Log.d("CHATACTIVITY", contacto.getNombre());
-
     }
 
     Runnable msgUpdater = new Runnable() {
@@ -105,6 +101,7 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
                 if (list == null)
                     Log.e("ChatActivity ", "error inesperado");
                 else {
+                    fragment.clearMessages();
                     for (int i = 0; i < list.size(); i++) {
                         fragment.addMessage(list.get(i).getId(), list.get(i).getMessage());
                         TextView tv = (TextView) findViewById(R.id.textViessw13);
@@ -150,7 +147,9 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
 
 
     public void showFriendInfo(View view) {
-        startActivity(new Intent(this, FriendProfileActivity.class));
+        Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra("user2", contacto.getId());
+        startActivity(intent);
     }
 
 
@@ -183,6 +182,10 @@ class MyFragment extends ListFragment {
 
     public void addMessage(String friend,String mess) {
         mItems.add(new ListViewItem(friend,mess));
+    }
+
+    public void clearMessages() {
+        mItems.clear();
     }
 
    //public void onListItemClick(ListView listView, View view, int position, long id) {
