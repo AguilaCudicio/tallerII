@@ -102,7 +102,7 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
                     Log.e("ChatActivity ", "error inesperado");
                 else {
                     fragment.clearMessages();
-                    for (int i = 0; i < list.size(); i++) {
+                    for (int i = list.size()-1; i >= 0; i--) {
                         fragment.addMessage(list.get(i).getId(), list.get(i).getMessage());
                         TextView tv = (TextView) findViewById(R.id.textViessw13);
                         tv.setText(list.get(i).getTime());

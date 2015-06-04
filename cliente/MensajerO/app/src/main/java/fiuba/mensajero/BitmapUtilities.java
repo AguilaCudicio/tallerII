@@ -14,11 +14,11 @@ public class BitmapUtilities {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] b = baos.toByteArray();
-        return Base64.encodeToString(b, Base64.DEFAULT);
+        return Base64.encodeToString(b, Base64.NO_WRAP);
     }
 
     public static Bitmap stringToBitmap(String input) {
-        byte[] decodedByte = Base64.decode(input, 0);
+        byte[] decodedByte = Base64.decode(input, Base64.NO_WRAP);
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 

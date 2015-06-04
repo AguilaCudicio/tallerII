@@ -125,7 +125,11 @@ public class ServerRequest {
 
     //devuelve un array con todos los mensajes o null si fallo el get
     public ArrayList<MessageData> getMessages(String user2) {
-        String finalURL = url + "/conversacion/" + user2 + "?r_user=" + user + "&token=" + token;
+        String finalURL;
+        if (user2.equals("broadcast"))
+            finalURL = url + "/broadcast?r_user=" + user + "&token=" + token;
+        else
+            finalURL = url + "/conversacion/" + user2 + "?r_user=" + user + "&token=" + token;
         RestMethod rest = new RestMethod();
         String resp = rest.GET(finalURL);
         int respCode = rest.getStatusCode();
@@ -147,8 +151,8 @@ public class ServerRequest {
     //si no se especifica user2 (destinatario) se envia el mensaje a todos los usuarios
     public String sendMessage(String user2, String message) {
         String finalURL;
-        if (user2 == null)
-            finalURL = url + "/broadcast/" + "?r_user=" + user + "&token=" + token;
+        if (user2.equals("broadcast"))
+            finalURL = url + "/broadcast?r_user=" + user + "&token=" + token;
         else
             finalURL = url + "/conversacion/" + user2 + "?r_user=" + user + "&token=" + token;
         JSONObject jsonObject = new JSONObject();

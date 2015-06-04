@@ -135,24 +135,6 @@ public class NetworkService extends IntentService {
             }
         }
 
-        if (command.equals("broadcast")) {
-            receiver.send(RUNNING, Bundle.EMPTY);
-            try {
-                String message = intent.getStringExtra("message");
-                String res = serverRequest.sendMessage(null, message);
-                if (res != null) {
-                    b.putString("result", res);
-                    receiver.send(OK_MSG, b);
-                }
-                else {
-                    b.putString("error", serverRequest.getErrormsg());
-                    receiver.send(ERROR, b);
-                }
-            } catch(Exception e) {
-                b.putString(Intent.EXTRA_TEXT, e.toString());
-                receiver.send(ERROR, b);
-            }
-        }
 
         if(command.equals("getProfile")) {
             receiver.send(RUNNING, Bundle.EMPTY);

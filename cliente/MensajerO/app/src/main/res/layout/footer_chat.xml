@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     tools:context="fiuba.mensajero.ChatActivity">
 
     <LinearLayout
@@ -63,6 +65,7 @@
         android:layout_height="40dp"
         android:layout_marginRight="3dp"
         android:layout_marginTop="1dp"
+        android:windowSoftInputMode="stateUnchanged"
         android:hint="@string/send_message" />
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -77,9 +80,15 @@
         android:onClick="handEnviar"
         />
     </LinearLayout>
-    <ListView android:layout_height="match_parent" android:layout_width="match_parent"
-    android:background="#BDEFF3"
-    android:id="@android:id/list" android:layout_above="@id/footer"
-        android:layout_below="@+id/headerchat" />
+    <ListView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="#BDEFF3"
+        android:id="@android:id/list"
+        android:layout_above="@id/footer"
+        android:layout_below="@+id/headerchat"
+        android:transcriptMode="alwaysScroll"
+        android:stackFromBottom="true"
+        />
 
 </RelativeLayout>

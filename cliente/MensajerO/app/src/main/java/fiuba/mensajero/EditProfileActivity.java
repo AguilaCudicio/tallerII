@@ -141,7 +141,7 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
             case NetworkService.RUNNING:
                 Log.i("EDITPROFILE", "esta corriendo el servicio de editprofile");
                 break;
-            case NetworkService.OK:
+            case NetworkService.OK_MSG:
                 Log.d("EDITPROFILE", "se completo la operacion de editprofile ");
                 String res = resultData.getString("result");
                 if (res == null)
@@ -154,7 +154,8 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
                     alerta.setMessage("Los cambios en el perfil fueron aceptados");
                     alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            saveLocalChanges();
+                           // saveLocalChanges();
+                            finish();
                         }
                     });
                     alerta.show();

@@ -87,11 +87,9 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
                 Log.d("onreceiveresult", "se completo la operacion ");
 
                 ArrayList<UserData> list = resultData.getParcelableArrayList("result");
-
                 if (list == null)
                   Log.e("onreceiveresult lista", "error inesperado");
                 else {
-                    addBroadcast(list);
                     contactos = list;
                     if(!this.isFinishing()) {
                         AdaptFriends adapt = new AdaptFriends(this, list);
@@ -114,11 +112,6 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
         }
     }
 
-
-    void addBroadcast(ArrayList<UserData> list) {
-        UserData userBroadcast= new UserData("broadcast","Conversacion grupal",true,false);
-        list.add(0,userBroadcast);
-    }
 
     //* handler para el boton de Perfil
     public void changeActivityProfile(View view) {

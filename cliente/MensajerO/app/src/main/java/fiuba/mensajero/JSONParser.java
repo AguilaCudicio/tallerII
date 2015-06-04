@@ -26,6 +26,8 @@ public class JSONParser {
             JSONObject result = new JSONObject(jsonstr);
             nuevobroadcast = result.getBoolean("nuevobroadcast");
             JSONArray users = result.getJSONArray("usuarios");
+            UserData ud = new UserData("broadcast", "Conversacion grupal", true, nuevobroadcast);
+            list.add(ud);
             for (int i = 0; i < users.length(); i++) {
                 boolean conectado = false;
                 JSONObject user = users.getJSONObject(i);
