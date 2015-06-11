@@ -113,6 +113,11 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
     }
 
 
+    //* handler para el boton de buscar
+    public void searchFriends(View view) {
+        /* TODO: buscar amigos y mostrar esa lista de amigos */
+    }
+
     //* handler para el boton de Perfil
     public void changeActivityProfile(View view) {
         startActivity(new Intent(this, ProfileActivity.class));

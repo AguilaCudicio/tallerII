@@ -6,6 +6,25 @@
         android:layout_height="wrap_content" android:id="@+id/top_control_bar"></RelativeLayout>
     <LinearLayout android:id="@+id/bottom_control_bar"
         android:layout_width="fill_parent" android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+        <LinearLayout android:id="@+id/bottom_search"
+            android:layout_width="fill_parent" android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+            <EditText
+                android:id="@+id/bb2"
+                android:layout_width="0.0dip" android:layout_height="fill_parent"
+                android:text="Nombre..."
+                android:layout_weight="1.0" />
+            <Button
+                android:id="@+id/bb"
+                android:layout_width="0.0dip" android:layout_height="fill_parent"
+                android:text="Buscar"
+                android:onClick="searchFriends"
+                android:layout_weight="1.0" />
+        </LinearLayout>
+    <LinearLayout android:id="@+id/bottom_log_prof"
+        android:layout_width="fill_parent" android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
         <Button
             android:id="@+id/logoutb"
@@ -20,6 +39,7 @@
             android:text="Perfil"
             android:onClick="changeActivityProfile"
             android:layout_weight="1.0" />
+    </LinearLayout>
     </LinearLayout>
 
     <ListView android:id="@android:id/list" android:layout_width="fill_parent"
