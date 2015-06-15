@@ -12,9 +12,9 @@
             android:layout_width="fill_parent" android:layout_height="wrap_content"
             android:layout_alignParentBottom="true">
             <EditText
-                android:id="@+id/bb2"
+                android:id="@+id/buscar"
                 android:layout_width="0.0dip" android:layout_height="fill_parent"
-                android:text="Nombre..."
+                android:hint="Buscar..."
                 android:layout_weight="1.0" />
             <Button
                 android:id="@+id/bb"

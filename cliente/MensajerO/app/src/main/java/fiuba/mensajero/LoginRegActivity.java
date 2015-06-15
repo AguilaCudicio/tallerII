@@ -25,7 +25,10 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
         setContentView(R.layout.activity_login_reg);
         mReceiver = new MyResultReceiver(new Handler());
         mReceiver.setReceiver(this);
-
+        Intent intent = getIntent();
+        if (intent.hasExtra("user")) {
+            logIn(intent.getStringExtra("user"), intent.getStringExtra("password"));
+        }
     }
 
     public boolean isEmpty(String s) {
@@ -133,6 +136,7 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
                 alerta.setMessage(err);
                 alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        logout();
                     }
                 });
                 //alerta.setIcon(R.drawable.noo);
@@ -140,6 +144,11 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
                 Log.e("onreceiveresult", "salto un error en login");
                 break;
         }
+    }
+
+    public void logout() {
+        LoginActivity.logout(this);
+        finish();
     }
 
 }

@@ -21,18 +21,13 @@ public class MainActivity extends ActionBarActivity {
         String user = sharedPref.getString("user", null);
         String password = sharedPref.getString("password", null);
 
+        Intent intent = new Intent(this, LoginActivity.class);
         if (user != null && password != null) {
-            String nombre = "Nombre";
-            Intent flist = new Intent(this, ListViewFriendsActivity.class);
-            flist.putExtra("nombre", nombre);
-            startActivity(flist);
-            finish();
+            intent.putExtra("user", user);
+            intent.putExtra("password", password);
         }
-        else {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
+        startActivity(intent);
+        finish();
 
     }
 

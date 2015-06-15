@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
     private ArrayList<UserData> contactos;
     private Handler handler;
     private int interval = 15000;   //intervalo entre updates
+    String searchInput;
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -31,8 +34,29 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
         mReceiver = new MyResultReceiver(new Handler());
         mReceiver.setReceiver(this);
         handler = new Handler();
-
+        EditText et = (EditText) findViewById(R.id.buscar);
+        et.addTextChangedListener(watch);
+        searchInput = null;
     }
+
+    TextWatcher watch = new TextWatcher(){
+        @Override
+        public void afterTextChanged(Editable arg0) {
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int a, int b, int c) {
+            if (isEmpty(s.toString()))
+                searchInput = null;
+            else
+                searchInput = s.toString().toLowerCase();
+            showList();
+        }
+    };
 
     Runnable listUpdater = new Runnable() {
         @Override
@@ -92,8 +116,7 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
                 else {
                     contactos = list;
                     if(!this.isFinishing()) {
-                        AdaptFriends adapt = new AdaptFriends(this, list);
-                        setListAdapter(adapt);
+                        showList();
                     }
                 }
                 break;
@@ -112,10 +135,31 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
         }
     }
 
+    boolean isEmpty(String s) {
+        return  s.trim().length() == 0;
+    }
+
+    public void showList() {
+        EditText et = (EditText) findViewById(R.id.buscar);
+        //  String search = et.getText().toString().toLowerCase();
+        ArrayList<UserData> newlist;
+        if (searchInput == null)
+            newlist = contactos;
+        else {
+            newlist = new ArrayList<>();
+            for (UserData user : contactos) {
+                String userName = user.getNombre();
+                if (userName.toLowerCase().contains(searchInput))
+                    newlist.add(user);
+            }
+        }
+        AdaptFriends adapt = new AdaptFriends(this, newlist);
+        setListAdapter(adapt);
+    }
 
     //* handler para el boton de buscar
     public void searchFriends(View view) {
-        /* TODO: buscar amigos y mostrar esa lista de amigos */
+        showList();
     }
 
     //* handler para el boton de Perfil

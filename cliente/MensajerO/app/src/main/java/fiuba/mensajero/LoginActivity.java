@@ -16,7 +16,14 @@ public class LoginActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        Intent intent = getIntent();
+        if (intent.hasExtra("user")) {
+            Intent intent2 = new Intent(this, LoginRegActivity.class);
+            intent2.putExtra("user", intent.getStringExtra("user"));
+            intent2.putExtra("password", intent.getStringExtra("password"));
+            startActivity(intent2);
+            finish();
+        }
     }
 
     //* handler para el boton de Log In

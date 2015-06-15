@@ -19,6 +19,12 @@ public class ConfigActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
+        SharedPreferences sharedPref= getSharedPreferences("appdata", 0);
+        String ip = sharedPref.getString("ip", null);
+        if (ip != null) {
+            EditText et = (EditText) findViewById(R.id.editTextconfig);
+            et.setText(ip);
+        }
     }
 
     //* handler para el boton de Guardar
