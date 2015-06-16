@@ -135,7 +135,6 @@ public class NetworkService extends IntentService {
             }
         }
 
-
         if(command.equals("getProfile")) {
             receiver.send(RUNNING, Bundle.EMPTY);
             try {
@@ -156,7 +155,8 @@ public class NetworkService extends IntentService {
             String password = intent.getStringExtra("password");
             String telefono = intent.getStringExtra("telefono");
             String email = intent.getStringExtra("email");
-            String res = serverRequest.editProfile(nombre, password, foto, telefono, email);
+            String ubicacion = intent.getStringExtra("ubicacion");
+            String res = serverRequest.editProfile(nombre, password, foto, telefono, email, ubicacion);
             if (res != null) {
                 b.putString("result", res);
                 receiver.send(OK_MSG, b);

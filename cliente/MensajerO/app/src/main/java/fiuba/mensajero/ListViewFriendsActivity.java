@@ -25,8 +25,8 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
     public MyResultReceiver mReceiver;
     private ArrayList<UserData> contactos;
     private Handler handler;
-    private int interval = 15000;   //intervalo entre updates
-    String searchInput;
+    private int interval = 30000;   //intervalo entre updates
+    private String searchInput;
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -34,9 +34,13 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
         mReceiver = new MyResultReceiver(new Handler());
         mReceiver.setReceiver(this);
         handler = new Handler();
+
         EditText et = (EditText) findViewById(R.id.buscar);
         et.addTextChangedListener(watch);
         searchInput = null;
+
+        startService(new Intent(this, GPSupdater.class)); //servicio de updates de ubicacion gps
+
     }
 
     TextWatcher watch = new TextWatcher(){
@@ -66,21 +70,40 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
         }
     };
 
+
+    public void getUsersOnline() {
+        Intent intent = new Intent(this, NetworkService.class);
+        intent.putExtra("receiver", mReceiver);
+        intent.putExtra("command", "getListaConectados");
+        startService(intent);
+    }
+
+
     @Override
     public void onResume() {
         super.onResume();
         listUpdater.run();
+
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
         handler.removeCallbacks(listUpdater);
+
     }
 
     public void onStop() {
         super.onStop();
         handler.removeCallbacks(listUpdater);
+
+
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        stopService(new Intent(this, GPSupdater.class));
     }
 
     @Override
@@ -94,12 +117,6 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
         super.onListItemClick(l, v, position, id);
     }
 
-    public void getUsersOnline() {
-        Intent intent = new Intent(this, NetworkService.class);
-        intent.putExtra("receiver", mReceiver);
-        intent.putExtra("command", "getListaConectados");
-        startService(intent);
-    }
 
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode) {

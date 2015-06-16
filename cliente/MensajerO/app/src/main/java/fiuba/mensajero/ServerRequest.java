@@ -208,7 +208,7 @@ public class ServerRequest {
     }
 
 
-    public String editProfile(String nombre, String password, String foto, String telefono, String email) {
+    public String editProfile(String nombre, String password, String foto, String telefono, String email, String ubicacion) {
         String finalURL = url + "/usuario/" + user + "?r_user=" + user + "&token=" + token + "&password=" + pass;
         Log.d("DAME LA URL", finalURL);
         JSONObject jsonObject = new JSONObject();
@@ -223,6 +223,8 @@ public class ServerRequest {
                 jsonObject.accumulate("telefono", telefono);
             if (email != null && !isEmpty(email) )
                 jsonObject.accumulate("email", email);
+            if (ubicacion != null && !isEmpty(ubicacion) )
+                jsonObject.accumulate("ubicacion", ubicacion);
             Log.d("JSONENVIADO", jsonObject.toString());
         }
         catch (JSONException e) {
