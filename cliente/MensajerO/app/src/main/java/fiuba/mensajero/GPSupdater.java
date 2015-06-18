@@ -27,7 +27,7 @@ public class GPSupdater extends Service implements LocationListener, MyResultRec
     protected LocationManager locationManager;
     private int distancegps = 10;   //minima distancia entre updates
     private int intervalgps = 60000; //minimo tiempo entre updates
-    private int intervalserver = 15000; // intervalo de updates al server
+    private int intervalserver = 10000; // intervalo de updates al server
     private Handler handler;
     private String ubicacion;
 
@@ -36,7 +36,7 @@ public class GPSupdater extends Service implements LocationListener, MyResultRec
         super.onCreate();
         latitude = 0;
         longitude = 0;
-        ubicacion = "casa";
+        ubicacion = "desconocida";
         mReceiver = new MyResultReceiver(new Handler());
         mReceiver.setReceiver(GPSupdater.this);
         handler = new Handler();
@@ -68,7 +68,7 @@ public class GPSupdater extends Service implements LocationListener, MyResultRec
         geocoder = new Geocoder(this, Locale.getDefault());
 
         try {
-            addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
         }
         catch (IOException e) {
             e.printStackTrace();

@@ -25,7 +25,7 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
     public MyResultReceiver mReceiver;
     private ArrayList<UserData> contactos;
     private Handler handler;
-    private int interval = 30000;   //intervalo entre updates
+    private int interval = 10000;   //intervalo entre updates
     private String searchInput;
 
     public void onCreate(Bundle icicle) {
@@ -144,12 +144,19 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
                 alerta.setMessage(err);
                 alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        logout();
                     }
                 });
                 alerta.show();
                 Log.e("onreceiveresult", err);
+
                 break;
         }
+    }
+
+    public void logout() {
+        LoginActivity.logout(this);
+        finish();
     }
 
     boolean isEmpty(String s) {

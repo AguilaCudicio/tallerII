@@ -141,7 +141,7 @@ public class RestMethod {
                     r.code =  response.getStatusLine().getStatusCode();
                     r.body = null;
                     HttpEntity entity = response.getEntity();
-                    r.body = EntityUtils.toString(entity);
+                    if(entity != null) r.body = EntityUtils.toString(entity);
                     return r;
                 }
             };

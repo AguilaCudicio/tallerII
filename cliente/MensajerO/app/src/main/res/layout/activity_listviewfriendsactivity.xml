@@ -16,12 +16,7 @@
                 android:layout_width="0.0dip" android:layout_height="fill_parent"
                 android:hint="Buscar..."
                 android:layout_weight="1.0" />
-            <Button
-                android:id="@+id/bb"
-                android:layout_width="0.0dip" android:layout_height="fill_parent"
-                android:text="Buscar"
-                android:onClick="searchFriends"
-                android:layout_weight="1.0" />
+
         </LinearLayout>
     <LinearLayout android:id="@+id/bottom_log_prof"
         android:layout_width="fill_parent" android:layout_height="wrap_content"

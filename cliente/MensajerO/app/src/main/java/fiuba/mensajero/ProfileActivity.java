@@ -104,6 +104,11 @@ public class ProfileActivity extends ActionBarActivity implements MyResultReceiv
             text = "Telefono: " + profile.getTelefono();
             tv.setText(text);
         }
+        if (profile.getUbicacion() != null) {
+            tv = (TextView) findViewById(R.id.textViewLocationProfile);
+            text = "Ubicacion: " + profile.getUbicacion();
+            tv.setText(text);
+        }
         String foto = profile.getFoto();
         avatar = (ImageButton) findViewById(R.id.imageButtonProfile);
         if (foto != null) {
