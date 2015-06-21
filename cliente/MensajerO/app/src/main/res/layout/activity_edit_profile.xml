@@ -113,6 +113,15 @@
         android:layout_alignRight="@+id/editText"
         android:layout_alignEnd="@+id/editText" />
 
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aparecer siempre desconectado"
+        android:id="@+id/radioButtonStatus"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editTextTelPE"
+        android:layout_toRightOf="@+id/textViewMailPEd"
+        android:layout_toEndOf="@+id/textViewMailPEd" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -120,7 +129,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Cargar Nuevo Avatar:"
         android:id="@+id/textViewAvatar"
-        android:layout_below="@+id/editTextTelPE"
+        android:layout_below="@+id/radioButtonStatus"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
     <Button
@@ -155,6 +164,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-</RelativeLayout>
+
+    </RelativeLayout>
     </LinearLayout>
     </ScrollView>
