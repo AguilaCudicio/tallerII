@@ -30,6 +30,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textViewDate"
+        android:gravity="center"
         android:layout_below="@+id/textViewNameProfile"
         android:layout_centerHorizontal="true" />
 
@@ -38,6 +39,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textViewNameProfile"
+        android:gravity="center"
         android:layout_below="@+id/imageButtonProfile"
         android:layout_centerHorizontal="true" />
 
@@ -47,6 +49,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textViewMailProfile"
         android:layout_below="@+id/textViewDate"
+        android:gravity="center"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -54,6 +57,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textViewTelProfile"
+        android:gravity="center"
         android:layout_below="@+id/textViewMailProfile"
         android:layout_centerHorizontal="true" />
 
@@ -63,6 +67,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textViewLocationProfile"
         android:layout_below="@+id/textViewTelProfile"
+        android:layout_centerInParent="true"
+        android:gravity="center"
         android:layout_centerHorizontal="true" />
 
     <Button
