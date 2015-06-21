@@ -71,7 +71,7 @@
         android:text="Editar Perfil"
         android:onClick="changeActivityEditProfile"
         android:id="@+id/buttonChangeProfile"
-        android:layout_below="@+id/textViewBirthProfile"
+        android:layout_below="@+id/textViewLocationProfile"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp" />
 
