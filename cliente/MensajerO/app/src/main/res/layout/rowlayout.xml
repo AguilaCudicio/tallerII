@@ -27,7 +27,8 @@
         android:layout_height="33px"
         android:layout_marginLeft="70px"
         android:layout_marginRight="10px"
-        android:layout_marginTop="4px"  >
+        android:layout_marginTop="4px"
+        android:scaleType="fitXY" >
     </ImageView>
 
 

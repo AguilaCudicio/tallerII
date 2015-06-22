@@ -208,7 +208,7 @@ public class ServerRequest {
     }
 
 
-    public String editProfile(String nombre, String password, String foto, String telefono, String email, String ubicacion) {
+    public String editProfile(String nombre, String password, String foto, String fotochica, String telefono, String email, String ubicacion, String showOffline) {
         String finalURL = url + "/usuario/" + user + "?r_user=" + user + "&token=" + token + "&password=" + pass;
         Log.d("DAME LA URL", finalURL);
         JSONObject jsonObject = new JSONObject();
@@ -219,12 +219,20 @@ public class ServerRequest {
                 jsonObject.accumulate("nombre", nombre);
             if (foto != null && !isEmpty(foto) )
                 jsonObject.accumulate("foto", foto);
+            if (fotochica != null && !isEmpty(fotochica) )
+                jsonObject.accumulate("fotochica", fotochica);
             if (telefono != null && !isEmpty(telefono) )
                 jsonObject.accumulate("telefono", telefono);
             if (email != null && !isEmpty(email) )
                 jsonObject.accumulate("email", email);
             if (ubicacion != null && !isEmpty(ubicacion) )
                 jsonObject.accumulate("ubicacion", ubicacion);
+            if (showOffline != null && !isEmpty(showOffline)) {
+                if (showOffline.equals("true"))
+                    jsonObject.accumulate("appear_offline", true);
+                if (showOffline.equals("false"))
+                    jsonObject.accumulate("appear_offline", false);
+            }
             Log.d("JSONENVIADO", jsonObject.toString());
         }
         catch (JSONException e) {

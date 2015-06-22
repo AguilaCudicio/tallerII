@@ -147,7 +147,8 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
                         logout();
                     }
                 });
-                alerta.show();
+                if (!isFinishing())
+                    alerta.show();
                 Log.e("onreceiveresult", err);
 
                 break;

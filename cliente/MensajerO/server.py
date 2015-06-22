@@ -23,7 +23,7 @@ class login(Resource):
 class usuarios(Resource):
 	def get(self):
 		if request.args.get('r_user', '') ==  ide and request.args.get('token', '') == token:
-			return  { "nuevobroadcast" : False, "usuarios": [ { "id": "pedro", "nombre": "Pedro Gomez", "estado" : "conectado", "nuevomsg": "true" }, {"id": "juan", "nombre": "Juan Perez", "estado" : "conectado", "nuevomsg": "false"}, {"id": "carlos", "nombre": "Carlos Johnson", "estado" : "desconectado", "nuevomsg": "false"} ] } , 200
+			return  { "nuevobroadcast" : False, "usuarios": [ { "id": "pedro", "nombre": "Pedro Gomez", "estado" : "conectado", "nuevomsg": "true", "foto" : "" }, {"id": "juan", "nombre": "Juan Perez", "estado" : "conectado", "nuevomsg": "false", "foto" : ""}, {"id": "carlos", "nombre": "Carlos Johnson", "estado" : "desconectado", "nuevomsg": "false", "foto" : ""} ] } , 200
 		else:
 			return { "error": "token invalido" }, 401
 

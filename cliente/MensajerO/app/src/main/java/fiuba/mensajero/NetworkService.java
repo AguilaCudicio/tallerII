@@ -152,11 +152,14 @@ public class NetworkService extends IntentService {
             receiver.send(RUNNING, Bundle.EMPTY);
             String nombre = intent.getStringExtra("nombre");
             String foto = intent.getStringExtra("foto");
+            String fotochica = intent.getStringExtra("fotochica");
             String password = intent.getStringExtra("password");
             String telefono = intent.getStringExtra("telefono");
             String email = intent.getStringExtra("email");
             String ubicacion = intent.getStringExtra("ubicacion");
-            String res = serverRequest.editProfile(nombre, password, foto, telefono, email, ubicacion);
+            String editando = intent.getStringExtra("editando");
+            String showOffline = intent.getStringExtra("showOffline");
+            String res = serverRequest.editProfile(nombre, password, foto, fotochica, telefono, email, ubicacion, showOffline);
             if (res != null) {
                 b.putString("result", res);
                 receiver.send(OK_MSG, b);
@@ -165,18 +168,6 @@ public class NetworkService extends IntentService {
                 b.putString("error", serverRequest.getErrormsg());
                 receiver.send(ERROR, b);
             }
-           /* try {
-                String foto = intent.getStringExtra("foto");
-                String password = intent.getStringExtra("password");
-                String telefono = intent.getStringExtra("telefono");
-                String email = intent.getStringExtra("email");
-                String res = serverRequest.editProfile(nombre, password, foto, telefono, email);
-                b.putString("result", res);
-                receiver.send(OK, b);
-            } catch(Exception e) {
-                b.putString("error", "fallo el servicio editprofile");
-                receiver.send(ERROR, b);
-            }*/
         }
     }
 

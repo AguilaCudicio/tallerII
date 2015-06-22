@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -25,7 +26,7 @@ import java.util.Calendar;
 
 public class EditProfileActivity extends ActionBarActivity implements MyResultReceiver.Receiver {
     private static int RESULT_LOAD_IMG = 1;
-    String imgString, nombre, password, email, telefono;
+    String imgString, fotochica, nombre, password, email, telefono, showOffline;
     public MyResultReceiver mReceiver;
 
     @Override
@@ -35,6 +36,7 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
         mReceiver = new MyResultReceiver(new Handler());
         mReceiver.setReceiver(this);
         imgString = null;
+        fotochica = null;
         //mostrar en los edittext la info actual (excepto password)
        /* SharedPreferences sharedPref= getSharedPreferences("appdata", 0);
         String nombre = sharedPref.getString("nombre", null);
@@ -79,6 +81,9 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
                 imgView.setImageBitmap(bm);
                 imgString = BitmapUtilities.bitmapToString(bm);
 
+                Bitmap resized = Bitmap.createScaledBitmap(bm, 33, 33, true);
+                fotochica = BitmapUtilities.bitmapToString(resized);
+
             } else {
                 Toast.makeText(this, "Tiene que seleccionar una imagen",
                         Toast.LENGTH_LONG).show();
@@ -103,6 +108,17 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
         telefono = et.getText().toString();
         et = (EditText) findViewById(R.id.editTextMailPEd);
         email = et.getText().toString();
+        RadioButton rb = (RadioButton) findViewById(R.id.radioButtonStatus);
+        if (rb.isChecked())
+            showOffline = "true";
+        else
+            showOffline = "false";
+        rb = (RadioButton) findViewById(R.id.radioButtonUbication);
+        if (rb.isChecked())
+            GPSupdater.hideLocation(true);
+        else
+            GPSupdater.hideLocation(false);
+
 
         //debo mandar esta info al servidor antes de guardarla localmente
         Intent intent = new Intent(this, NetworkService.class);
@@ -113,6 +129,9 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
         intent.putExtra("telefono", telefono);
         intent.putExtra("email", email);
         intent.putExtra("foto", imgString);
+        intent.putExtra("fotochica", fotochica);
+        intent.putExtra("editando", "editanding");
+        intent.putExtra("showOffline", showOffline);
         startService(intent);
     }
 

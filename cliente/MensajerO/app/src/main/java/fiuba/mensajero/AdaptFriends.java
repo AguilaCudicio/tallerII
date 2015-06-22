@@ -2,6 +2,7 @@ package fiuba.mensajero;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,8 @@ public class AdaptFriends extends ArrayAdapter<UserData> {
         textView.setText(contacto.getNombre());
 
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+        ImageView fotoview = (ImageView) rowView.findViewById(R.id.iconFriend);
+
         if (contacto.getId().equals("broadcast")) {
             rowView.setBackgroundColor(Color.argb(228,135,159,255));
         }
@@ -48,6 +51,20 @@ public class AdaptFriends extends ArrayAdapter<UserData> {
            rowView.setBackgroundColor(Color.argb(50,0,0,20));
         }
 
+        String foto = contacto.getFoto();
+        if (foto != null && !isEmpty(foto) ) {
+            Bitmap bm = BitmapUtilities.stringToBitmap(foto);
+            fotoview.setImageBitmap(bm);
+        } else {
+            fotoview.setImageResource(R.drawable.noimage);
+        }
+
+
         return rowView;
     }
+
+    boolean isEmpty(String s) {
+        return  s.trim().length() == 0;
+    }
+
 }

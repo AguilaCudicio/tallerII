@@ -63,22 +63,7 @@ public class ProfileActivity extends ActionBarActivity implements MyResultReceiv
         intent.putExtra("command", "getProfile");
         intent.putExtra("user2", user2);
         startService(intent);
-       /* if(!owner) {
-            //si es el perfil de otra persona hago request al server
-        }
-        else {
-            //si no se trata del perfil del dueño de la app, lo obtengo localmente
-            SharedPreferences sharedPref= getSharedPreferences("appdata", 0);
-            String nombre = sharedPref.getString("nombre", null);
-            String foto = sharedPref.getString("foto", null);
-            String ultimoacceso = sharedPref.getString("ultimoacceso", null);
-            String telefono = sharedPref.getString("telefono", null);
-            String email = sharedPref.getString("email", null);
-            profile = new ProfileData(nombre, foto, ultimoacceso, telefono, email);
-            showProfile();
-        }
 
-        */
     }
 
 
@@ -122,8 +107,8 @@ public class ProfileActivity extends ActionBarActivity implements MyResultReceiv
             }
         }
         else {
-            Resources resources = this.getResources();
-            avatar.setImageBitmap(BitmapFactory.decodeResource(resources, R.drawable.noimage));
+            avatar.setImageResource(R.drawable.noimage);
+
         }
     }
 
@@ -152,7 +137,8 @@ public class ProfileActivity extends ActionBarActivity implements MyResultReceiv
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
-                alerta.show();
+                if (!isFinishing())
+                     alerta.show();
                 Log.e("PROFILEACT", err);
                 break;
         }

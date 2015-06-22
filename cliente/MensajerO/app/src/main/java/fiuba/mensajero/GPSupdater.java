@@ -31,6 +31,8 @@ public class GPSupdater extends Service implements LocationListener, MyResultRec
     private Handler handler;
     private String ubicacion;
 
+    static boolean hideLocation;
+
 
     public void onCreate() {
         super.onCreate();
@@ -42,6 +44,11 @@ public class GPSupdater extends Service implements LocationListener, MyResultRec
         handler = new Handler();
         getLocationUpdates();
         gpsUpdater.run();
+        hideLocation = false;
+    }
+
+    public static void hideLocation(boolean val) {
+        hideLocation = val;
     }
 
     public void onDestroy() {
@@ -62,27 +69,29 @@ public class GPSupdater extends Service implements LocationListener, MyResultRec
         Log.d("LONGITUD", String.valueOf(longitude));
         Log.d("LATITUD", String.valueOf(latitude));
 
+        if (hideLocation)
+            ubicacion = "desconocida";
+        else {
+            Geocoder geocoder;
+            List<Address> addresses = null;
+            geocoder = new Geocoder(this, Locale.getDefault());
 
-        Geocoder geocoder;
-        List<Address> addresses = null;
-        geocoder = new Geocoder(this, Locale.getDefault());
+            try {
+                addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        try {
-            addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses != null && !addresses.isEmpty()) {
+                String address = addresses.get(0).getAddressLine(0);
+                String city = addresses.get(0).getLocality();
+                String state = addresses.get(0).getAdminArea();
+                String country = addresses.get(0).getCountryName();
+
+                ubicacion = address + ", " + city + ", " + state + ", " + country;
+            }
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (addresses != null && !addresses.isEmpty()) {
-            String address = addresses.get(0).getAddressLine(0);
-            String city = addresses.get(0).getLocality();
-            String state = addresses.get(0).getAdminArea();
-            String country = addresses.get(0).getCountryName();
-
-            ubicacion = address + ", " + city + ", " + state + ", " + country;
-            Log.d("UBICACION", ubicacion);
-        }
+        Log.d("UBICACION", ubicacion);
 
         Intent intent = new Intent(GPSupdater.this, NetworkService.class);
         intent.putExtra("receiver", mReceiver);

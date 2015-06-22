@@ -20,13 +20,13 @@ public class JSONParser {
 
     public ArrayList<UserData> parseUsersOnline(String jsonstr) {
         ArrayList<UserData> list = new ArrayList<>();
-        String nombre, estado, id;
+        String nombre, estado, id, foto;
         boolean nuevomsg, nuevobroadcast;
         try {
             JSONObject result = new JSONObject(jsonstr);
             nuevobroadcast = result.getBoolean("nuevobroadcast");
             JSONArray users = result.getJSONArray("usuarios");
-            UserData ud = new UserData("broadcast", "Conversacion grupal", true, nuevobroadcast);
+            UserData ud = new UserData("broadcast", "Conversacion grupal", true, nuevobroadcast, null);
             list.add(ud);
             for (int i = 0; i < users.length(); i++) {
                 boolean conectado = false;
@@ -38,7 +38,8 @@ public class JSONParser {
                 if (estado.equals("conectado")) {
                     conectado = true;
                 }
-                UserData userData = new UserData(id, nombre, conectado, nuevomsg);
+                foto = user.getString("fotochica");
+                UserData userData = new UserData(id, nombre, conectado, nuevomsg, foto);
                 list.add(userData);
             }
         }

@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -78,7 +81,16 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
         intent.putExtra("user2", contacto.getId());
 
         TextView tv = (TextView) findViewById(R.id.textView13);
-        tv.setText(contacto.getId());
+        tv.setText(contacto.getNombre());
+
+        ImageView iv = (ImageView) findViewById(R.id.imageButtonProfileFriend);
+        String foto = contacto.getFoto();
+        if (foto != null && !isEmpty(foto) ) {
+            Bitmap bm = BitmapUtilities.stringToBitmap(foto);
+            iv.setImageBitmap(bm);
+        } else {
+            iv.setImageResource(R.drawable.noimage);
+        }
         startService(intent);
     }
 
@@ -143,6 +155,10 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
         else {
             Log.d("ChatActivity", "no se puede enviar un mensaje vacio");
         }
+    }
+
+    boolean isEmpty(String s) {
+        return  s.trim().length() == 0;
     }
 
 
