@@ -3,27 +3,47 @@ package fiuba.mensajero;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
+/**
+ * Clase contenedora de datos de un mensaje de una conversacion. Implementa parcelable para posibilitar la comunicacion del objeto entre activities.
+ */
 public class MessageData implements Parcelable {
 
     private  String id;
     private  String time;
     private  String message;
 
+    /**
+     * Constructor
+     * @param id id del usuario emisor del mensaje
+     * @param time tiempo en que se manda el mensaje
+     * @param message mensaje enviado
+     */
     public MessageData(String id, String time, String message) {
         this.id = id;
         this.time = time;
         this.message = message;
     }
 
+    /**
+     * Obtener el id del usuario emisor
+     * @return String con el id del emisor
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Obtener el tiempo del mensaje enviado
+     * @return String con el tiempo del mensaje
+     */
     public String getTime() {
         return time;
     }
 
+    /**
+     * Obtener mensaje enviado
+     * @return String con el mensaje
+     */
     public String getMessage() {
         return message;
     }

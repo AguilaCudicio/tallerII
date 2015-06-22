@@ -26,25 +26,42 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-
+/**
+ * Clase para realizar http request concretas
+ */
 public class RestMethod {
 
     private int statusCode;
     private String response;
 
+    /**
+     * Tipo de dato necesario para comunicar un respuesta
+     */
     public class Respuesta {
         public String body;
         public int code;
     }
 
+    /**
+     * Constructor. Inicializa el statuscode en 0.
+     */
     public RestMethod() {
         statusCode = 0;       //codigo sin valor
     }
 
+    /**
+     * Devuelve status code
+     * @return int statuscode
+     */
     public int getStatusCode() {
         return statusCode;
     }
 
+    /**
+     * Http request tipo GET. Setea statuscode con el codigo de la respuesta http o -1 si hubo error
+     * @param URL URL donde se hace el request
+     * @return String con respuesta del servidor (json)
+     */
     public String GET(String URL) {
         HttpParams httpParameters = new BasicHttpParams();
         int timeoutConnection = 3000;
@@ -80,6 +97,11 @@ public class RestMethod {
         return text;
     }
 
+    /**
+     * Http request tipo POST. Setea statuscode con el codigo de la respuesta http o -1 si hubo error
+     * @param URL URL donde se hace el request
+     * @return String con respuesta del servidor (json)
+     */
     public String POST(String URL, JSONObject jsonobj) {
         HttpParams httpParameters = new BasicHttpParams();
         int timeoutConnection = 3000;
@@ -122,6 +144,11 @@ public class RestMethod {
         return text;
     }
 
+    /**
+     * Http request tipo PUT. Setea statuscode con el codigo de la respuesta http o -1 si hubo error
+     * @param URL URL donde se hace el request
+     * @return String con respuesta del servidor (json)
+     */
     public String PUT(String URL, JSONObject jsonobj) {
         HttpParams httpParameters = new BasicHttpParams();
         int timeoutConnection = 3000;

@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
+/**
+ * Activity primera en orden de ejecucion. Controla si debe loguearse automaticamente o no.
+ */
 public class MainActivity extends ActionBarActivity {
 
     boolean conectado= false;

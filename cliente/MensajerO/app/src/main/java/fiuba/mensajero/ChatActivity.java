@@ -7,10 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.ListFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -26,6 +24,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity para visualizar y realizar conversaciones entre usuarios.
+ */
 public class ChatActivity extends ActionBarActivity implements MyResultReceiver.Receiver {
 
     MyFragment fragment;
@@ -74,6 +75,9 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
         handler.removeCallbacks(msgUpdater);
     }
 
+    /**
+     * Iniciar el servicio para obtencion de los mensajes de la conversacion
+     */
     public void getMessages() {
         Intent intent = new Intent(this, NetworkService.class);
         intent.putExtra("receiver", mReceiver);
@@ -94,7 +98,11 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
         startService(intent);
     }
 
-
+    /**
+     * Procesa la respuesta del servicio de red. Notifica el resultado con dialogos.
+     * @param resultCode codigo de error del resultado
+     * @param resultData datos de la respuesta
+     */
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode) {
             case NetworkService.RUNNING:
@@ -138,7 +146,10 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
         }
     }
 
-
+    /**
+     * Iniciar el servicio para enviar el mensaje del cuadro de texto al apretar el boton de enviar
+     * @param view boton que invoca el metodo
+     */
     public void handEnviar(View view) {
         final EditText msg = (EditText) findViewById(R.id.edit_message);
         String message = msg.getText().toString();
@@ -161,7 +172,10 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
         return  s.trim().length() == 0;
     }
 
-
+    /**
+     * Iniciar la activity de profile para mostrar el perfil del usuario
+     * @param view boton que invoca al metodo
+     */
     public void showFriendInfo(View view) {
         Intent intent = new Intent(this, ProfileActivity.class);
         intent.putExtra("user2", contacto.getId());

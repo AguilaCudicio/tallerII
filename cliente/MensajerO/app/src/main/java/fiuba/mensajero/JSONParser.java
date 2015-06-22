@@ -1,13 +1,10 @@
 package fiuba.mensajero;
 
-import android.os.Message;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,9 +12,16 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-
+/**
+ * Clase para extraer la informacion de los JSON provenientes del servidor
+ */
 public class JSONParser {
 
+    /**
+     * Convierte un string JSON en una lista de usuarios
+     * @param jsonstr JSON string a parsear
+     * @return ArrayList de tipo UserData con la informacion de los usuarios
+     */
     public ArrayList<UserData> parseUsersOnline(String jsonstr) {
         ArrayList<UserData> list = new ArrayList<>();
         String nombre, estado, id, foto;
@@ -50,6 +54,11 @@ public class JSONParser {
         return list;
     }
 
+    /**
+     * Convierte un string JSON en una lista de mensajes
+     * @param jsonstr JSON string a parsear
+     * @return ArrayList de tipo MessageData con la informacion de los mensajes de una conversacion
+     */
     public ArrayList<MessageData> parseMessages(String jsonstr) {
         ArrayList<MessageData> list = new ArrayList<>();
         String id, time, message;
@@ -77,6 +86,11 @@ public class JSONParser {
         return list;
     }
 
+    /**
+     * Convierte un string JSON en un string de un mensaje de error
+     * @param jsonstr JSON string a parsear
+     * @return String con el mensaje de error
+     */
     public String parseError(String jsonstr) {
         String error = null;
         try {
@@ -90,6 +104,11 @@ public class JSONParser {
         return error;
     }
 
+    /**
+     * Convierte un string JSON en un string de un token
+     * @param jsonstr JSON string a parsear
+     * @return String con el token
+     */
     public String parseToken(String jsonstr) {
         String token = null;
         try {
@@ -107,6 +126,11 @@ public class JSONParser {
         return  s.trim().length() == 0;
     }
 
+    /**
+     * Convierte un string JSON en un objeto ProfileData con informacion de un perfil
+     * @param jsonstr JSON string a parsear
+     * @return ProfileData con informacion de un perfil
+     */
     public ProfileData parseProfile(String jsonstr) {
         ProfileData profile = null;
         String nombre, foto, ultimoacceso, telefono, email, ubicacion;

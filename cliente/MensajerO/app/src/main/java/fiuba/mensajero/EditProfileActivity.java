@@ -23,7 +23,9 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-
+/**
+ * Activity para edicion del perfil.
+ */
 public class EditProfileActivity extends ActionBarActivity implements MyResultReceiver.Receiver {
     private static int RESULT_LOAD_IMG = 1;
     String imgString, fotochica, nombre, password, email, telefono, showOffline;
@@ -47,8 +49,10 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
     }
 
 
-    //* handler para el boton de cargar imagen.
-    // Crea un intent de galería
+    /**
+     * Inicia la galeria para seleccion una foto en el dispositivo
+     * @param view boton que llama al metodo
+     */
     public void uploadImage(View view) {
 
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
@@ -56,6 +60,12 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
         startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
     }
 
+    /**
+     * Recibe el resultado de la seleccion de una foto de la galeria
+     * @param requestCode codigo de request
+     * @param resultCode codigo de error del resultado
+     * @param data datos obtenidos de la galeria
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -98,6 +108,10 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
         return s.trim().length() == 0;
     }
 
+    /**
+     * Guardar los cambios hechos en las opciones hasta el momento. Invoca el servicio para hacer los cambios al servidor.
+     * @param view boton que llama al metodo
+     */
     public void saveChanges(View view) {
         //obtengo los valores a guardar
         EditText et = (EditText) findViewById(R.id.editTextPassword);
@@ -154,7 +168,11 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
         finish();
     }
 
-
+    /**
+     * Procesa la respuesta del servicio de red. Notifica el resultado con dialogos.
+     * @param resultCode codigo de error del resultado
+     * @param resultData datos de la respuesta
+     */
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode) {
             case NetworkService.RUNNING:

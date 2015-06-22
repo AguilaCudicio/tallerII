@@ -14,7 +14,9 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
-
+/**
+ * Activity para el registro de usuarios nuevos.
+ */
 public class RegisterActivity extends ActionBarActivity implements MyResultReceiver.Receiver {
 
     public MyResultReceiver mReceiver;
@@ -35,7 +37,7 @@ public class RegisterActivity extends ActionBarActivity implements MyResultRecei
         return true;
     }
 
-    //* handler para el boton de Terminar
+
     public void handTerminar(View view) {
 
         final EditText usr = (EditText) findViewById(R.id.editTextNombreUsuario);
@@ -67,6 +69,12 @@ public class RegisterActivity extends ActionBarActivity implements MyResultRecei
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Invocar al servicio para obtener el perfil del servidor
+     * @param user Id del usuario nuevo
+     * @param password password del usuario nuevo
+     * @param name nombre del usuario nuevo
+     */
     public void register(String user, String password, String name) {
         Intent intent = new Intent(this, NetworkService.class);
         intent.putExtra("receiver", mReceiver);
@@ -77,6 +85,11 @@ public class RegisterActivity extends ActionBarActivity implements MyResultRecei
         startService(intent);
     }
 
+    /**
+     * Procesa la respuesta del servicio de red. Notifica el resultado con dialogos.
+     * @param resultCode codigo de error del resultado
+     * @param resultData datos de la respuesta
+     */
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode) {
             case NetworkService.RUNNING:

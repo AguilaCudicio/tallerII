@@ -14,13 +14,19 @@ import android.app.AlertDialog;
 import android.view.View;
 import android.widget.EditText;
 
+/**
+ * Activity para el logueo de un usuario.
+ */
 public class LoginRegActivity extends ActionBarActivity implements MyResultReceiver.Receiver {
 
     public MyResultReceiver mReceiver;
 
+    /**
+     * Inicializa variables. Si existe el usuario localmente, loguea automaticamente
+     * @param savedInstanceState -
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_reg);
         mReceiver = new MyResultReceiver(new Handler());
@@ -35,9 +41,11 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
         return s.trim().length() == 0;
     }
 
-    //* handler para el boton de Terminar
+    /**
+     * LLama al metodo logIn() si los campos no estan vacios.
+     * @param view boton que invoca el metodo
+     */
     public void handTerminar(View view) {
-
         EditText nom = (EditText) findViewById(R.id.editTextNombre);
         String user = nom.getText().toString();
         EditText pass = (EditText) findViewById(R.id.editTextPass);
@@ -90,6 +98,11 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Invoca al servicio de logueo.
+     * @param user Id del usuario a loguear
+     * @param password password del usuario a loguear
+     */
     public void logIn(String user, String password) {
         Intent intent = new Intent(this, NetworkService.class);
         intent.putExtra("receiver", mReceiver);
@@ -99,6 +112,11 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
         startService(intent);
     }
 
+    /**
+     * Procesa la respuesta del servicio de red. Notifica el resultado con dialogos.
+     * @param resultCode codigo de error del resultado
+     * @param resultData datos de la respuesta
+     */
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode) {
             case NetworkService.RUNNING:
@@ -146,6 +164,9 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
         }
     }
 
+    /**
+     * Termina activity y desloguea al usuario.
+     */
     public void logout() {
         LoginActivity.logout(this);
         finish();

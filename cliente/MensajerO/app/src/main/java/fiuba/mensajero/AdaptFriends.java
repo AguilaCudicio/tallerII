@@ -13,15 +13,32 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-
+/**
+ * Extension de ArrayAdapter para manejar el tipo de dato definido UserData
+ */
 public class AdaptFriends extends ArrayAdapter<UserData> {
+    /**
+     * Contexto actual
+     */
     private final Context context;
 
+    /**
+     * Constructor
+     * @param context Contexto actual
+     * @param contactos Array de tipo UserData que contiene la informacion de contactos
+     */
     public AdaptFriends(Context context, ArrayList<UserData> contactos) {
         super(context, R.layout.rowlayout, contactos);
         this.context = context;
     }
 
+    /**
+     * Metodo que indica que mostrar en pantalla por cada subitem de la lista
+     * @param position Posicion en el array
+     * @param convertView View a modificar
+     * @param parent View parent a la que pertenece
+     * @return Subitem de la lista
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         UserData contacto = getItem(position);
@@ -63,7 +80,7 @@ public class AdaptFriends extends ArrayAdapter<UserData> {
         return rowView;
     }
 
-    boolean isEmpty(String s) {
+    private boolean isEmpty(String s) {
         return  s.trim().length() == 0;
     }
 

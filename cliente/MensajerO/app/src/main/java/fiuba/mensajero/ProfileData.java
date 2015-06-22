@@ -3,11 +3,10 @@ package fiuba.mensajero;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
+/**
+ * Clase contenedora de datos de un perfil de usuario. Implementa parcelable para posibilitar la comunicacion del objeto entre activities.
+ */
 public class ProfileData implements Parcelable {
-
-    //todo poner los datos de profile que vamos a usar
-
     private String nombre;
     private String foto;
     private String ultimoacceso;
@@ -15,6 +14,15 @@ public class ProfileData implements Parcelable {
     private String email;
     private String ubicacion;
 
+    /**
+     * Constructor
+     * @param nombre nombre del usuario
+     * @param foto foto del usuario
+     * @param ultimoacceso fecha y hora de ultimo acceso del usuario
+     * @param telefono telefono del usuario
+     * @param email email del usuario
+     * @param ubicacion ubicacion del usuario
+     */
     public ProfileData(String nombre, String foto, String ultimoacceso, String telefono, String email, String ubicacion) {
         this.nombre = nombre;
         this.foto = foto;
@@ -24,21 +32,44 @@ public class ProfileData implements Parcelable {
         this.ubicacion = ubicacion;
     }
 
-
+    /**
+     * Obtener el nombre del usuario
+     * @return String
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Obtener foto del usuario
+     * @return String
+     */
     public String getFoto() {
         return foto;
     }
 
+    /**
+     * Obtener fecha y hora de ultimo acceso del usuario
+     * @return String
+     */
     public String getUltimoacceso() { return ultimoacceso; }
 
+    /**
+     * Obtener telefono del usuario
+     * @return String
+     */
     public String getTelefono() { return telefono; }
 
+    /**
+     * Obtener email del usuario
+     * @return String
+     */
     public String getEmail() { return email; }
 
+    /**
+     * Obtener ubicacion del usuario
+     * @return String
+     */
     public String getUbicacion() {  return ubicacion; }
 
     public ProfileData(Parcel in) {

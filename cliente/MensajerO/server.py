@@ -33,7 +33,7 @@ class usuario(Resource):
 		if request.args.get('token', '') != token:
 			return { "error": "token invalido" }, 401
 		else:
-			return { "nombre": "Usuarioprueba", "foto" : " ", "ubicacion": "Brazil", "telefono" : "46345455", "email" : "pepefake", "ultimoacceso" : 1433342925 }, 200
+			return { "nombre": "Usuarioprueba", "foto" : " ", "ubicacion": "Carlos Francisco Melo 5034, Villa Martelli, Buenos Aires, Argentina", "telefono" : "46345455", "email" : "pepefake", "ultimoacceso" : 1433342925 }, 200
 			
 	def post(self, user):
 		root = request.get_json(force=True)

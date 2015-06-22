@@ -2,7 +2,6 @@ package fiuba.mensajero;
 
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,8 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import java.io.OutputStreamWriter;
-
+/**
+ * Activity de configuracion. Permite cambiar IP del servidor.
+ */
 public class ConfigActivity extends ActionBarActivity {
 
     @Override
@@ -27,7 +27,10 @@ public class ConfigActivity extends ActionBarActivity {
         }
     }
 
-    //* handler para el boton de Guardar
+    /**
+     * Guarda la ip del servidor especificada en el cuadro de texto
+     * @param view vista que llama al metodo
+     */
     public void handGuardar(View view) {
 
         final EditText ip = (EditText) findViewById(R.id.editTextconfig);

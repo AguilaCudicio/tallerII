@@ -9,7 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-
+/**
+ * Activity que se muestra en pantalla al inciar la app. Otorga la opcion de loguearse, registrarse o configuracion
+ */
 public class LoginActivity extends ActionBarActivity {
 
     @Override
@@ -26,18 +28,25 @@ public class LoginActivity extends ActionBarActivity {
         }
     }
 
-    //* handler para el boton de Log In
+    /**
+     * Invoca a la activity para loguearse
+     * @param view boton que invoca el metodo
+     */
     public void changeActivityLogin(View view) {
         startActivity(new Intent(this, LoginRegActivity.class));
     }
 
-    //* handler para el boton de Sign In
-    public void changeActivitySign(View view) {
+    /**
+     * Invoca a la activity para registrarse
+     * @param view boton que invoca el metodo
+     */    public void changeActivitySign(View view) {
         startActivity(new Intent(this, RegisterActivity.class));
     }
 
-    //* handler para el boton de Config
-    public void changeActivityConfig(View view) {
+    /**
+     * Invoca a la activity para configuracion
+     * @param view boton que invoca el metodo
+     */    public void changeActivityConfig(View view) {
         startActivity(new Intent(this, ConfigActivity.class));
     }
 
@@ -63,7 +72,10 @@ public class LoginActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //hacer logout
+    /**
+     * Borra todos los datos guardados localmennte e inicia LoginActivity (usado para desconectarse)
+     * @param context Contexto actual
+     */
     public static void logout(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

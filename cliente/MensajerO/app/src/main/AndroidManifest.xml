@@ -115,14 +115,6 @@
             android:name=".ImageUploadActivity"
             android:label="@string/title_activity_image_upload" >
         </activity>
-        <activity
-            android:name=".FriendProfileActivity"
-            android:label="@string/title_activity_friend_profile"
-            android:parentActivityName=".ChatActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="fiuba.mensajero.ChatActivity" />
-        </activity>
     </application>
 
 </manifest>

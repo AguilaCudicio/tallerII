@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Servicio para obtener periodicamente la posicion actual del dispositivo y notificarla al servidor
+ */
 public class GPSupdater extends Service implements LocationListener, MyResultReceiver.Receiver {
     public MyResultReceiver mReceiver;
     boolean isGPSEnabled = false;
@@ -30,10 +33,11 @@ public class GPSupdater extends Service implements LocationListener, MyResultRec
     private int intervalserver = 10000; // intervalo de updates al server
     private Handler handler;
     private String ubicacion;
-
     static boolean hideLocation;
 
-
+    /**
+     * Inicializa variables. Empieza a correr periodicamente los metodos de obtencion e informe de ubicacion
+     */
     public void onCreate() {
         super.onCreate();
         latitude = 0;
@@ -47,6 +51,10 @@ public class GPSupdater extends Service implements LocationListener, MyResultRec
         hideLocation = false;
     }
 
+    /**
+     * Ocultar la ubicacion actual. Quedara seteada como "desconocida"
+     * @param val true si desea ocultar ubicacion
+     */
     public static void hideLocation(boolean val) {
         hideLocation = val;
     }
@@ -64,7 +72,9 @@ public class GPSupdater extends Service implements LocationListener, MyResultRec
         }
     };
 
-
+    /**
+     * Obtiene la direccion a partir de la latitud  y longitud y se la envia al servidor. Si no puede obtenerla o se especifico ocultarla, se envia "desconocida"
+     */
     public void updateLocation() {
         Log.d("LONGITUD", String.valueOf(longitude));
         Log.d("LATITUD", String.valueOf(latitude));
@@ -79,7 +89,7 @@ public class GPSupdater extends Service implements LocationListener, MyResultRec
             try {
                 addresses = geocoder.getFromLocation(latitude, longitude, 1);
             } catch (IOException e) {
-                e.printStackTrace();
+                ubicacion = "desconocida";
             }
 
             if (addresses != null && !addresses.isEmpty()) {
@@ -102,16 +112,21 @@ public class GPSupdater extends Service implements LocationListener, MyResultRec
     }
 
     public void onReceiveResult(int resultCode, Bundle resultData) {
-        
 
     }
 
+    /**
+     * Detiene la actualizacion de posicion periodica
+     */
     public void stopGPSupdate(){
         if(locationManager != null){
             locationManager.removeUpdates(GPSupdater.this);
         }
     }
 
+    /**
+     * Obtiene la longitud y latitud actual del dispositivo
+     */
     public void getLocationUpdates() {
         try {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -119,7 +134,7 @@ public class GPSupdater extends Service implements LocationListener, MyResultRec
             isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
             if (!isGPSEnabled && !isNetworkEnabled) {
-                // no provider is enabled
+                Log.d("GPSupdater", "No hay proveedores para obtener ubicacion");
             } else {
                 if (isNetworkEnabled) {
                         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, distancegps, intervalgps, this);
@@ -137,6 +152,10 @@ public class GPSupdater extends Service implements LocationListener, MyResultRec
         }
     }
 
+    /**
+     * Realiza cambios cuando se le informa una nueva ubicacion del proveedor
+     * @param location ubicacion proveniente del proveedor
+     */
     @Override
     public void onLocationChanged(Location location) {
         latitude = location.getLatitude();

@@ -11,18 +11,34 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+/**
+ * Servicio que realiza operaciones de red y devuelve la respuesta a la activity invocante
+ */
 public class NetworkService extends IntentService {
 
     public NetworkService() {
         super("NetworkService");
     }
 
+    /**
+     * Indica una operacion de red en marcha
+     */
     public static final int RUNNING = 0;
+    /**
+     * Inidica una operacion de red finalizada
+     */
     public static final int OK = 1;
+    /**
+     * Indica un error en la operacion de red
+     */
     public static final int ERROR = 2;
     public static final int OK_MSG = 3;
 
 
+    /**
+     * Define una operacion de red a realizar de acuerdo a la informacion contenida en el Intent. Envia la respuesta a la activity invocante.
+     * @param intent Intent utilizado para invocar al servicio
+     */
     protected void onHandleIntent(Intent intent) {
         ResultReceiver receiver = intent.getParcelableExtra("receiver");
         String command = intent .getStringExtra("command");

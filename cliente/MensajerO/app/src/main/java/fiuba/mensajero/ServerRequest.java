@@ -10,6 +10,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Clase que realiza operaciones concretas de la aplicacion que involucran al servidor
+ */
 public class ServerRequest {
 
     private String url;     //url base
@@ -18,7 +21,11 @@ public class ServerRequest {
     private String errormsg;
     private String pass;
 
-
+    /**
+     * Constructor. Construye URL del servidor y recupera datos guardados localmente.
+     * @param c Contexto actual
+     * @throws ServerAddressNotFoundException cuando la ip del servidor no fue especificada
+     */
     public ServerRequest(Context c) throws ServerAddressNotFoundException {
         Context context;
         errormsg = null;
@@ -35,11 +42,18 @@ public class ServerRequest {
         Log.i("URL DEL SERVER ES", url);
     }
 
+    /**
+     * Mensaje de error de acuerdo a un codigo de error http
+     * @return String del error
+     */
     public String getErrormsg() {
         return errormsg;
     }
 
-    //devuelve un array con todos los usuarios o null si fallo el get
+    /**
+     * Solicita al servidor los usuarios online.
+     * @return ArrayList de UserData con los usuarios registrados o null si fallo el http GET
+     */
     public ArrayList<UserData> getUsersOnline () {
         String finalURL = url + "/usuarios" + "?r_user=" + this.user + "&token=" + this.token;
         RestMethod rest = new RestMethod();
@@ -61,7 +75,13 @@ public class ServerRequest {
        return list;
     }
 
-    //devuelve un string si el registro es exitoso o null si fallo
+    /**
+     * Solicit al servidor el registro de un nuevo usuario.
+     * @param user Id del usuario nuevo a registrar
+     * @param password Password del usuario a registrar
+     * @param name Nombre del usuario a registrar
+     * @return String con la leyenda "ok" o null si fallo el http POST
+     */
     public String register(String user, String password, String name) {
         String finalURL = url + "/usuario/" + user;
         JSONObject jsonObject = new JSONObject();
@@ -92,7 +112,12 @@ public class ServerRequest {
         return ret;
     }
 
-    //si tuvo exito devuelve el token valido, si fallo devuleve null
+    /**
+     * Solicita al servidor el logueo del usuario.
+     * @param user id del usuario a loguear
+     * @param password password del usuario a loguear
+     * @return String con un token valido o null si fallo el http POST
+     */
     public String logIn(String user, String password) {
         String finalURL = url + "/login";
 
@@ -123,7 +148,11 @@ public class ServerRequest {
     }
 
 
-    //devuelve un array con todos los mensajes o null si fallo el get
+    /**
+     * Solicita al servidor los mensajes provenientes de un usuario o del broadcast.
+     * @param user2 Usuario emisor de los mensajes o null para el broadcast
+     * @return ArrayList de tipo MessageData con la informacion de los mensajes enviados o null si fallo el http GET
+     */
     public ArrayList<MessageData> getMessages(String user2) {
         String finalURL;
         if (user2.equals("broadcast"))
@@ -148,7 +177,12 @@ public class ServerRequest {
         return list;
     }
 
-    //si no se especifica user2 (destinatario) se envia el mensaje a todos los usuarios
+    /**
+     * Solicita al servidor el envio de un nuevo mensaje.
+     * @param user2 Usuario receptor del mensaje o null si se quiere enviar a todos (broadcast)
+     * @param message Mensaje a enviar
+     * @return String con la leyenda "ok" si fue exitoso o null si fallo el http POST
+     */
     public String sendMessage(String user2, String message) {
         String finalURL;
         if (user2.equals("broadcast"))
@@ -181,6 +215,11 @@ public class ServerRequest {
         return ret;
     }
 
+    /**
+     * Solicitar al servidor el perfil de un usuario
+     * @param user2 Id del usuario solicitado
+     * @return objeto ProfileData con la informacion del perfil del usuario o null si fallo el http GET
+     */
     public ProfileData getProfile(String user2) {
         if (user2 == null)
             user2 = user;
@@ -208,6 +247,18 @@ public class ServerRequest {
     }
 
 
+    /**
+     * Solicitar al servidor el cambio en los datos de un usuario. Dejar en null o vacio los campos que no se desean modificar
+     * @param nombre Nuevo nombre del usuario
+     * @param password Nueva password del usuario
+     * @param foto Nueva foto del usuario
+     * @param fotochica Forma reducida de la nueva foto
+     * @param telefono Nuevo telefono del usuario
+     * @param email Nuevo email del usuario
+     * @param ubicacion Nueva ubicacion del usuario
+     * @param showOffline True si se desea aparecer desconectado
+     * @return String con la leyenda "ok" o null si hubo error en el http PUT
+     */
     public String editProfile(String nombre, String password, String foto, String fotochica, String telefono, String email, String ubicacion, String showOffline) {
         String finalURL = url + "/usuario/" + user + "?r_user=" + user + "&token=" + token + "&password=" + pass;
         Log.d("DAME LA URL", finalURL);

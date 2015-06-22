@@ -4,6 +4,9 @@ package fiuba.mensajero;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * Clase contenedora de datos de un contacto. Implementa parcelable para posibilitar la comunicacion del objeto entre activities.
+ */
 public class UserData implements Parcelable {
 
     private  String id;
@@ -12,6 +15,14 @@ public class UserData implements Parcelable {
     private  boolean nuevomsg;
     private  String fotochica;
 
+    /**
+     * Constructor
+     * @param id id del usuario
+     * @param nombre nombre del usuario
+     * @param conectado true si este usuario esta conectado
+     * @param nuevomsg true si hay nuevos mensajes de este usuario
+     * @param fotochica foto baja resolucion del usuario
+     */
     public UserData(String id, String nombre, boolean conectado, boolean nuevomsg, String fotochica) {
         this.id = id;
         this.nombre = nombre;
@@ -20,20 +31,40 @@ public class UserData implements Parcelable {
         this.fotochica = fotochica;
     }
 
+    /**
+     * Obtiene id del usuario
+     * @return String
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Obtiene nombre del usuario
+     * @return String
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Estado de conexion del usuario
+     * @return true si el usuario esta conectado
+     */
     public boolean isConectado() {
         return conectado;
     }
 
+    /**
+     * Mensjes nuevos del usuario
+     * @return true si el usuario ha realizado nuevos mensajes
+     */
     public boolean hasNewMessages() { return nuevomsg; }
 
+    /**
+     * Obtiene foto del usuario
+     * @return String
+     */
     public String getFoto() {
         return fotochica;
     }

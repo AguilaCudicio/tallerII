@@ -4,15 +4,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,10 +20,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-
-
+/**
+ * Activity que muestra el profile de un usuario
+ */
 public class ProfileActivity extends ActionBarActivity implements MyResultReceiver.Receiver {
 
     ImageButton avatar;
@@ -34,7 +30,10 @@ public class ProfileActivity extends ActionBarActivity implements MyResultReceiv
     public MyResultReceiver mReceiver;
     String user2;
 
-
+    /**
+     * Inicializa variables. Si el profile no es del usuario logueado, el boton de editar perfil se oculta
+     * @param savedInstanceState -
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +56,9 @@ public class ProfileActivity extends ActionBarActivity implements MyResultReceiv
         getProfile();
     }
 
+    /**
+     * Invocar al servicio para obtener el perfil del servidor
+     */
     public void getProfile() {
         Intent intent = new Intent(this, NetworkService.class);
         intent.putExtra("receiver", mReceiver);
@@ -66,7 +68,9 @@ public class ProfileActivity extends ActionBarActivity implements MyResultReceiv
 
     }
 
-
+    /**
+     * Mostrar los campos que existan del profile. Si no existe foto se muestra una default
+     */
     public void showProfile() {
         TextView tv = (TextView) findViewById(R.id.textViewNameProfile);
         String text;
@@ -112,6 +116,11 @@ public class ProfileActivity extends ActionBarActivity implements MyResultReceiv
         }
     }
 
+    /**
+     * Procesa la respuesta del servicio de red. Notifica el resultado con dialogos.
+     * @param resultCode codigo de error del resultado
+     * @param resultData datos de la respuesta
+     */
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode) {
             case NetworkService.RUNNING:

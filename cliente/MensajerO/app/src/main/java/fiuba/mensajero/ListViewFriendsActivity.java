@@ -2,25 +2,23 @@ package fiuba.mensajero;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 
 import static android.app.AlertDialog.*;
 
+/**
+ * Activity principal de la aplicacion. Muestra la lista de conectados y algunos botones de opciones.
+ */
 public class ListViewFriendsActivity extends ListActivity implements MyResultReceiver.Receiver {
     public MyResultReceiver mReceiver;
     private ArrayList<UserData> contactos;
@@ -28,6 +26,10 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
     private int interval = 10000;   //intervalo entre updates
     private String searchInput;
 
+    /**
+     * Inicializa variables. Inicia el servicio de actualizacion de posicion.
+     * @param icicle -
+     */
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.activity_listviewfriendsactivity);
@@ -70,7 +72,9 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
         }
     };
 
-
+    /**
+     * LLama al servicio para obtener la lista de usuarios del servidor.
+     */
     public void getUsersOnline() {
         Intent intent = new Intent(this, NetworkService.class);
         intent.putExtra("receiver", mReceiver);
@@ -79,6 +83,9 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
     }
 
 
+    /**
+     * Inicia el update periodio de la lista de usuarios
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -87,6 +94,9 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
 
     }
 
+    /**
+     * Detiene el update periodio de la lista de usuarios
+     */
     @Override
     public void onPause() {
         super.onPause();
@@ -97,15 +107,23 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
     public void onStop() {
         super.onStop();
         handler.removeCallbacks(listUpdater);
-
-
     }
 
+    /**
+     * Detiene el servicio de actualizacion de posicion
+     */
     public void onDestroy() {
         super.onDestroy();
         stopService(new Intent(this, GPSupdater.class));
     }
 
+    /**
+     * Inicia la activity de chat al presionar sobre un contacto
+     * @param l lista de contactos
+     * @param v subitem de la lista
+     * @param position posicion en la lista
+     * @param id -
+     */
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         AlertDialog alertDialog = new Builder(this).create();
@@ -117,7 +135,11 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
         super.onListItemClick(l, v, position, id);
     }
 
-
+    /**
+     * Procesa la respuesta del servicio de red. Notifica errores con dialogos.
+     * @param resultCode codigo de error del resultado
+     * @param resultData datos de la respuesta
+     */
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode) {
             case NetworkService.RUNNING:
@@ -155,6 +177,9 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
         }
     }
 
+    /**
+     * Desloguea al usuario actual y finaliza
+     */
     public void logout() {
         LoginActivity.logout(this);
         finish();
@@ -164,6 +189,9 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
         return  s.trim().length() == 0;
     }
 
+    /**
+     * Muestra la lista en pantalla, filtrando de acuerdo a lo especificado en el buscador
+     */
     public void showList() {
         EditText et = (EditText) findViewById(R.id.buscar);
         //  String search = et.getText().toString().toLowerCase();
@@ -182,12 +210,14 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
         setListAdapter(adapt);
     }
 
-    //* handler para el boton de buscar
     public void searchFriends(View view) {
         showList();
     }
 
-    //* handler para el boton de Perfil
+    /**
+     * Inicia la activity de edicion de profile
+     * @param view boton que hace el llamado
+     */
     public void changeActivityProfile(View view) {
         startActivity(new Intent(this, ProfileActivity.class));
     }
