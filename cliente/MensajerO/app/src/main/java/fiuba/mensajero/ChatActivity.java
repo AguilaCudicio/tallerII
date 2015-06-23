@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
     MyFragment fragment;
     public MyResultReceiver mReceiver;
     private UserData contacto;
+    private String nombre;
     private Handler handler;
     private int interval;
 
@@ -48,6 +50,8 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
         interval = 10000; //10 seg
         Intent intent = getIntent();
         contacto = intent.getParcelableExtra("contacto");
+        SharedPreferences sharedPref= getSharedPreferences("appdata", 0);
+        nombre = sharedPref.getString("nombre", "Yo");
     }
 
     Runnable msgUpdater = new Runnable() {
@@ -123,7 +127,11 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
                 else {
                     fragment.clearMessages();
                     for (int i = list.size()-1; i >= 0; i--) {
-                        fragment.addMessage(list.get(i).getId(), list.get(i).getMessage());
+                        String id = list.get(i).getId();
+                        if (id.equals(contacto.getId()))
+                            fragment.addMessage(contacto.getNombre(), list.get(i).getMessage());
+                        else
+                            fragment.addMessage(nombre, list.get(i).getMessage());
                         TextView tv = (TextView) findViewById(R.id.textViessw13);
                         tv.setText(list.get(i).getTime());
                     }

@@ -74,30 +74,39 @@ public class ProfileActivity extends ActionBarActivity implements MyResultReceiv
     public void showProfile() {
         TextView tv = (TextView) findViewById(R.id.textViewNameProfile);
         String text;
-        if (profile.getNombre() != null) {
+        if (profile.getNombre() != null)
             text = "Nombre: " + profile.getNombre();
-            tv.setText(text);
-        }
-        if (profile.getUltimoacceso() != null) {
-            tv = (TextView) findViewById(R.id.textViewDate);
+        else
+            text = "Nombre: -";
+        tv.setText(text);
+
+        tv = (TextView) findViewById(R.id.textViewDate);
+        if (profile.getUltimoacceso() != null)
             text = "Ultimo acceso: " + profile.getUltimoacceso();
-            tv.setText(text);
-        }
-        if (profile.getEmail() != null) {
-            tv = (TextView) findViewById(R.id.textViewMailProfile);
+        else
+            text = "Ultimo acceso: -";
+        tv.setText(text);
+
+        tv = (TextView) findViewById(R.id.textViewMailProfile);
+        if (profile.getEmail() != null)
             text = "Email: " + profile.getEmail();
-            tv.setText(text);
-        }
-        if (profile.getTelefono() != null) {
-            tv = (TextView) findViewById(R.id.textViewTelProfile);
+        else
+            text = "Email: -" ;
+        tv.setText(text);
+
+        tv = (TextView) findViewById(R.id.textViewTelProfile);
+        if (profile.getTelefono() != null)
             text = "Telefono: " + profile.getTelefono();
-            tv.setText(text);
-        }
-        if (profile.getUbicacion() != null) {
-            tv = (TextView) findViewById(R.id.textViewLocationProfile);
+        else
+            text = "Telefono: -";
+        tv.setText(text);
+
+        tv = (TextView) findViewById(R.id.textViewLocationProfile);
+        if (profile.getUbicacion() != null)
             text = "Ubicacion: " + profile.getUbicacion();
-            tv.setText(text);
-        }
+        else
+            text = "Ubicacion: -";
+        tv.setText(text);
         String foto = profile.getFoto();
         avatar = (ImageButton) findViewById(R.id.imageButtonProfile);
         if (foto != null) {

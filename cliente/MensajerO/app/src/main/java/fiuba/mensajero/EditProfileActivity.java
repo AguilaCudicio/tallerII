@@ -161,11 +161,10 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
             editor.putString("email", email);
         if (!isEmpty(telefono))
             editor.putString("telefono", telefono);
-        if (imgString != null)
-            editor.putString("foto", imgString);
+        //if (imgString != null)
+        //    editor.putString("foto", imgString);
         editor.commit();
 
-        finish();
     }
 
     /**
@@ -191,10 +190,11 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
                     alerta.setMessage("Los cambios en el perfil fueron aceptados");
                     alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                           // saveLocalChanges();
+                            saveLocalChanges();
                             finish();
                         }
                     });
+                    if (!isFinishing())
                     alerta.show();
                 }
 

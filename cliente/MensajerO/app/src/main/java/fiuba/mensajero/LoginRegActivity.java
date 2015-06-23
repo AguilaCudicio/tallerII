@@ -125,14 +125,17 @@ public class LoginRegActivity extends ActionBarActivity implements MyResultRecei
                 break;
             case NetworkService.OK:
                 Log.d("onreceiveresult", "se completo la operacion de login ");
-                String token = resultData.getString("result");
-                if (token == null)
+                String res = resultData.getString("result");
+                String token = res.substring(0,16);
+                String nombre = res.substring(16);
+                if (res == null)
                     Log.e("ONRECEIVERESULT REG", "error inesperado");
                 else {
                     //guardo el token en sharedpreferences
                     SharedPreferences sharedPref = getSharedPreferences("appdata", 0);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("token", token);
+                    editor.putString("nombre", nombre);
                     editor.commit();
                     Log.i("TOKEN OBTENIDO: ", token);
                     Intent flist = new Intent(this, ListViewFriendsActivity.class);
