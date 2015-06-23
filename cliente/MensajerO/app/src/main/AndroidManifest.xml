@@ -42,6 +42,7 @@
         <activity
             android:name=".ListViewFriendsActivity"
             android:label="Lista de amigos"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -87,7 +87,7 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
                 ImageView imgView = (ImageView) findViewById(R.id.uploadimageview);
 
                 //Cambiar el segundo argumento para redimensionar a un tamaño mas grande o mas chico
-                Bitmap bm = BitmapUtilities.getResizedBitmap(imgDecodableString,1000);
+                Bitmap bm = BitmapUtilities.getResizedBitmap(imgDecodableString,250);
                 imgView.setImageBitmap(bm);
                 imgString = BitmapUtilities.bitmapToString(bm);
 
