@@ -52,7 +52,9 @@ public class AdaptFriends extends ArrayAdapter<UserData> {
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         ImageView fotoview = (ImageView) rowView.findViewById(R.id.iconFriend);
 
-        if (contacto.getId().equals("broadcast")) {
+        boolean isBroad=contacto.getId().equals("broadcast");
+
+        if (isBroad) {
             rowView.setBackgroundColor(Color.argb(228,135,159,255));
         }
         else {
@@ -72,7 +74,7 @@ public class AdaptFriends extends ArrayAdapter<UserData> {
         if (foto != null && !isEmpty(foto) ) {
             Bitmap bm = BitmapUtilities.stringToBitmap(foto);
             fotoview.setImageBitmap(bm);
-        } else {
+        } else if (!isBroad){
             fotoview.setImageResource(R.drawable.noimage);
         }
 

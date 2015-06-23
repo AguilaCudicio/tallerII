@@ -10,7 +10,6 @@
         android:id="@+id/iconFriend"
         android:layout_width="66px"
         android:layout_height="66px"
-        android:src="@drawable/noimage"
         android:layout_gravity="left" >
 
     </ImageView>
