@@ -1,17 +1,17 @@
 <resources>
     <string name="app_name">MensajerO</string>
-    <string name="edit_message">Enter a message</string>
+    <string name="edit_message">Escriba su mensaje</string>
     <string name="send_message">Escriba su mensaje</string>
     <string name="button_send">Enviar</string>
     <string name="activity_chat">Conversacion</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_login">Login</string>
-    <string name="title_activity_sign_in">SignIn</string>
-    <string name="title_activity_login_reg">Login</string>
+    <string name="action_settings">Propiedades</string>
+    <string name="title_activity_login">MensajerO</string>
+    <string name="title_activity_sign_in">Inscripción</string>
+    <string name="title_activity_login_reg">Inicio de sesión</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_profile">ProfileActivity</string>
-    <string name="title_activity_edit_profile">EditProfileActivity</string>
-    <string name="title_activity_image_upload">ImageUploadActivity</string>
+    <string name="title_activity_profile">Perfil</string>
+    <string name="title_activity_edit_config">Configuración</string>
+    <string name="title_activity_edit_profile">Edición de perfil</string>
+    <string name="title_activity_image_upload">Subir una imagen...</string>
     <string name="title_activity_friend_profile">Perfil del contacto</string>
 </resources>
