@@ -1,0 +1,8 @@
+.. _inst:
+
+Instalación
+============ 
+
+Poner acá como se instala un apk!
+
+Una vez instalada la aplicación, puede leer la sección de :ref:`Configuración <config>` para poder utilizarla correctamente.

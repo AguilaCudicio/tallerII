@@ -1,0 +1,27 @@
+.. Manual de usuario documentation master file, created by
+   sphinx-quickstart on Wed Jun 24 10:32:06 2015.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Bienvenido al manual de uso de MensajerO!
+=========================================
+
+Contents:
+
+.. toctree::
+   :maxdepth: 2
+   
+   introduccion
+   instalacion
+   configuracion
+   inscripcion
+   iniciarsesion
+   problemascomunes
+
+
+
+Buscador
+================
+
+* :ref:`search`
+

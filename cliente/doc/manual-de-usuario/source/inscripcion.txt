@@ -1,0 +1,25 @@
+.. _insc:
+
+Inscripción
+============
+
+El proceso de inscripción es muy sencillo.
+La pantalla inicial de la aplicación mostrará las siguientes opciones:
+
+.. image:: images/main.png
+  :width: 40%
+  :align: center
+  
+Debe oprimir el botón "Inscribirse", y se mostrará la siguiente pantalla:
+
+.. image:: images/insc.png
+  :width: 40%
+  :align: center
+  
+Complete los datos requeridos.
+
+* El **nombre de usuario** es el nombre que verán los demás usuarios. Puede cambiarlo luego.
+* El **nombre** le servirá para iniciar sesión. NO podrá cambiarlo, pero solamente usted lo verá.
+* La **contraseña** solamente sirve para iniciar sesión. Puede cambiarse luego.
+
+Luego de oprimir Terminar, recibirá un mensaje de confirmación si todo sale bien. Puede continuar leyendo la sección de :ref:`Inicio de sesión <iniciarSesion>`

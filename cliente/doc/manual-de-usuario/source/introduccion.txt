@@ -1,0 +1,7 @@
+Introducción
+============
+
+MensajerO es un programa de mensajería que le permite comunicarse con todos los usuarios inscriptos, a través de texto.
+Funciona en dispositivos moviles con Android 3.0 o superior.
+
+Para comenzar, lea la sección de :ref:`Instalación <inst>` para instalar la aplicación correctamente.
