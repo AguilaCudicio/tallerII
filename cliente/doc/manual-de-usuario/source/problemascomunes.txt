@@ -1,0 +1,13 @@
+Soluciones a problemas comunes
+=============================
+ 
+**Al iniciar sesión o al inscribirme, aparece un mensaje diciendo que "No se puede conectar con el servidor"**
+
+* Recuerde que debe configurar la aplicación antes de su uso. Entre a la sección "Configuración" para más información.
+* Asegúrese de haber escrito correctamente la IP en la configuración.
+* Asegúrese de tener conexión a internet, ya sea mediante wi-fi o 3g/4g.
+* Si todo lo anterior falla, contacte al proveedor para asegurarse de que no hayan habido cambios en la IP del servidor y que no hayan habido problemas técnicos.
+
+**Al iniciar sesión, aparece un mensaje diciendo que el nombre o la contraseña son invalidos**
+
+* Asegúrese de haber escrito correctamente su nombre de usuario y contraseña. Tenga en cuenta que la aplicación diferencia entre minúsculas y mayúsculas.

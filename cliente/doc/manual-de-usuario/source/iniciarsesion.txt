@@ -1,0 +1,19 @@
+.. _iniciarSesion:
+
+Iniciar Sesión
+==============
+
+Nuevamente, se volverá a la pantalla inicial
+
+.. image:: images/main.png
+  :width: 40%
+  :align: center
+
+Deberá elegirse la primera opción, Iniciar Sesión, y se mostrará en pantalla algo como lo siguiente:
+
+.. image:: images/iniciosesion.png
+  :width: 40%
+  :align: center
+
+... en la que deberá ingresar los datos que eligió en la inscripción.
+Completado este paso con éxito, podrá proceder a ver la lista de usuarios conectados. Continúe :ref:`con el siguiente paso <chat>` para comprender el funcionamiento del programa de chat.

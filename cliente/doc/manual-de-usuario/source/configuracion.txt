@@ -1,0 +1,21 @@
+.. _config:
+
+Configuración
+=============
+
+Antes de inscribirse, iniciar sesión y usar la aplicación, es necesario configurarla.
+Para eso, ingrese a la aplicación y se encontrará con las siguientes opciones:
+
+.. image:: images/main.png
+  :width: 40%
+  :align: center
+  
+Ingrese a la última opción, configuración, y la aplicación mostrará una pantalla como la siguiente:
+
+.. image:: images/config.png
+  :width: 40%
+  :align: center
+  
+Hay un sólo campo que configurar: La ip del servidor. La misma debe ser otorgada por el proveedor, y se trata de un conjunto de cuatro números de hasta 3 digitos, separados por puntos.
+
+Una vez que su aplicación está correctamente configurada, puede proceder a inscribirse: Lea la sección de :ref:`inscripción <insc>`
