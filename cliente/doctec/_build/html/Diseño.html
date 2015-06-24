@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Diseño &mdash; documentación de MensajerO - 1.0</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="documentación de MensajerO - 1.0" href="index.html" />
+    <link rel="next" title="Codigo fuente" href="Codigo fuente.html" />
+    <link rel="prev" title="Ambiente de desarrollo" href="Ambiente de desarrollo.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="diseno">
+<h1>Diseño<a class="headerlink" href="#diseno" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>MensajerO es una aplicación cliente tipo REST para comunicación entre usuarios. El protocolo utilizado para comunicación con el servidor es el siguiente:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/jmartty/taller2server/blob/master/docs/Protocolo-REST-v1.7.pdf">Protocolo</a></li>
+</ul>
+<p>El diseño de la aplicación esta basado en los patrones de diseño recomendados por Google para <a class="reference external" href="https://www.youtube.com/watch?v=xHXn3Kg2IQE">aplicaciones REST en Android.</a> Sin embargo presenta diferencias ya que nuestra aplicación no mantiene una base de datos local, aunque sí guarda algunos datos localmente.
+El diseño entonces consiste basicamente en 4 o 5 bloques principales que interactuan en una especie de ciclo.</p>
+<ul class="simple">
+<li><strong>Activities</strong>: Una activity es un componente de Android que representa una pantalla determinada de la aplicación. Interactua con el usuario y responde a eventos iniciados por el mismo o por otros componentes. Invoca a NetworkService cuando necesita obtener informacion del servidor.</li>
+<li><strong>NetworkService</strong>: Esta clase es un Servicio. Es invocada por alguna activity que solicita una operacion de red. El servicio corre en un thread paralelo al thread principal (UI thread), de esta forma al realizar estas operaciones que suelen ser costosas en tiempo y recursos, se evita blockear la interfaz de usuario para que permanezca todo el tiempo responsiva. Una vez determinado el tipo de operacion a realizar, se llama a ServerRequest.</li>
+<li><strong>ServerRequest</strong>: Esta clase efectua un tipo de request especifico al servidor, por ejemplo, realizar un GET para obtener la lista de usuarios o un POST para registrar un nuevo usuario. La respuesta obtenida por el servidor se procesa con la clase JSONParser, y el resultado es enviado finalmente a la activity que inició el ciclo.</li>
+<li><strong>JSONParser</strong>: Se encarga de convertir la respuesta en formato JSON a un tipo de dato manejable por la aplicacion.</li>
+<li><strong>RestMethod</strong>: Encapsula el http GET, POST y PUT.</li>
+</ul>
+<p>A continuación un diagrama de ejemplo que muestra el ciclo para una activity que solicita la lista de usuarios al servidor</p>
+<img alt="_images/diagrama.jpg" src="_images/diagrama.jpg" />
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Ambiente de desarrollo.html" title="capítulo anterior">Ambiente de desarrollo</a></li>
+      <li>Next: <a href="Codigo fuente.html" title="próximo capítulo">Codigo fuente</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Esta página</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Diseño.txt"
+            rel="nofollow">Mostrar el código</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Nicolas Gimenez, Barbara Aguila Cudicio, Juan Luis Martty, Maximiliano Yacobucci.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="_sources/Diseño.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

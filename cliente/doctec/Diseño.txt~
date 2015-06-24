@@ -1,0 +1,23 @@
+Diseño
+================
+.. automodule:: Diseño
+
+El diseño del servidor se realizó teniendo en cuenta el protocolo REST - MensajerO que se encuentra en:
+
+* `Protocolo <https://github.com/jmartty/taller2server/blob/master/docs/Protocolo-REST-v1.7.pdf>`_
+
+Se han creado diferentes clases para implementar el servidor:
+
+* **Server**: Es la clase encargada de ejecutar el servidor.
+
+* **Requesthandler**: Procesa cada uri a partir de sus parámetros.
+
+* **Requesthandler_installs**: Se encarga de realizar la acción deseada dependiendo del tipo de instrucción que se haya especificado (uri).
+
+* **Usuario**: Posee todos los datos de cada usuario.
+
+* **Database**: Realiza todas las acciones en las que se utiliza la base de datos.
+
+* **Conversacion**: Se encarga de implementar todo lo relacion con la conversación entre los usuarios.
+
+

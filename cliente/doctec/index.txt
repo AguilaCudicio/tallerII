@@ -1,0 +1,18 @@
+.. MensajerO documentation master file, created by
+   sphinx-quickstart on Tue Jun 23 21:34:02 2015.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Documentación técnica Cliente MensajerO
+=====================================
+
+Contents:
+
+.. toctree::
+   :maxdepth: 2
+
+   Ambiente de desarrollo
+   Diseño
+   Codigo fuente
+   Pruebas	
+
