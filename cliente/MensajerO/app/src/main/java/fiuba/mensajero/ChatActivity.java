@@ -36,6 +36,7 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
     private String nombre;
     private Handler handler;
     private int interval;
+    ArrayList<UserData> contactos;
 
 
     @Override
@@ -50,6 +51,7 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
         interval = 10000; //10 seg
         Intent intent = getIntent();
         contacto = intent.getParcelableExtra("contacto");
+        contactos = intent.getParcelableArrayListExtra("contactos");
         SharedPreferences sharedPref= getSharedPreferences("appdata", 0);
         nombre = sharedPref.getString("nombre", "Yo");
     }
@@ -128,10 +130,15 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
                     fragment.clearMessages();
                     for (int i = list.size()-1; i >= 0; i--) {
                         String id = list.get(i).getId();
-                        if (id.equals(contacto.getId()))
-                            fragment.addMessage(contacto.getNombre(), list.get(i).getMessage());
-                        else
-                            fragment.addMessage(nombre, list.get(i).getMessage());
+                        if (contacto.getId().equals("broadcast")) {
+                            fragment.addMessage(findNameById(list.get(i).getId()), list.get(i).getMessage());
+                        }
+                        else {
+                            if (id.equals(contacto.getId()))
+                                fragment.addMessage(contacto.getNombre(), list.get(i).getMessage());
+                            else
+                                fragment.addMessage(nombre, list.get(i).getMessage());
+                        }
                         TextView tv = (TextView) findViewById(R.id.textViessw13);
                         tv.setText(list.get(i).getTime());
                     }
@@ -153,6 +160,19 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
                 break;
         }
     }
+
+    private String findNameById(String id) {
+        String nom = nombre;
+        for (UserData user : contactos) {
+            String userid = user.getId();
+            if (userid.equals(id)) {
+                nom = user.getNombre();
+                break;
+            }
+        }
+        return nom;
+    }
+
 
     /**
      * Iniciar el servicio para enviar el mensaje del cuadro de texto al apretar el boton de enviar

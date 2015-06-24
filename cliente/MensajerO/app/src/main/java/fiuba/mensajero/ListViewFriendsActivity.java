@@ -130,6 +130,7 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
 
         Intent intent = new Intent(this, ChatActivity.class);
         intent.putExtra("contacto", contactos.get(position));
+        intent.putParcelableArrayListExtra("contactos", contactos);
         startActivity(intent);
 
         super.onListItemClick(l, v, position, id);
