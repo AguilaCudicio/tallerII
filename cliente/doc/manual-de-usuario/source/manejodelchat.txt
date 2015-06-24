@@ -1,0 +1,6 @@
+.. _chat:
+
+Manejo del chat
+===============
+
+Luego de iniciar sesión, podrá utilizar el chat. Se mostrará una ventana como la siguiente, con la lista de usuarios:

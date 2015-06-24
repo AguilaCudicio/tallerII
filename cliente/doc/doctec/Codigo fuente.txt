@@ -2,6 +2,6 @@ Codigo fuente
 ================
 .. automodule:: Codigo fuente
 
-La documentacion del codigo puede verse aca:
+La documentacion del codigo puede verse aquí:
 
-* `Codigo fuente <../../../doc/javadocum/index.html>`_
+* `Codigo fuente <../../../../doc/javadocum/index.html>`_
