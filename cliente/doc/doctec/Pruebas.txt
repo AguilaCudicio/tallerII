@@ -1,6 +1,5 @@
 Pruebas
 ================
-.. automodule:: Pruebas
 
 * **Mocks**: Para facilitar el testeo de la aplicación independiente del servidor, se creo un mock del servidor en python que simula la funcionalidad del servidor. A su vez este fue previamente testeado realizando http requests mediante el plugin de chrome `postman <https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm>`_ .
 
@@ -8,3 +7,4 @@ Pruebas
 
 * **Pruebas de interfaz de usuario**: completar
 
+:ref:`Click aquí para volver al índice <index>`

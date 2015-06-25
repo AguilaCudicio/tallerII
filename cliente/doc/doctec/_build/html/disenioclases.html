@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Diseño: Clases &mdash; documentación de MensajerO - 1.0</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="documentación de MensajerO - 1.0" href="index.html" />
+    <link rel="next" title="Codigo fuente" href="Codigo fuente.html" />
+    <link rel="prev" title="Diseño: Introducción" href="Diseño.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="diseno-clases">
+<h1>Diseño: Clases<a class="headerlink" href="#diseno-clases" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>El siguiente diagrama muestra las clases más importantes del sistema:</p>
+<a class="reference internal image-reference" href="_images/Diagrama.png"><img alt="_images/Diagrama.png" class="align-center" src="_images/Diagrama.png" style="width: 80%;" /></a>
+<p class="centered">
+<strong>(click en la imagen para aumentar su tamaño)</strong></p><p>Un pequeño resumen sobre la función de las clases:</p>
+<ul class="simple">
+<li><strong>MainActivity:</strong> Activity primera en orden de ejecución. Controla si debe loguearse automaticamente o no.</li>
+<li><strong>LoginActivity:</strong> Activity que se muestra en pantalla al inciar la aplicación. Otorga la opcion de loguearse, registrarse o configuración</li>
+<li><strong>ConfigActivity:</strong> Activity de configuracion. Permite cambiar IP del servidor.</li>
+<li><strong>RegisterActivity:</strong> Activity para el registro de usuarios nuevos.</li>
+<li><strong>LoginRegActivity:</strong> Activity para el logueo de un usuario.</li>
+<li><strong>NetworkService:</strong> Servicio que realiza operaciones de red y devuelve la respuesta a la activity invocante</li>
+<li><strong>MyResultReceiver:</strong> Clase utilizada para permitir que las activities reciban respuesta despues de haber llamado a un servicio</li>
+<li><strong>ListViewFriendsActivity:</strong> Activity principal de la aplicacion. Muestra la lista de conectados y algunos botones de opciones.</li>
+<li><strong>AdaptFriends:</strong> Extension de ArrayAdapter para manejar el tipo de dato definido UserData</li>
+<li><strong>UserData:</strong> Clase contenedora de datos de un contacto. Implementa parcelable para posibilitar la comunicacion del objeto entre activities.</li>
+<li><strong>ProfileActivity:</strong> Activity que muestra el profile de un usuario</li>
+<li><strong>EditProfileActivity:</strong> Activity para edicion del perfil.</li>
+<li><strong>ProfileData:</strong> Clase contenedora de datos de un perfil de usuario. Implementa parcelable para posibilitar la comunicacion del objeto entre activities.</li>
+<li><strong>ChatActivity:</strong>  Activity para visualizar y realizar conversaciones entre usuarios.</li>
+<li><strong>MyFragment:</strong> Fragmento usado por ChatActivity para visualizar correctamente los mensajes en forma de lista</li>
+<li><strong>ListViewItem:</strong> Vista de los elementos que contiene la lista: El nombre de usuario y el mensaje</li>
+</ul>
+<p>Hay más detalles sobre las clases en <a class="reference external" href="../../../../doc/javadocum/index.html">la documentación del código fuente</a></p>
+<p><a class="reference internal" href="index.html#index"><span>Click aquí para volver al índice</span></a></p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Diseño.html" title="capítulo anterior">Diseño: Introducción</a></li>
+      <li>Next: <a href="Codigo fuente.html" title="próximo capítulo">Codigo fuente</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Esta página</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/disenioclases.txt"
+            rel="nofollow">Mostrar el código</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Nicolas Gimenez, Barbara Aguila Cudicio, Juan Luis Martty, Maximiliano Yacobucci.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="_sources/disenioclases.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

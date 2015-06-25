@@ -1,8 +1,8 @@
 Ambiente de desarrollo
 ================
-.. automodule:: Ambiente de desarrollo
 
 El cliente MensajerO es una aplicación Android desarrollada en Android Studio, utilizando el control de versiones GitHub. La versión minima de Android soportada es 3.0.
 
-* `Repositorio <https://github.com/BarAgCud/tallerII/>`_ 
+* `Repositorio <https://github.com/BarAgCud/tallerII/>`_
 
+:ref:`Click aquí para volver al índice <index>`

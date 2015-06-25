@@ -5,3 +5,5 @@ Codigo fuente
 La documentacion del codigo puede verse aquí:
 
 * `Codigo fuente <../../../../doc/javadocum/index.html>`_
+
+:ref:`Click aquí para volver al índice <index>`

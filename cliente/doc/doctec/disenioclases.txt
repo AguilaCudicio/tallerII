@@ -1,0 +1,33 @@
+Diseño: Clases
+==============
+
+El siguiente diagrama muestra las clases más importantes del sistema:
+
+.. image:: imagenes/Diagrama.png
+  :width: 80%
+  :align: center
+.. centered:: (click en la imagen para aumentar su tamaño)
+
+Un pequeño resumen sobre la función de las clases:
+
+* **MainActivity:** Activity primera en orden de ejecución. Controla si debe loguearse automaticamente o no.
+* **LoginActivity:** Activity que se muestra en pantalla al inciar la aplicación. Otorga la opcion de loguearse, registrarse o configuración
+* **ConfigActivity:** Activity de configuracion. Permite cambiar IP del servidor.
+* **RegisterActivity:** Activity para el registro de usuarios nuevos.
+* **LoginRegActivity:** Activity para el logueo de un usuario.
+* **NetworkService:** Servicio que realiza operaciones de red y devuelve la respuesta a la activity invocante
+* **MyResultReceiver:** Clase utilizada para permitir que las activities reciban respuesta despues de haber llamado a un servicio
+* **ListViewFriendsActivity:** Activity principal de la aplicacion. Muestra la lista de conectados y algunos botones de opciones.
+* **AdaptFriends:** Extension de ArrayAdapter para manejar el tipo de dato definido UserData
+* **UserData:** Clase contenedora de datos de un contacto. Implementa parcelable para posibilitar la comunicacion del objeto entre activities.
+* **ProfileActivity:** Activity que muestra el profile de un usuario
+* **EditProfileActivity:** Activity para edicion del perfil.
+* **ProfileData:** Clase contenedora de datos de un perfil de usuario. Implementa parcelable para posibilitar la comunicacion del objeto entre activities.
+* **ChatActivity:**  Activity para visualizar y realizar conversaciones entre usuarios.
+* **MyFragment:** Fragmento usado por ChatActivity para visualizar correctamente los mensajes en forma de lista
+* **ListViewItem:** Vista de los elementos que contiene la lista: El nombre de usuario y el mensaje
+
+
+Hay más detalles sobre las clases en `la documentación del código fuente <../../../../doc/javadocum/index.html>`_
+
+:ref:`Click aquí para volver al índice <index>`

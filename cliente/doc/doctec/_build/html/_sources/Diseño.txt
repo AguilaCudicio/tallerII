@@ -1,6 +1,5 @@
-Diseño
-================
-.. automodule:: Diseño
+Diseño: Introducción
+====================
 
 MensajerO es una aplicación cliente tipo REST para comunicación entre usuarios. El protocolo utilizado para comunicación con el servidor es el siguiente:
 
@@ -18,3 +17,5 @@ El diseño entonces consiste basicamente en 4 o 5 bloques principales que intera
 A continuación un diagrama de ejemplo que muestra el ciclo para una activity que solicita la lista de usuarios al servidor
 
 .. image:: diagrama.jpg
+
+:ref:`Click aquí para volver al índice <index>`
