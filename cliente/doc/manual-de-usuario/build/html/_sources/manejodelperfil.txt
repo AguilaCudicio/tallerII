@@ -1,0 +1,32 @@
+.. _perfil: 
+
+Vista y edición del perfil
+==========================
+
+En la parte inferior de la pantalla principal luego de iniciar sesión, se puede ver un botón que dice "perfil"
+
+.. image:: images/chatnuevosmsjs.png
+  :width: 40%
+  :align: center
+
+Al presionar el mismo, se podrá ver el propio perfil.
+
+.. image:: images/perfil.png
+  :width: 40%
+  :align: center
+
+Finalmente, al presionar en la última pantalla "editar perfil", se accederá a una pantalla en la cual podrá editar su propio perfil. Deslice el dedo por la pantalla para poder ver todas las opciones. Deje en blanco aquellos campos que no desee modificar y presione "guardar cambios" para guardar todo y ver su perfil modificado.
+
+.. image:: images/editperfil1.png
+  :width: 40%
+  :align: center
+  
+|
+
+.. image:: images/editperfil2.png
+  :width: 40%
+  :align: center
+
+|
+  
+:ref:`Click aquí para volver al índice <index>`
