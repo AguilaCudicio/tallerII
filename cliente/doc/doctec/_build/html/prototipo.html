@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Prototipo inicial de vistas y resultado final &mdash; documentación de MensajerO - 1.0</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="documentación de MensajerO - 1.0" href="index.html" />
+    <link rel="next" title="Diseño: Introducción" href="Diseño.html" />
+    <link rel="prev" title="Ambiente de desarrollo" href="Ambiente de desarrollo.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="prototipo-inicial-de-vistas-y-resultado-final">
+<h1>Prototipo inicial de vistas y resultado final<a class="headerlink" href="#prototipo-inicial-de-vistas-y-resultado-final" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Inicialmente, se creó un prototipo en Photoshop para mostrar cual sería el aspecto de las pantallas de MensajerO. Sin embargo, algunas de esas vistas cambiaron durante la implementación.
+En esta sección se muestran en el lado izquierdo las imágenes del prototipo y en el derecho el resultado final, obtenido de capturas de un celular con Android Lollipop.</p>
+<ul class="simple">
+<li>El programa, al ser iniciado por primera vez, comenzará mostrando una pantalla de presentación. En el programa final, esto se corresponde con la Activity <strong>LoginActivity</strong> y su archivo de layout, <strong>activity_login.xml</strong></li>
+</ul>
+<a class="reference internal image-reference" href="_images/proto1.jpg"><img alt="_images/proto1.jpg" src="_images/proto1.jpg" style="width: 45%;" /></a>
+<a class="reference internal image-reference" href="_images/proto1r.png"><img alt="_images/proto1r.png" src="_images/proto1r.png" style="width: 45%;" /></a>
+<ul class="simple">
+<li>Presionando Sign Up: Se mostrará un formulario para que el usuario se registre. En el programa final, esto se corresponde con <strong>RegisterActivity</strong> y su layout, <strong>activity_sign_in.xml</strong></li>
+</ul>
+<a class="reference internal image-reference" href="_images/proto2.jpg"><img alt="_images/proto2.jpg" src="_images/proto2.jpg" style="width: 45%;" /></a>
+<a class="reference internal image-reference" href="_images/proto2r.png"><img alt="_images/proto2r.png" src="_images/proto2r.png" style="width: 45%;" /></a>
+<ul class="simple">
+<li>Al presionar Log In O al completar exitosamente el registro, pasar a la pantalla para completar nombre de usuario y contraseña. En el programa final, esto se corresponde con <strong>LoginRegActivity</strong> y su layout, <strong>activity_login_reg.xml</strong></li>
+</ul>
+<a class="reference internal image-reference" href="_images/proto3.jpg"><img alt="_images/proto3.jpg" src="_images/proto3.jpg" style="width: 45%;" /></a>
+<a class="reference internal image-reference" href="_images/proto3r.png"><img alt="_images/proto3r.png" src="_images/proto3r.png" style="width: 45%;" /></a>
+<ul class="simple">
+<li>Si la respuesta del servidor es que el usuario o la contraseña son erróneos, o no hay conexión con el servidor, mostrar un diálogo de advertencia. En el programa final, esto es un Dialog.</li>
+</ul>
+<a class="reference internal image-reference" href="_images/proto4.jpg"><img alt="_images/proto4.jpg" src="_images/proto4.jpg" style="width: 45%;" /></a>
+<a class="reference internal image-reference" href="_images/proto4r.png"><img alt="_images/proto4r.png" src="_images/proto4r.png" style="width: 45%;" /></a>
+<ul class="simple">
+<li>Mostrar la lista de usuarios. En el programa final, esto se corresponde con <strong>ListViewFriendsActivity</strong> y <strong>AdaptFriends</strong> y sus layouts, <strong>activity_listviewfriendsactivity.xml</strong> y <strong>rowlayout.xml</strong>. Notar que hubo un cambio importante en esta ventana al añadirse el campo de búsqueda en la parte inferior.</li>
+</ul>
+<a class="reference internal image-reference" href="_images/proto5.jpg"><img alt="_images/proto5.jpg" src="_images/proto5.jpg" style="width: 60%;" /></a>
+<a class="reference internal image-reference" href="_images/proto5r.png"><img alt="_images/proto5r.png" src="_images/proto5r.png" style="width: 30%;" /></a>
+<ul class="simple">
+<li>Ventana de Chat con un contacto. En el programa final, esto se corresponde con <strong>ChatActivity</strong>, <strong>ListViewItem</strong> y <strong>MyFragment</strong>, y sus layouts, <strong>activity_chat.xml</strong> y <strong>footer_chat.xml</strong></li>
+</ul>
+<a class="reference internal image-reference" href="_images/proto6.jpg"><img alt="_images/proto6.jpg" src="_images/proto6.jpg" style="width: 45%;" /></a>
+<a class="reference internal image-reference" href="_images/proto6r.png"><img alt="_images/proto6r.png" src="_images/proto6r.png" style="width: 45%;" /></a>
+<ul class="simple">
+<li>Vista del propio Perfil. En el programa final, esto se corresponde con <strong>ProfileActivity</strong> y su layout, <strong>activity_profile.xml</strong></li>
+</ul>
+<a class="reference internal image-reference" href="_images/proto7.jpg"><img alt="_images/proto7.jpg" src="_images/proto7.jpg" style="width: 45%;" /></a>
+<a class="reference internal image-reference" href="_images/proto7r.png"><img alt="_images/proto7r.png" src="_images/proto7r.png" style="width: 45%;" /></a>
+<ul class="simple">
+<li><ol class="first arabic" start="6">
+<li>Modificación del propio perfil. En el programa final, esto se corresponde con <strong>EditProfileActivity</strong> y su layout, <strong>activity_edit_profile.xml</strong></li>
+</ol>
+</li>
+</ul>
+<a class="reference internal image-reference" href="_images/proto8.jpg"><img alt="_images/proto8.jpg" src="_images/proto8.jpg" style="width: 45%;" /></a>
+<a class="reference internal image-reference" href="_images/proto8r.png"><img alt="_images/proto8r.png" src="_images/proto8r.png" style="width: 45%;" /></a>
+<p><a class="reference internal" href="index.html#index"><span>Click aquí para volver al índice</span></a></p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Ambiente de desarrollo.html" title="capítulo anterior">Ambiente de desarrollo</a></li>
+      <li>Next: <a href="Diseño.html" title="próximo capítulo">Diseño: Introducción</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Esta página</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/prototipo.txt"
+            rel="nofollow">Mostrar el código</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introduzca los términos de búsqueda o un nombre de módulo, clase o función.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Nicolas Gimenez, Barbara Aguila Cudicio, Juan Luis Martty, Maximiliano Yacobucci.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="_sources/prototipo.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

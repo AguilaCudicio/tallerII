@@ -7,7 +7,7 @@
 Bienvenido al manual de uso de MensajerO!
 =========================================
 
-Contents:
+Contenidos:
 
 .. toctree::
    :maxdepth: 2

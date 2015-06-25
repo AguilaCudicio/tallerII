@@ -30,4 +30,6 @@ Un pequeño resumen sobre la función de las clases:
 
 Hay más detalles sobre las clases en `la documentación del código fuente <../../../../doc/javadocum/index.html>`_
 
+:ref:`Para una mayor compresión de las Activities, se recomienda visualizar las vistas y layouts asociados aquí <vistas>`
+
 :ref:`Click aquí para volver al índice <index>`

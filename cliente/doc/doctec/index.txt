@@ -4,15 +4,16 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Documentación técnica Cliente MensajerO
-=====================================
+Documentación técnica del cliente de MensajerO
+==============================================
 
-Contents:
+Contenidos:
 
 .. toctree::
    :maxdepth: 2
 
    Ambiente de desarrollo
+   prototipo
    Diseño
    disenioclases
    Codigo fuente

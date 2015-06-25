@@ -1,0 +1,64 @@
+.. _vistas:
+Prototipo inicial de vistas y resultado final
+=============================================
+
+Inicialmente, se creó un prototipo en Photoshop para mostrar cual sería el aspecto de las pantallas de MensajerO. Sin embargo, algunas de esas vistas cambiaron durante la implementación.
+En esta sección se muestran en el lado izquierdo las imágenes del prototipo y en el derecho el resultado final, obtenido de capturas de un celular con Android Lollipop.
+
+* El programa, al ser iniciado por primera vez, comenzará mostrando una pantalla de presentación. En el programa final, esto se corresponde con la Activity **LoginActivity** y su archivo de layout, **activity_login.xml**
+
+.. image:: imagenes/proto1.jpg
+   :width: 45%
+.. image:: imagenes/proto1r.png
+   :width: 45%
+
+* Presionando Sign Up: Se mostrará un formulario para que el usuario se registre. En el programa final, esto se corresponde con **RegisterActivity** y su layout, **activity_sign_in.xml**
+
+.. image:: imagenes/proto2.jpg
+   :width: 45%
+.. image:: imagenes/proto2r.png
+   :width: 45%
+
+* Al presionar Log In O al completar exitosamente el registro, pasar a la pantalla para completar nombre de usuario y contraseña. En el programa final, esto se corresponde con **LoginRegActivity** y su layout, **activity_login_reg.xml**
+
+.. image:: imagenes/proto3.jpg
+   :width: 45%
+.. image:: imagenes/proto3r.png
+   :width: 45%
+
+* Si la respuesta del servidor es que el usuario o la contraseña son erróneos, o no hay conexión con el servidor, mostrar un diálogo de advertencia. En el programa final, esto es un Dialog.
+
+.. image:: imagenes/proto4.jpg
+   :width: 45%
+.. image:: imagenes/proto4r.png
+   :width: 45%
+
+* Mostrar la lista de usuarios. En el programa final, esto se corresponde con **ListViewFriendsActivity** y **AdaptFriends** y sus layouts, **activity_listviewfriendsactivity.xml** y **rowlayout.xml**. Notar que hubo un cambio importante en esta ventana al añadirse el campo de búsqueda en la parte inferior.
+
+.. image:: imagenes/proto5.jpg
+   :width: 60%
+.. image:: imagenes/proto5r.png
+   :width: 30%
+
+* Ventana de Chat con un contacto. En el programa final, esto se corresponde con **ChatActivity**, **ListViewItem** y **MyFragment**, y sus layouts, **activity_chat.xml** y **footer_chat.xml**
+
+.. image:: imagenes/proto6.jpg
+   :width: 45%
+.. image:: imagenes/proto6r.png
+   :width: 45%
+
+* Vista del propio Perfil. En el programa final, esto se corresponde con **ProfileActivity** y su layout, **activity_profile.xml**
+
+.. image:: imagenes/proto7.jpg
+   :width: 45%
+.. image:: imagenes/proto7r.png
+   :width: 45%
+
+* 6) Modificación del propio perfil. En el programa final, esto se corresponde con **EditProfileActivity** y su layout, **activity_edit_profile.xml**
+
+.. image:: imagenes/proto8.jpg
+   :width: 45%
+.. image:: imagenes/proto8r.png
+   :width: 45%
+
+:ref:`Click aquí para volver al índice <index>`

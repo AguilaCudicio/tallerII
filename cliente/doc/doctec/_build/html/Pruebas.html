@@ -41,10 +41,177 @@
   <div class="section" id="pruebas">
 <h1>Pruebas<a class="headerlink" href="#pruebas" title="Enlazar permanentemente con este título">¶</a></h1>
 <ul class="simple">
-<li><strong>Mocks</strong>: Para facilitar el testeo de la aplicación independiente del servidor, se creo un mock del servidor en python que simula la funcionalidad del servidor. A su vez este fue previamente testeado realizando http requests mediante el plugin de chrome <a class="reference external" href="https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm">postman</a> .</li>
-<li><strong>Pruebas de stress</strong>: bla bla bla</li>
-<li><strong>Pruebas de interfaz de usuario</strong>: completar</li>
+<li><strong>Pruebas iniciales con Mocks</strong>: Para facilitar el testeo de la aplicación independientemente del servidor, se creo un mock del servidor en python que simula su funcionalidad. A su vez, este fue previamente testeado realizando http requests mediante el plugin de chrome <a class="reference external" href="https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm">postman</a> .</li>
+<li>Posteriormente, con el proyecto más avanzado, se probó toda la aplicación utilizando el servidor real.</li>
 </ul>
+</div>
+<div class="section" id="pruebas-de-integracion-con-el-servidor">
+<h1>Pruebas de integración con el servidor<a class="headerlink" href="#pruebas-de-integracion-con-el-servidor" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Para las siguientes pruebas con el servidor, se utilizaron básicamente dos dispositivos.</p>
+<ul class="simple">
+<li>Un celular Moto E de segunda generación con Android Lollipop, registrando un usuario de nombre &#8220;poly&#8221; y nombre para mostrar &#8220;polaris&#8221;</li>
+<li>Una tablet Kelyx con Android Jelly Bean, registrando un usuario de nombre de usuario y nombre para mostrar iguales, &#8220;Venecia&#8221;</li>
+</ul>
+</div>
+<div class="section" id="capturas-de-pantalla-de-pruebas-de-integracion">
+<h1>Capturas de pantalla de pruebas de integración<a class="headerlink" href="#capturas-de-pantalla-de-pruebas-de-integracion" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Para los cambios de orientación en la pantalla, son especialmente importantes las pruebas en el celular, que tiene una pantalla de menor tamaño.</p>
+<ul class="simple">
+<li>Pantalla principal: Vista en ambas orientaciones</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas01.png"><img alt="_images/pruebas01.png" class="align-center" src="_images/pruebas01.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas02.png"><img alt="_images/pruebas02.png" class="align-center" src="_images/pruebas02.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>Configuración: Vista en ambas orientaciones. Prueba de que la IP queda guardada y se muestra al volver a entrar a la sección de configuración.</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas03.png"><img alt="_images/pruebas03.png" class="align-center" src="_images/pruebas03.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas04.png"><img alt="_images/pruebas04.png" class="align-center" src="_images/pruebas04.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>Registro de un nuevo usuario: Vista en ambas orientaciones. Al poner el dispositivo en posición horizontal, se comprueba que se puede desplazar correctamente por la pantalla.</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas05.png"><img alt="_images/pruebas05.png" class="align-center" src="_images/pruebas05.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas06.png"><img alt="_images/pruebas06.png" class="align-center" src="_images/pruebas06.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas07.png"><img alt="_images/pruebas07.png" class="align-center" src="_images/pruebas07.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>Registro de un nuevo usuario: Se prueba registrar un usuario de nombre demasiado corto y también de password demasiado corto, y en ambas opciones se muestra un mensaje de error.</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas08.png"><img alt="_images/pruebas08.png" class="align-center" src="_images/pruebas08.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>Registro de un nuevo usuario: Se registra el usuario poly en el celular (con nombre &#8220;polaris&#8221; para mostrar) y Venecia en la tablet con éxito. Luego, se registra nuevamente el usuario poly para comprobar el mensaje acorde a la situación.</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas09.png"><img alt="_images/pruebas09.png" class="align-center" src="_images/pruebas09.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>Se apaga el wifi y la conexión 3g del celular para comprobar, al intentar hacer login, el mensaje de error correspondiente</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas10.png"><img alt="_images/pruebas10.png" class="align-center" src="_images/pruebas10.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>Muestra de la pantalla de login en ambas orientaciones</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas11.png"><img alt="_images/pruebas11.png" class="align-center" src="_images/pruebas11.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas12.png"><img alt="_images/pruebas12.png" class="align-center" src="_images/pruebas12.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>Al hacer login como poly en el celular, se ve apropiadamente la lista de contactos</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas13.png"><img alt="_images/pruebas13.png" class="align-center" src="_images/pruebas13.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>Se modifica el perfil para cambiar de avatar y agregar datos como telefono, mail, etc</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas21.png"><img alt="_images/pruebas21.png" class="align-center" src="_images/pruebas21.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas20.png"><img alt="_images/pruebas20.png" class="align-center" src="_images/pruebas20.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas18.png"><img alt="_images/pruebas18.png" class="align-center" src="_images/pruebas18.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>Se entra a la sección de perfil para ver el propio perfil, con la ubicación mostrada correctamente y los nuevos datos</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas17.png"><img alt="_images/pruebas17.png" class="align-center" src="_images/pruebas17.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas19.png"><img alt="_images/pruebas19.png" class="align-center" src="_images/pruebas19.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>Al hacer login como Venecia en la tablet, polaris aparece conectada (recordar que el usuario de nombre poly se muestra como polaris)</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas14.png"><img alt="_images/pruebas14.png" class="align-center" src="_images/pruebas14.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>También, en el celular Venecia aparece conectada. Se cambió la orientación del celular para comprobar que se ve correctamente y que se puede desplazar la pantalla con el dedo para ver toda la lista.</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas15.png"><img alt="_images/pruebas15.png" class="align-center" src="_images/pruebas15.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas16.png"><img alt="_images/pruebas16.png" class="align-center" src="_images/pruebas16.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>Nuevamente, se entra a la edición del perfil del usuario con nombre poly y nombre para mostrar polaris, en el celular. Se introducen nuevos datos, incluyendo una nueva imagen, poner &#8220;poly&#8221; como nombre para mostrar y eligiendo ocultar la ubicación y aparecer siempre desconectado. Inmediatamente se reflejan los cambios en el propio perfil.</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas22.png"><img alt="_images/pruebas22.png" class="align-center" src="_images/pruebas22.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas23.png"><img alt="_images/pruebas23.png" class="align-center" src="_images/pruebas23.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>En la tablet, desde la cuenta de Venecia, se comprueba que el usuario ahora aparece con el nombre poly, con ubicación desconocida y una nueva imagen.</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas24.png"><img alt="_images/pruebas24.png" class="align-center" src="_images/pruebas24.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas25.png"><img alt="_images/pruebas25.png" class="align-center" src="_images/pruebas25.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas26.png"><img alt="_images/pruebas26.png" class="align-center" src="_images/pruebas26.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>De nuevo desde la cuenta de Venecia, se escribe un mensaje a poly</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas27.png"><img alt="_images/pruebas27.png" class="align-center" src="_images/pruebas27.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>En la cuenta de poly, se ve una notificación de un nuevo mensaje de Venecia</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas28.png"><img alt="_images/pruebas28.png" class="align-center" src="_images/pruebas28.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>En la cuenta de poly, vemos la ventana de chat en ambas orientaciones, con los mensajes recibidos</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas30.png"><img alt="_images/pruebas30.png" class="align-center" src="_images/pruebas30.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas29.png"><img alt="_images/pruebas29.png" class="align-center" src="_images/pruebas29.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>En la cuenta de poly, enviamos un mensaje por conversación grupal (broadcast) y comprobamos que Venecia tiene una notificación de mensaje grupal.</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas31.png"><img alt="_images/pruebas31.png" class="align-center" src="_images/pruebas31.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas32.png"><img alt="_images/pruebas32.png" class="align-center" src="_images/pruebas32.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>En la cuenta de poly, se prueba filtrar la lista de usuarios usando el buscador.</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas33.png"><img alt="_images/pruebas33.png" class="align-center" src="_images/pruebas33.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>En la cuenta de poly, se ve el perfil de Venecia</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas34.png"><img alt="_images/pruebas34.png" class="align-center" src="_images/pruebas34.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas35.png"><img alt="_images/pruebas35.png" class="align-center" src="_images/pruebas35.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>Finalmente, una prueba de estrés: Cargar desde la cuenta de poly una imagen de muy alta resolución (unos 10 Mb).</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas36.png"><img alt="_images/pruebas36.png" class="align-center" src="_images/pruebas36.png" style="width: 40%;" /></a>
+<ul class="simple">
+<li>Comprobamos que el avatar de alta resolución fue modificado en su tamaño y enviado correctamente a Venecia:</li>
+</ul>
+<a class="reference internal image-reference" href="_images/pruebas37.png"><img alt="_images/pruebas37.png" class="align-center" src="_images/pruebas37.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas38.png"><img alt="_images/pruebas38.png" class="align-center" src="_images/pruebas38.png" style="width: 40%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/pruebas39.png"><img alt="_images/pruebas39.png" class="align-center" src="_images/pruebas39.png" style="width: 40%;" /></a>
 <p><a class="reference internal" href="index.html#index"><span>Click aquí para volver al índice</span></a></p>
 </div>
 
@@ -53,7 +220,14 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Tabla de Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Pruebas</a></li>
+<li><a class="reference internal" href="#pruebas-de-integracion-con-el-servidor">Pruebas de integración con el servidor</a></li>
+<li><a class="reference internal" href="#capturas-de-pantalla-de-pruebas-de-integracion">Capturas de pantalla de pruebas de integración</a></li>
+</ul>
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
