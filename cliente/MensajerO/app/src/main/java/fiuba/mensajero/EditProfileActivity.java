@@ -30,6 +30,8 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
     private static int RESULT_LOAD_IMG = 1;
     String imgString, fotochica, nombre, password, email, telefono, showOffline;
     public MyResultReceiver mReceiver;
+    public static boolean forcelogout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
         mReceiver.setReceiver(this);
         imgString = null;
         fotochica = null;
+        forcelogout = false;
         //mostrar en los edittext la info actual (excepto password)
        /* SharedPreferences sharedPref= getSharedPreferences("appdata", 0);
         String nombre = sharedPref.getString("nombre", null);
@@ -113,6 +116,11 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
      * @param view boton que llama al metodo
      */
     public void saveChanges(View view) {
+        if (forcelogout) {
+            finish();
+            return;
+        }
+
         //obtengo los valores a guardar
         EditText et = (EditText) findViewById(R.id.editTextPassword);
         password = et.getText().toString();
@@ -205,12 +213,14 @@ public class EditProfileActivity extends ActionBarActivity implements MyResultRe
                 AlertDialog alerta = new AlertDialog.Builder(this).create();
                 alerta.setTitle("Error");
                 String err = resultData.getString("error");
-                alerta.setMessage(err);
-                alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                alerta.show();
+                if (!err.equals("No se pudo conectar con el servidor")) {
+                    alerta.setMessage(err);
+                    alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    alerta.show();
+                }
                 break;
         }
     }

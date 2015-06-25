@@ -1,7 +1,271 @@
 Pruebas
-================
-.. automodule:: Pruebas
+=======
 
-Para facilitar el testeo de la aplicación independiente del servidor, se creo un mock del servidor en python que simula la funcionalidad del servidor. A su vez este fue previamente testeado realizando http requests mediante el plugin de chrome `postman <https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm>`_ .
+**Modalidad de testing**
+
+Debido a la constante interacción de la aplicación con el usuario, la dificultad del chequeo del correcto funcionamiento de las interfaces de usuario y dificil simulacion de problemas de red, se optó por no automatizar las pruebas y se realizaron pruebas manuales constantemente, apoyados por la utilización de un log que informa progreso actual y problemas.
+
+* **Utilizacion de mocks**: Para facilitar el testeo de la aplicación independientemente del servidor, se creo un mock del servidor en python que simula su funcionalidad. A su vez, este fue previamente testeado realizando http requests mediante el plugin de chrome `postman <https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm>`_ .
+
+* **Pruebas funcionales**: Toda la funcionalidad fue testeada correctamente. Problema existente: en uno de los dispositivos testeados no pudimos hacer funcionar el servicio de localización. Sospechamos que es un problema externo a la aplicación.
+
+* **Pruebas de performance**: Se ha testeado que la aplicación responda velozmente en la mayoría de los casos. Un inconveniente que persiste es el caso en que falle algun request de información al servidor, en este caso el cliente no mostrará la información solicitada hasta el próximo intento de request unos segundos mas tarde. En raras ocasiones puede fallar la carga del perfil, y no se mostrara nada hasta que se salga y vuelva a entrar.
+
+* **Pruebas de volumen**: Se probo la aplicacion con hasta 10 usuarios registrados y hasta 3 conectados simultaneamente por la falta de dispositivos disponibles. La aplicación responde cada vez mas lenta a medida que se agregan usuarios registrados con fotos porque la transferencia de datos es mayor, pero la diferencia no es abismal y sigue respondiendo en tiempos razonables, pero es considerable. 
+
+* **Pruebas de usabilidad y de GUI**: Se testeo la correcta visualización de la interfaz en dispositivos con distintos tamaños de pantalla. Constantemente la aplicacion fue probada considerando el punto de vista del usuario. El diseño original se asemeja a otras aplicaciones de mensajeria existentes, y fue modificada para cumplir con los requisitos de forma que se acceda facil y rapidamente. Se probo la aparición de mensajes informando el exito o fallo de cada operacion realizada.
+
+* **Pruebas de integracion**: Todas las pruebas fueron repetidas utilizando el servidor real. Se integro en presencia de todos los integrantes y se resolvieron los problemas que surgieron.
+
+Dispositivos utilizados para testing
+======================================
+
+Para las pruebas de la aplicación, se utilizaron tres dispositivos distintos.
+
+* Un celular Moto E de segunda generación con Android Lollipop
+* Una tablet Kelyx con Android Jelly Bean
+* Celular Samsung Galaxy S3 mini, con Android Jelly Bean (v4.1.2)
+
+En general se encontraron problemas especificos en cada dispositivo que fueron resueltos tras las pruebas. La falta de mas variedad de dispositivos y la imposibilidad de utilizar emuladores no asegura que la aplicación este excenta de bugs particulares. De todas formas, si existiesen, deberían ser menores.
 
 
+Capturas de pantalla de pruebas realizadas
+==============================================
+
+Para los cambios de orientación en la pantalla, son especialmente importantes las pruebas en el celular, que tiene una pantalla de menor tamaño.
+
+* Pantalla principal: Vista en ambas orientaciones
+
+.. image:: imagenes/pruebas01.png
+  :width: 40%
+  :align: center
+
+|
+  
+.. image:: imagenes/pruebas02.png
+  :width: 40%
+  :align: center
+
+* Configuración: Vista en ambas orientaciones. Prueba de que la IP queda guardada y se muestra al volver a entrar a la sección de configuración.
+
+.. image:: imagenes/pruebas03.png
+  :width: 40%
+  :align: center
+
+|
+  
+.. image:: imagenes/pruebas04.png
+  :width: 40%
+  :align: center
+
+* Registro de un nuevo usuario: Vista en ambas orientaciones. Al poner el dispositivo en posición horizontal, se comprueba que se puede desplazar correctamente por la pantalla.
+
+.. image:: imagenes/pruebas05.png
+  :width: 40%
+  :align: center
+
+|
+  
+.. image:: imagenes/pruebas06.png
+  :width: 40%
+  :align: center
+
+|
+  
+.. image:: imagenes/pruebas07.png
+  :width: 40%
+  :align: center
+
+* Registro de un nuevo usuario: Se prueba registrar un usuario de nombre demasiado corto y también de password demasiado corto, y en ambas opciones se muestra un mensaje de error.
+
+.. image:: imagenes/pruebas08.png
+  :width: 40%
+  :align: center
+
+* Registro de un nuevo usuario: Se registra el usuario poly en el celular (con nombre "polaris" para mostrar) y Venecia en la tablet con éxito. Luego, se registra nuevamente el usuario poly para comprobar el mensaje acorde a la situación.
+
+.. image:: imagenes/pruebas09.png
+  :width: 40%
+  :align: center
+
+* Se apaga el wifi y la conexión 3g del celular para comprobar, al intentar hacer login, el mensaje de error correspondiente
+
+.. image:: imagenes/pruebas10.png
+  :width: 40%
+  :align: center
+
+* Muestra de la pantalla de login en ambas orientaciones
+
+.. image:: imagenes/pruebas11.png
+  :width: 40%
+  :align: center
+
+|
+  
+.. image:: imagenes/pruebas12.png
+  :width: 40%
+  :align: center
+
+* Al hacer login como poly en el celular, se ve apropiadamente la lista de contactos
+
+.. image:: imagenes/pruebas13.png
+  :width: 40%
+  :align: center
+
+* Se modifica el perfil para cambiar de avatar y agregar datos como telefono, mail, etc
+
+.. image:: imagenes/pruebas21.png
+  :width: 40%
+  :align: center
+  
+|
+
+.. image:: imagenes/pruebas20.png
+  :width: 40%
+  :align: center
+  
+|
+
+.. image:: imagenes/pruebas18.png
+  :width: 40%
+  :align: center
+
+* Se entra a la sección de perfil para ver el propio perfil, con la ubicación mostrada correctamente y los nuevos datos
+
+.. image:: imagenes/pruebas17.png
+  :width: 40%
+  :align: center
+
+|
+
+.. image:: imagenes/pruebas19.png
+  :width: 40%
+  :align: center
+
+* Al hacer login como Venecia en la tablet, polaris aparece conectada (recordar que el usuario de nombre poly se muestra como polaris)
+
+.. image:: imagenes/pruebas14.png
+  :width: 40%
+  :align: center
+
+* También, en el celular Venecia aparece conectada. Se cambió la orientación del celular para comprobar que se ve correctamente y que se puede desplazar la pantalla con el dedo para ver toda la lista.
+
+.. image:: imagenes/pruebas15.png
+  :width: 40%
+  :align: center
+
+|
+  
+.. image:: imagenes/pruebas16.png
+  :width: 40%
+  :align: center
+
+* Nuevamente, se entra a la edición del perfil del usuario con nombre poly y nombre para mostrar polaris, en el celular. Se introducen nuevos datos, incluyendo una nueva imagen, poner "poly" como nombre para mostrar y eligiendo ocultar la ubicación y aparecer siempre desconectado. Inmediatamente se reflejan los cambios en el propio perfil.
+
+.. image:: imagenes/pruebas22.png
+  :width: 40%
+  :align: center
+
+|
+  
+.. image:: imagenes/pruebas23.png
+  :width: 40%
+  :align: center
+
+* En la tablet, desde la cuenta de Venecia, se comprueba que el usuario ahora aparece con el nombre poly, con ubicación desconocida y una nueva imagen.
+
+.. image:: imagenes/pruebas24.png
+  :width: 40%
+  :align: center
+
+|
+  
+.. image:: imagenes/pruebas25.png
+  :width: 40%
+  :align: center
+
+|
+
+.. image:: imagenes/pruebas26.png
+  :width: 40%
+  :align: center
+
+* De nuevo desde la cuenta de Venecia, se escribe un mensaje a poly
+
+.. image:: imagenes/pruebas27.png
+  :width: 40%
+  :align: center
+
+* En la cuenta de poly, se ve una notificación de un nuevo mensaje de Venecia
+
+.. image:: imagenes/pruebas28.png
+  :width: 40%
+  :align: center
+
+* En la cuenta de poly, vemos la ventana de chat en ambas orientaciones, con los mensajes recibidos
+
+.. image:: imagenes/pruebas30.png
+  :width: 40%
+  :align: center
+
+|
+  
+.. image:: imagenes/pruebas29.png
+  :width: 40%
+  :align: center
+
+* En la cuenta de poly, enviamos un mensaje por conversación grupal (broadcast) y comprobamos que Venecia tiene una notificación de mensaje grupal.
+
+.. image:: imagenes/pruebas31.png
+  :width: 40%
+  :align: center
+
+|
+  
+.. image:: imagenes/pruebas32.png
+  :width: 40%
+  :align: center
+
+* En la cuenta de poly, se prueba filtrar la lista de usuarios usando el buscador.
+
+.. image:: imagenes/pruebas33.png
+  :width: 40%
+  :align: center
+
+* En la cuenta de poly, se ve el perfil de Venecia
+
+.. image:: imagenes/pruebas34.png
+  :width: 40%
+  :align: center
+
+|
+  
+.. image:: imagenes/pruebas35.png
+  :width: 40%
+  :align: center
+
+* Finalmente, una prueba de estrés: Cargar desde la cuenta de poly una imagen de muy alta resolución (unos 10 Mb).
+
+.. image:: imagenes/pruebas36.png
+  :width: 40%
+  :align: center
+
+* Comprobamos que el avatar de alta resolución fue modificado en su tamaño y enviado correctamente a Venecia:
+
+.. image:: imagenes/pruebas37.png
+  :width: 40%
+  :align: center
+
+|
+  
+.. image:: imagenes/pruebas38.png
+  :width: 40%
+  :align: center
+
+|
+  
+.. image:: imagenes/pruebas39.png
+  :width: 40%
+  :align: center
+
+:ref:`Click aquí para volver al índice <index>`

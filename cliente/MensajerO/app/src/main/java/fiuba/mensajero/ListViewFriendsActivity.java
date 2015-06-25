@@ -25,6 +25,8 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
     private Handler handler;
     private int interval = 10000;   //intervalo entre updates
     private String searchInput;
+    public static boolean forcelogout;
+
 
     /**
      * Inicializa variables. Inicia el servicio de actualizacion de posicion.
@@ -36,10 +38,10 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
         mReceiver = new MyResultReceiver(new Handler());
         mReceiver.setReceiver(this);
         handler = new Handler();
-
         EditText et = (EditText) findViewById(R.id.buscar);
         et.addTextChangedListener(watch);
         searchInput = null;
+        forcelogout = false;
 
         startService(new Intent(this, GPSupdater.class)); //servicio de updates de ubicacion gps
 
@@ -89,9 +91,10 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
     @Override
     public void onResume() {
         super.onResume();
-        listUpdater.run();
-
-
+        if (forcelogout) {
+            logout();
+        } else
+         listUpdater.run();
     }
 
     /**
@@ -142,6 +145,8 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
      * @param resultData datos de la respuesta
      */
     public void onReceiveResult(int resultCode, Bundle resultData) {
+        if (forcelogout)
+            logout();
         switch (resultCode) {
             case NetworkService.RUNNING:
                 Log.i("onreceiveresult", "esta corriendo el servicio");
@@ -164,15 +169,17 @@ public class ListViewFriendsActivity extends ListActivity implements MyResultRec
                 AlertDialog alerta = new AlertDialog.Builder(this).create();
                 alerta.setTitle("Error");
                 String err = resultData.getString("error");
-                alerta.setMessage(err);
-                alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        logout();
-                    }
-                });
-                if (!isFinishing())
-                    alerta.show();
-                Log.e("onreceiveresult", err);
+                if (!err.equals("No se pudo conectar con el servidor")) {
+                    alerta.setMessage(err);
+                    alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            logout();
+                        }
+                    });
+                    if (!isFinishing())
+                        alerta.show();
+                    Log.e("onreceiveresult", err);
+                }
 
                 break;
         }

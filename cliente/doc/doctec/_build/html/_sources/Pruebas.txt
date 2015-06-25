@@ -1,19 +1,33 @@
 Pruebas
 =======
 
-* **Pruebas iniciales con Mocks**: Para facilitar el testeo de la aplicación independientemente del servidor, se creo un mock del servidor en python que simula su funcionalidad. A su vez, este fue previamente testeado realizando http requests mediante el plugin de chrome `postman <https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm>`_ .
+* **Modalidad de testing**: Debido a la constante interacción de la aplicación con el usuario, la dificultad del chequeo del correcto funcionamiento de las interfaces de usuario y dificil simulacion de problemas de red, se optó por no automatizar las pruebas y realizar pruebas manuales constantemente, apoyados por la utilización de un log que informa progreso actual y problemas.
 
-* Posteriormente, con el proyecto más avanzado, se probó toda la aplicación utilizando el servidor real.
+* **Utilizacion de mocks**: Para facilitar el testeo de la aplicación independientemente del servidor, se creo un mock del servidor en python que simula su funcionalidad. A su vez, este fue previamente testeado realizando http requests mediante el plugin de chrome `postman <https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm>`_ .
 
-Pruebas de integración con el servidor
+* **Pruebas funcionales**: Toda la funcionalidad fue testeada correctamente. Problema existente: en uno de los dispositivos testeados no pudimos hacer funcionar el servicio de localización. Sospechamos que es un problema externo a la aplicación.
+
+* **Pruebas de performance**: Se ha testeado que la aplicación responda velozmente en la mayoría de los casos. Un inconveniente que persiste es el caso en que falle algun request de información al servidor, en este caso el cliente no mostrará la información solicitada hasta el próximo intento de request unos segundos mas tarde. En raras ocasiones puede fallar la carga del perfil, y no se mostrara nada hasta que se salga y vuelva a entrar.
+
+* **Pruebas de volumen**: Se probo la aplicacion con hasta 10 usuarios registrados y hasta 3 conectados simultaneamente por la falta de dispositivos disponibles. La aplicación responde cada vez mas lenta a medida que se agregan usuarios registrados con fotos porque la transferencia de datos es mayor, pero la diferencia no es abismal y sigue respondiendo en tiempos razonables, pero es considerable. 
+
+* **Pruebas de usabilidad y de GUI**: Se testeo la correcta visualización de la interfaz en dispositivos con distintos tamaños de pantalla. Constantemente la aplicacion fue probada considerando el punto de vista del usuario. El diseño original se asemeja a otras aplicaciones de mensajeria existentes, y fue modificada para cumplir con los requisitos de forma que se acceda facil y rapidamente. Se probo la aparición de mensajes informando el exito o fallo de cada operacion realizada.
+
+* **Pruebas de integracion**: Todas las pruebas fueron repetidas utilizando el servidor real. Se integro en presencia de todos los integrantes y se resolvieron los problemas que surgieron.
+
+Dispositivos utilizados para testing
 ======================================
 
-Para las siguientes pruebas con el servidor, se utilizaron básicamente dos dispositivos.
+Para las pruebas de la aplicación, se utilizaron tres dispositivos distintos.
 
-* Un celular Moto E de segunda generación con Android Lollipop, registrando un usuario de nombre "poly" y nombre para mostrar "polaris"
-* Una tablet Kelyx con Android Jelly Bean, registrando un usuario de nombre de usuario y nombre para mostrar iguales, "Venecia"
+* Un celular Moto E de segunda generación con Android Lollipop
+* Una tablet Kelyx con Android Jelly Bean
+* Celular Samsung Galaxy S3 mini, con Android Jelly Bean (v4.1.2)
 
-Capturas de pantalla de pruebas de integración
+En general se encontraron problemas especificos en cada dispositivo que fueron resueltos tras las pruebas. La falta de mas variedad de dispositivos y la imposibilidad de utilizar emuladores no asegura que la aplicación este excenta de bugs particulares. De todas formas, si existiesen, deberían ser menores.
+
+
+Capturas de pantalla de pruebas realizadas
 ==============================================
 
 Para los cambios de orientación en la pantalla, son especialmente importantes las pruebas en el celular, que tiene una pantalla de menor tamaño.

@@ -37,6 +37,7 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
     private Handler handler;
     private int interval;
     ArrayList<UserData> contactos;
+    public static boolean forcelogout;
 
 
     @Override
@@ -54,6 +55,7 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
         contactos = intent.getParcelableArrayListExtra("contactos");
         SharedPreferences sharedPref= getSharedPreferences("appdata", 0);
         nombre = sharedPref.getString("nombre", "Yo");
+        forcelogout = false;
     }
 
     Runnable msgUpdater = new Runnable() {
@@ -110,6 +112,8 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
      * @param resultData datos de la respuesta
      */
     public void onReceiveResult(int resultCode, Bundle resultData) {
+        if (forcelogout)
+            finish();
         switch (resultCode) {
             case NetworkService.RUNNING:
                 Log.i("ChatActivity", "esta corriendo el servicio chat msg");
@@ -150,13 +154,15 @@ public class ChatActivity extends ActionBarActivity implements MyResultReceiver.
                 AlertDialog alerta = new AlertDialog.Builder(this).create();
                 alerta.setTitle("Error");
                 String err = resultData.getString("error");
-                alerta.setMessage(err);
-                alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                alerta.show();
-                Log.e("onreceiveresult", err);
+                if (!err.equals("No se pudo conectar con el servidor")) {
+                    alerta.setMessage(err);
+                    alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    alerta.show();
+                    Log.e("onreceiveresult", err);
+                }
                 break;
         }
     }

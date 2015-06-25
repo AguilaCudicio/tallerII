@@ -34,6 +34,8 @@ public class GPSupdater extends Service implements LocationListener, MyResultRec
     private Handler handler;
     private String ubicacion;
     static boolean hideLocation;
+    private int connectionTry;
+
 
     /**
      * Inicializa variables. Empieza a correr periodicamente los metodos de obtencion e informe de ubicacion
@@ -49,6 +51,7 @@ public class GPSupdater extends Service implements LocationListener, MyResultRec
         getLocationUpdates();
         gpsUpdater.run();
         hideLocation = false;
+        connectionTry = 0;
     }
 
     /**
@@ -112,7 +115,22 @@ public class GPSupdater extends Service implements LocationListener, MyResultRec
     }
 
     public void onReceiveResult(int resultCode, Bundle resultData) {
+        if (resultCode == NetworkService.OK) {
+            connectionTry = 0;
+        }
+        if (resultCode == NetworkService.ERROR) {
+            connectionTry++;
+            if (connectionTry >= 2) {
+                forceLogout();
+            }
+        }
+    }
 
+    public void forceLogout() {
+        ChatActivity.forcelogout = true;
+        ListViewFriendsActivity.forcelogout = true;
+        EditProfileActivity.forcelogout = true;
+        ProfileActivity.forcelogout = true;
     }
 
     /**

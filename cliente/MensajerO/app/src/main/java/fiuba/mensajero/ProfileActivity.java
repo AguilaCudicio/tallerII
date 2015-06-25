@@ -29,6 +29,8 @@ public class ProfileActivity extends ActionBarActivity implements MyResultReceiv
     ProfileData profile;
     public MyResultReceiver mReceiver;
     String user2;
+    public static boolean forcelogout;
+
 
     /**
      * Inicializa variables. Si el profile no es del usuario logueado, el boton de editar perfil se oculta
@@ -49,11 +51,15 @@ public class ProfileActivity extends ActionBarActivity implements MyResultReceiv
         }
         mReceiver = new MyResultReceiver(new Handler());
         mReceiver.setReceiver(this);
+        forcelogout = false;
     }
 
     public void onResume() {
         super.onResume();
-        getProfile();
+        if (forcelogout)
+            finish();
+        else
+            getProfile();
     }
 
     /**
@@ -150,14 +156,16 @@ public class ProfileActivity extends ActionBarActivity implements MyResultReceiv
                 AlertDialog alerta = new AlertDialog.Builder(this).create();
                 alerta.setTitle("Error");
                 String err = resultData.getString("error");
-                alerta.setMessage(err);
-                alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                if (!isFinishing())
-                     alerta.show();
-                Log.e("PROFILEACT", err);
+                if (!err.equals("No se pudo conectar con el servidor")) {
+                    alerta.setMessage(err);
+                    alerta.setButton("Aceptar", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    if (!isFinishing())
+                        alerta.show();
+                    Log.e("PROFILEACT", err);
+                }
                 break;
         }
     }

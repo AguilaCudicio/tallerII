@@ -1,4 +1,4 @@
-Soluciones a problemas comunes
+Soluciones a problemas conocidos
 ==============================
  
 **Al iniciar sesión o al inscribirme, aparece un mensaje diciendo que "No se puede conectar con el servidor"**
@@ -11,6 +11,14 @@ Soluciones a problemas comunes
 **Al iniciar sesión, aparece un mensaje diciendo que el nombre o la contraseña son invalidos**
 
 * Asegúrese de haber escrito correctamente su nombre de usuario y contraseña. Tenga en cuenta que la aplicación diferencia entre minúsculas y mayúsculas.
+
+**Mi ubicación actual aparece como "desconocida"**
+
+Esto indica que el servicio de localización del dispositivo no pudo determinar su latitud y longitud, o bien se ha determinado pero no se pudo convertir esos datos a una dirección real. Si el problema es esto último, encontramos que puede solucionarse reiniciando el dispositivo. No hemos podido determinar la causa del primer motivo, pero solo ha ocurrido en uno de los dispositivos testeados.
+
+**La aplicación se desconecta sola**
+
+Esto puede ocurrir cuando la aplicación se bloquea ya sea por un proceso externo (ej: una llamada) o bien el dispositivo se bloquea (protector de pantalla, apagado de pantalla) por mas de 30 segundos. Inicie sesión nuevamente.
 
 **He intentado seguir las instrucciones para instalar la aplicación, pero no se ajustan a mi dispositivo**
 
