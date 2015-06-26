@@ -1,3 +1,0 @@
-# tallerII
-# tallerII
-PRIMERA ENTREGA
